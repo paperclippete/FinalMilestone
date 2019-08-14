@@ -1,1 +1,35 @@
+/* Site-wide styles from base.html */
+
+/* Fonts by Tyler Finck*/ 
 @import url("../fonts/ostrich-sans.css");
+
+/* Site-wide Colours and Fonts */
+:root {
+    --tangerine: #f26204;
+    --sunshine: #FFC300;
+    --grass: #00ad37;
+    --blueberry: #3b0061;
+    --raspberry: #e70026;
+    --lanwhite: #f1fae5;
+    --langrey: #1b1b1b;
+    --site-font: 'Muli', sans-serif;
+    --title-font: 'Ostrich Sans', sans-serif;
+}
+
+
+body {
+    color: var(--lanwhite);
+    font-family: var(--site-font);
+}
+
+.navbar {
+    background-color: #f1fae55e;
+    color: var(--lanwhite);
+}
+
+#site-background {
+    min-height: 100vh;
+    margin: 0;
+    padding-top: 100px;
+    padding-left: 30px;
+}
