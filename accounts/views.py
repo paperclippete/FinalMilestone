@@ -33,7 +33,7 @@ def login(request):
                                     password=request.POST['password'])
             if user: 
                 auth.login(user=user, request=request)
-                messages.success(request, "You have successfully logged in!")
+                messages.success(request, f"{user.first_name}, you have successfully logged in!")
                 return redirect(reverse('index'))
             else:
                 messages.error(request, "Your username or password is incorrect!")
@@ -60,7 +60,7 @@ def register(request):
                                      password=request.POST['password1'])
             if user:
                 auth.login(user=user, request=request)
-                messages.success(request, "You have successfully registered")
+                messages.success(request, f"{user.first_name}, you have successfully registered!")
                 return redirect(reverse('index'))
             else:
                 messages.error(request, "Unable to register your account at this time")
