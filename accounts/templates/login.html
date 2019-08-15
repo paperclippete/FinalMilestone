@@ -9,7 +9,7 @@
 
 <form method="POST">
     {% csrf_token %}
-    {{ login_form }}
+    {{ login_form.as_p }}
     <button action="submit" class="btn btn-primary">Login</a>
 </form>
 
