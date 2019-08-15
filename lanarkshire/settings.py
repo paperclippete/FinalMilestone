@@ -122,4 +122,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+# UserAuth Feedback Messages
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+# Reset Password Link Email
+EMAIL_USE_TLS = True
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = os.getenv("EMAIL_ADDRESS")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASSWORD")
+EMAIL_PORT = 587
+
+
+
