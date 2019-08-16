@@ -2,6 +2,8 @@
 {% load static %}
 {% block title %}Login{% endblock %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
 <p>Love</p>
 <h1>Lanarkshire</h1>
@@ -9,7 +11,7 @@
 
 <form method="POST">
     {% csrf_token %}
-    {{ login_form.as_p }}
+    {{ login_form|crispy }}
     <button action="submit" class="btn btn-primary">Login</button>
 </form>
 
