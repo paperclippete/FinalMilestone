@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'fonts/font-awesome/css/all.min.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
     <title>Love Lanarkshire| {% block title %}{% endblock %}</title>
 </head>
@@ -15,7 +16,7 @@
     <nav class="navbar navbar-expand-lg fixed-top">
         <a class="navbar-brand" href="#">Love Lanarkshire</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
@@ -64,6 +65,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+<!--<script defer src="{% static 'fonts/font-awesome/js/all.min.js' %}"></script>-->
+<script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

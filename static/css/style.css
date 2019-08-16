@@ -1,7 +1,7 @@
 /* Site-wide styles from base.html */
 
 /* Fonts by Tyler Finck*/ 
-@import url("../fonts/ostrich-sans.css");
+@import url("../fonts/ostrich-sans/ostrich-sans.css");
 
 /* Site-wide Colours and Fonts */
 :root {
