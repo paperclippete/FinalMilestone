@@ -66,14 +66,16 @@ def register(request):
     
     return render(request, 'register.html', context)
     
-    
+@login_required     
 def user_profile(request):
     """The user's profile page"""
-    user = User.objects.get(email=request.user.email)
-    context = {
-        'profile': user
-    }
-    return render(request, 'profile.html', context)
-    
+    if request.user.is_authenticated:
+        user = User.objects.get(email=request.user.email)
+        context = {
+            'profile': user
+        }
+        return render(request, 'profile.html', context)
+    else:
+        return redirect(reverse('login'))
     
     
