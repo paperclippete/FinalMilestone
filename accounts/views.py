@@ -6,9 +6,6 @@ from accounts.forms import UserLoginForm, UserRegistrationForm
 
 # Create your views here.
 
-def index(request):
-    """Return index.html as homepage"""
-    return render(request, 'index.html')
 
 @login_required    
 def logout(request):
