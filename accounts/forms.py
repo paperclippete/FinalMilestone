@@ -6,8 +6,8 @@ from django.core.exceptions import ValidationError
 
 class UserLoginForm(forms.Form):
     """Form for User Login"""
-    username = forms.CharField(widget=forms.EmailInput(attrs={'name': "Email Address", 'label': "Email Address", 'placeholder': "Email Address"}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'label': "Password", 'placeholder': "Password"}))
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
     
 class UserRegistrationForm(UserCreationForm):
     """Form for Registering a new user"""

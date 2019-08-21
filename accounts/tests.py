@@ -1,8 +1,6 @@
 from django.test import TestCase
 from django.shortcuts import reverse
-from accounts.forms import UserLoginForm, UserRegistrationForm
-
-# Create your tests here.
+from .forms import UserLoginForm, UserRegistrationForm
 
 # Testing Accounts Forms
 
