@@ -22,14 +22,63 @@ body {
     font-family: var(--site-font);
 }
 
-.navbar {
-    background-color: #f1fae55e;
-    color: var(--lanwhite);
-}
-
 #site-background {
     min-height: 100vh;
     margin: 0;
     padding-top: 100px;
     padding-left: 30px;
+}
+
+/*Navbar Styles*/
+
+.navbar-effect {
+    background-color: #f1fae55e !important;
+}
+
+.navbar {
+    color: var(--lanwhite);
+    -webkit-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.75);
+}
+
+.navbar-toggler-icon {
+    padding-top: 5px;
+    color: var(--lanwhite);
+}
+
+.navbar-brand,
+.nav-link {
+    color: var(--lanwhite);
+}
+
+.nav-link:hover:visited,
+a:hover:visited {
+    color: #007bff;
+}
+
+/*Site-wide Forms Styling*/
+
+.lanarkshire-form {
+    margin-right: 20px;
+    padding-bottom: 20px;
+}
+
+@media screen and (min-width: 992px) {
+    .lanarkshire-form {
+        margin-left: 100px;
+        margin-right: 140px;
+    }
+}
+
+.form-button {
+    margin-top: 30px;
+}
+
+/*Index Styles*/
+
+#site-title {
+    font-family: var(--title-font);
+    font-size: 9rem;
+    font-weight: 500;
 }

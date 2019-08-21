@@ -13,25 +13,32 @@ $(document).ready(function() {
         
     $("#site-background").css({"background-image": bg[random]});
     
-    let background = ($("#site-background").css('background-image'));
-    console.log(raspberry);
-    console.log(background);
-    console.log(background===raspberry);
-
-    
-    
     // Matching body color 
-    const blueberryback = "#3b0061";
-    const raspberryback = "#e70026";
-    const sunshineback = "#FFC300";
-    const grassback = "#00ad37";
-    const tangerineback = "#f26204";
-    console.log(blueberryback)
+    const blueberryback = "#2d004a";
+    const raspberryback = "#a7001b";
+    const sunshineback = "#ab8300";
+    const grassback = "#006520";
+    const tangerineback = "#b54904";
+    
     if ($("#site-background").css('background-image') === blueberry) {
         $('body').css({"background-color": blueberryback});
     }
-    
+    if ($("#site-background").css('background-image') === raspberry) {
+        $('body').css({"background-color": raspberryback});
+    }
+    if ($("#site-background").css('background-image') === sunshine) {
+        $('body').css({"background-color": sunshineback});
+    }
     if ($("#site-background").css('background-image') === grass) {
         $('body').css({"background-color": grassback});
     }
+    if ($("#site-background").css('background-image') === tangerine) {
+        $('body').css({"background-color": tangerineback});
+    }
+    
+    $(".navbar-toggler").on('click', function(){
+        let colour = $('body').css("background-color");
+        $('.navbar').css({"background-color": colour});
+        $('.navbar').toggleClass('navbar-effect');
+    })
 });
