@@ -1,5 +1,5 @@
 from django.urls import path, include
-from accounts.views import logout, login, register, user_profile
+from .views import logout, login, register, user_profile
 from accounts import urls_reset
 
 # Specific accounts related URLs

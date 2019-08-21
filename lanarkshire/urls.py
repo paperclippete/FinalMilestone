@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from home.views import index, about_us
 from accounts import urls as urls_accounts
+from events import urls as urls_events
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
     path('about_us/', about_us, name='about_us'),
     path('accounts/', include(urls_accounts)),
+    path('events/', include(urls_events)),
 ]
