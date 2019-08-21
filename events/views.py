@@ -7,12 +7,23 @@ from .forms import CreateEventForm
 @login_required
 def post_event(request):
     """Renders Create Event Form"""
-    post_event_form = CreateEventForm(request.POST or None)
-    if post_event_form.is_valid():
-        post_event_form.save()
-        post_event_form = CreateEventForm()
-        
+    post_event_form = CreateEventForm()
     context = {
         'post_event_form': post_event_form
     }
+    if request.method == "POST":
+        post_event_form = CreateEventForm(request.POST)
+        if post_event_form.is_valid():
+            post_event_form.instance.event_host = request.user
+            post_event_form.save()
+            post_event_form = CreateEventForm()
+        else:
+            messages.error(request, "Oops"+f"{post_event_form.errors}")
+    else:    
+        return render(request, 'post_event.html', context)
+    
     return render(request, 'post_event.html', context)
+    
+
+       
+     

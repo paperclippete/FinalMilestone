@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
+
 
 # Create your models here.
 class Event(models.Model):
@@ -7,6 +9,7 @@ class Event(models.Model):
     
     # Choice selections
     AGE_RANGE_CHOICES = [
+        (None, 'Please Choose'),
         ('Babies and Toddlers', 'Babies and Toddlers'),
         ('Children', 'Children'),
         ('Teenagers', 'Teenagers'),
@@ -14,6 +17,7 @@ class Event(models.Model):
         ('OAPs', 'OAPs')
     ]
     TOWN_CHOICES = [
+        (None, 'Please Choose'),
         ('Airdrie', 'Airdrie'),
         ('Bellshill', 'Bellshill'),
         ('Biggar', 'Biggar'),
@@ -30,6 +34,7 @@ class Event(models.Model):
         ('Wishaw', 'Wishaw'),
     ]
     EVENT_TYPE_CHOICES = [
+        (None, 'Please Choose'),
         ('Arts and Crafts', 'Arts and Crafts'),
         ('Educational', 'Educational'),
         ('Nature', 'Nature'),
