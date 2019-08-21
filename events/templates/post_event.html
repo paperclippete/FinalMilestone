@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+{% endblock %}
+{% block title %}Post Event{% endblock %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<p>Love</p>
+<h1>Lanarkshire</h1>
+<p>Post Event</p>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ post_event_form|crispy }}
+    {{ post_event_form.media }}
+    <button action="submit" class="btn btn-primary">Post</button>
+</form>
+
+
+{% endblock %}
+{% block js %}
+
+{% endblock %}
