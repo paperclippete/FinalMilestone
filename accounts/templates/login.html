@@ -9,11 +9,13 @@
 <h1>Lanarkshire</h1>
 <p>Login</p>
 
-<form method="POST">
-    {% csrf_token %}
-    {{ login_form|crispy }}
-    <button action="submit" class="btn btn-primary">Login</button>
-</form>
+<div class="lanarkshire-form">
+    <form method="POST">
+        {% csrf_token %}
+        {{ login_form|crispy }}
+        <button action="submit" class="btn btn-primary btn-block btn-lg">Login</button>
+    </form>
+</div>
 
 <p><a href="{% url 'password_reset' %}">Forgotten Password</a></p>
 

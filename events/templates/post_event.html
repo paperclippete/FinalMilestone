@@ -11,14 +11,14 @@
 <p>Love</p>
 <h1>Lanarkshire</h1>
 <p>Post Event</p>
-
-<form method="POST">
-    {% csrf_token %}
-    {{ post_event_form|crispy }}
-    {{ post_event_form.media }}
-    <button action="submit" class="btn btn-primary">Post</button>
-</form>
-
+<div class="lanarkshire-form">
+    <form method="POST">
+        {% csrf_token %}
+        {{ post_event_form|crispy }}
+        {{ post_event_form.media }}
+        <button action="submit" class="btn btn-primary btn-block btn-lg form-button">Post Event</button>
+    </form>
+</div>
 
 {% endblock %}
 {% block js %}

@@ -10,10 +10,12 @@
 <p>Register</p>
 <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
 
-<form method="POST">
-    {% csrf_token %}
-    {{ registration_form|crispy }}
-    <button action="submit" class="btn btn-primary">Register</a>
-</form>
+<div class="lanarkshire-form">
+    <form method="POST">
+        {% csrf_token %}
+        {{ registration_form|crispy }}
+        <button action="submit" class="btn btn-primary btn-block btn-lg">Register</a>
+    </form>
+</div>
 
 {% endblock %}
