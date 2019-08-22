@@ -110,7 +110,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # Custome Authentication - login with email address
 
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
     'accounts.backends.EmailAuth',
     
 ]

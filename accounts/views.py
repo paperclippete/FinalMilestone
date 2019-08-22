@@ -17,20 +17,19 @@ def logout(request):
 
 def login(request):
     """Return a Login Page and log the user in"""
-    login_form = UserLoginForm()
+    login_form = UserLoginForm(request.POST or None)
     context = {
         'login_form': login_form,
     }
     if request.user.is_authenticated:
         return redirect(reverse('index'))
     if request.method == "POST":
-        login_form = UserLoginForm(request.POST)
         if login_form.is_valid():
-            user = auth.authenticate( username=request.POST['username'],
-                                    password=request.POST['password'])
+            user = auth.authenticate(request.POST['username_or_email'],
+                                     password=request.POST['password'])
             if user: 
                 auth.login(user=user, request=request)
-                messages.success(request, f"{user.first_name}, you have successfully logged in!")
+                messages.success(request, f"Welcome {user.first_name}, you have successfully logged in!")
                 return redirect(reverse('index'))
             else:
                 messages.error(request, "Your username or password is incorrect!")
@@ -43,18 +42,21 @@ def login(request):
 
 def register(request):
     """Return a registration form and create a new authorised user"""
-    registration_form = UserRegistrationForm
+    registration_form = UserRegistrationForm(request.POST or None)
     context = {
         'registration_form': registration_form
     }
     if request.user.is_authenticated:
         return redirect(reverse('index'))
     if request.method == "POST":
-        registration_form = UserRegistrationForm(request.POST)
         if registration_form.is_valid():
-            registration_form.save()
-            user = auth.authenticate(username=request.POST['username'],
-                                     password=request.POST['password1'])
+            # Ensure username saves as lowercase to the db
+            form_data = registration_form.save(commit=False)
+            print(form_data)
+            form_data.username.lower()
+            form_data.save()
+            user = auth.authenticate(username=request.post['username'],
+                                     password=request.post['password1'])
             if user:
                 auth.login(user=user, request=request)
                 messages.success(request, f"{user.first_name}, you have successfully registered!")
