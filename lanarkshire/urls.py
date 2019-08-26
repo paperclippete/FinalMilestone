@@ -18,6 +18,7 @@ from django.urls import path, include
 from home.views import index, about_us
 from accounts import urls as urls_accounts
 from events import urls as urls_events
+from search import urls as urls_search
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,5 @@ urlpatterns = [
     path('about_us/', about_us, name='about_us'),
     path('accounts/', include(urls_accounts)),
     path('events/', include(urls_events)),
+    path('search/', include(urls_search)),
 ]
