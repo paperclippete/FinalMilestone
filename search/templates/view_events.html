@@ -10,19 +10,19 @@
 
 
 <div class="row">
-  <div class="col-sm-12 col-md-4 col-lg-3">
-    {% for event in events %}
-    <img src="" class="card-img-top" alt="">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
+    <div class="col-sm-12 col-md-4 col-lg-3">
+        {% for event in events %}
+        <img src="{{ MEDIA_URL }}{{ event.image }}" class="card-img-top" alt="">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ event.title }}</h5>
+                <p class="card-text">{{ event.description }}</p>
+                <a href="#" class="btn btn-primary">Join Up!</a>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-  </div>
-  
+
 </div>
 
 {% endblock %}

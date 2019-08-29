@@ -18,7 +18,7 @@ def post_event(request):
             post_event_form.save()
             post_event_form = CreateEventForm()
         else:
-            messages.error(request, "Oops"+f"{post_event_form.errors}")
+            post_event_form.add_error(None, f"Oops {post_event_form.error}")
     else:    
         return render(request, 'post_event.html', context)
     
