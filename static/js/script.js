@@ -36,9 +36,29 @@ $(document).ready(function() {
         $('body').css({"background-color": tangerineback});
     }
     
+    // Solid Navbar colour on toggler click
     $(".navbar-toggler").on('click', function(){
         let colour = $('body').css("background-color");
         $('.navbar').css({"background-color": colour});
         $('.navbar').toggleClass('navbar-effect');
     })
+    
+    // Solid Navbar on scroll
+    $(window).scroll(function() {
+        let colour = $('body').css("background-color");
+        if($(this).scrollTop() > 30) {
+            $('.navbar').css({"background-color": colour});
+            $('.navbar').removeClass('navbar-effect');
+        }
+        else {
+            $('.navbar').addClass('navbar-effect');
+        }
+    })
+    
+    
+    $(".create-book").modalForm({
+        formURL: "{% url 'create_book' %}"
+    });
+    
+    
 });
