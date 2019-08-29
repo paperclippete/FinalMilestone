@@ -45,25 +45,26 @@
             </ul>
         </div>
     </nav>
-    <section id="site-background">
-    
-    <!-- User message will render here -->
+    <div id="site-background">
+        <section id="site-content">
+        <!-- User message will render here -->
+            
+            {% if messages %}
+            <div id="user-message">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+            {% endif %}
         
-        {% if messages %}
-        <div id="user-message">
-            {% for message in messages %}
-                {{ message }}
-            {% endfor %}
-        </div>
-        {% endif %}
-    
-    <!-- Individual Page Content -->
-    
-    {% block content %}
-    
-    {% endblock %}
-    
-    </section>
+        <!-- Individual Page Content -->
+        
+        {% block content %}
+        
+        {% endblock %}
+        
+        </section>
+    </div>
     
     <!-- Sitewide Footer, Links and Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
