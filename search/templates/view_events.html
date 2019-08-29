@@ -7,22 +7,75 @@
 <h1>Lanarkshire</h1>
 <p>Find and post local classes, events and activities.</p>
 
-
-
-<div class="row">
-    <div class="col-sm-12 col-md-4 col-lg-3">
+<div class="container">
+    <div class="row">
         {% for event in events %}
-        <img src="{{ MEDIA_URL }}{{ event.image }}" class="card-img-top" alt="">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{{ event.title }}</h5>
-                <p class="card-text">{{ event.description }}</p>
-                <a href="#" class="btn btn-primary">Join Up!</a>
+        <div class="col-sm-12 col-md-6 col-lg-4">
+            <div class="card">
+                <div class="card-image">
+                    {% if event.image %}
+                        <img src="{{ MEDIA_URL }}{{ event.image }}" class="card-img-top" alt="{{ event.event_type }} Image">
+                    {% else %} 
+                        {% if event.event_type == "Arts and Crafts" %}
+                            <img src="{{ MEDIA_URL }}images/craft_event.jpg" class="card-img-top" alt="Arts and Crafts Image">
+                        {% elif event.event_type == "Education" %}
+                            <img src="{{ MEDIA_URL }}images/education_event.jpg" class="card-img-top" alt="Education Image"> 
+                        {% elif event.event_type == "Nature" %}
+                            <img src="{{ MEDIA_URL }}images/nature_event.jpg" class="card-img-top" alt="Nature Image">
+                        {% elif event.event_type == "Physical and Exercise" %}
+                            <img src="{{ MEDIA_URL }}images/physical_event.jpg" class="card-img-top" alt="Physical and Exercise Image">
+                        {% elif event.event_type == "Health and Wellbeing" %}
+                            <img src="{{ MEDIA_URL }}images/wellbeing_event.jpg" class="card-img-top" alt="Health and Wellbeing Image"> 
+                        {% elif event.event_type == "Entertainment" %}
+                            <img src="{{ MEDIA_URL }}images/entertainment_event.jpg" class="card-img-top" alt="Entertainment Image">
+                        {% endif %} 
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ event.title|title }}</h5>
+                    <span class="event-host">Hosted by: <strong>{{ event.event_host|title }}</strong></span>
+                    <div class="divider"></div>
+                    <p class="card-text">{{ event.description|capfirst|truncatewords:8 }}</p>
+                    <div class="container card-container">
+                        <div class="row">
+                            <div class="col col-xs-6">
+                                <p><i class="fas fa-location-arrow"></i> - {{ event.town }}</p>
+                            </div>
+                            <div class="col col-xs-6">
+                                {% if event.price == null %}
+                                <p><i class="fas fa-pound-sign"></i> - free!</p>
+                                {% else %}
+                                <p><i class="fas fa-pound-sign"></i> - £{{ event.price }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {% if event.event_date_begins == event.event_date_ends %}
+                                <p><i class="far fa-calendar-alt"></i> - {{ event.event_day }} {{ event.event_date_begins|date:"jS F Y" }}</p>
+                                {% else %}
+                                <p><i class="far fa-calendar-alt"></i> - {{ event.event_day }}s from {{ event.event_date_begins|date:"jS F Y" }} to {{ event.event_date_ends|date:"jS F Y" }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <p><i class="far fa-clock"></i> - {{ event.event_time_begins }} 'til {{ event.event_time_ends }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary btn-block btn-lg">Join Up!</a>
+                </div>
             </div>
         </div>
         {% endfor %}
     </div>
-
 </div>
+    
+
+
 
 {% endblock %}
+

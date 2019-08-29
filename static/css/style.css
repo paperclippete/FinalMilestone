@@ -25,8 +25,21 @@ body {
 #site-background {
     min-height: 100vh;
     margin: 0;
-    padding-top: 100px;
-    padding-left: 30px;
+    
+}
+
+#site-content {
+    padding-top: 60px;
+}
+
+.divider {
+    width: 100%;
+    background-color: #007bff;
+    height: 1.2px;
+}
+
+.layout {
+    padding: 0px 30px;
 }
 
 /*Navbar Styles*/
@@ -57,17 +70,33 @@ a:hover:visited {
     color: #007bff;
 }
 
+#user-message {
+    color: var(--lanwhite);
+    margin-right: 30px;
+    margin-bottom: 15px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 
+    0 0 0.1vw 0.4vw #b3d7ff, 
+    0 0 0.4vw 0.6vw #7ebafb, 
+    0 0 1.8vw 0.2vw #007bff, 
+    inset 0 0 0.8vw 0.1vw #007bff, 
+    inset 0 0 0.4vw 0.2vw #64acf9, 
+    inset 0 0 0vw 0.1vw #b3d7ff;
+    border-radius: 0.6rem;
+}
+
 /*Site-wide Forms Styling*/
 
 .lanarkshire-form {
-    margin-right: 20px;
+    margin: 0px 20px;
     padding-bottom: 20px;
 }
 
 @media screen and (min-width: 992px) {
     .lanarkshire-form {
         margin-left: 100px;
-        margin-right: 140px;
+        margin-right: 100px;
     }
 }
 
@@ -79,6 +108,58 @@ a:hover:visited {
 
 #site-title {
     font-family: var(--title-font);
+    font-size: 5.7rem;
+    font-weight: 500;
+}
+
+/*Events Page Styles*/
+.card-row {
+    margin-right: 15px;
+}
+
+.card {
+    color: var(--langrey);
+    background-color: var(--lanwhite);
+    min-height: 100%;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 20vw;
+    object-fit: cover;
+}
+
+.card-body {
+    padding-top: 5px;
+}
+
+.card-title {
+    margin-bottom: 0px;
+}
+
+.card-footer {
+    background-color:  var(--lanwhite);
+    border: 0;
+}
+
+.event-host,
+.card-container {
+    font-size: 0.8rem;
+}
+
+.col {
+    padding-left: 0px;
+}
+
+
+/*Media Queries*/
+@media screen and (min-width: 992px) {
+    .lanarkshire-form {
+        margin-left: 100px;
+        margin-right: 140px;
+    }
+    #site-title {
     font-size: 9rem;
     font-weight: 500;
+}
 }
