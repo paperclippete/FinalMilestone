@@ -15,7 +15,7 @@
 <body>
     <!-- Sitewide Nav Bar -->
     <nav class="navbar navbar-expand-lg fixed-top navbar-effect">
-        <a class="navbar-brand" href="#">Love Lanarkshire</a>
+        <a class="navbar-brand" href="{% url 'index' %}">Love Lanarkshire</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
         </button>
@@ -48,7 +48,7 @@
     <div id="site-background">
         <section id="site-content">
         <!-- User message will render here -->
-            
+        <div class="placeholder">  
             {% if messages %}
             <div id="user-message">
                 {% for message in messages %}
@@ -56,7 +56,7 @@
                 {% endfor %}
             </div>
             {% endif %}
-        
+        </div>  
         <!-- Individual Page Content -->
         
         {% block content %}

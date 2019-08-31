@@ -8,4 +8,20 @@
     <h1 id="site-title">Lanarkshire</h1>
     <p id="site-description">Find and post local classes, events and activities.</p>
 </div>
+
+<div class="index-buttons">
+
+    <form action="{% url 'search' %}" method="GET">
+        <div class="input-group input-group-lg search-box">
+            <input type="text" name="query" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Search</button>
+            </div>
+        </div>
+    </form>
+
+
+    <a href="{% url 'view_all_events' %}" class="btn btn-primary btn-lg">View All of our Amazing Events</a>
+
+</div>
 {% endblock %}
