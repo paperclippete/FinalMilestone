@@ -71,3 +71,16 @@ class Event(models.Model):
     
     def __str__(self):
         return self.title
+        
+        
+class Participant(models.Model):
+    """User Joins and Event"""
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return "{0} joined {1}".format(
+            self.user.email, self.event.title)
+    
+    
+        

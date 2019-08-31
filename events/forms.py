@@ -1,7 +1,8 @@
 from django import forms
-from .models import Event
+from .models import Event, Participant
 import datetime
 from bootstrap_datepicker_plus import DatePickerInput, TimePickerInput
+
 
 
 class CreateEventForm(forms.ModelForm):
@@ -15,3 +16,11 @@ class CreateEventForm(forms.ModelForm):
     class Meta:
         model = Event
         exclude = ['event_host'] 
+        
+        
+class JoinEvent(forms.ModelForm):
+    """"User joins an event by pressing a button"""
+    class Meta:
+        model = Participant
+        exclude = ['event', 'user']
+    
