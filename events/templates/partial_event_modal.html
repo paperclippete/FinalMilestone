@@ -1,0 +1,55 @@
+<div class="modal-header">
+    <h5 class="modal-title">{{ event.title|title }}</h5>
+    <p class="event-host">Hosted by: <strong>{{ event.event_host|title }}</strong></p>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <p class="card-text">{{ event.description|capfirst }}</p>
+    <div class="container card-container">
+        <div class="row">
+            <div class="col col-xs-6">
+                <p><i class="fas fa-location-arrow"></i> - {{ event.town }}</p>
+            </div>
+            <div class="col col-xs-6">
+                {% if event.price == null %}
+                <p><i class="fas fa-pound-sign"></i> - free!</p>
+                {% else %}
+                <p><i class="fas fa-pound-sign"></i> - £{{ event.price }}</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {% if event.event_date_begins == event.event_date_ends %}
+                <p><i class="far fa-calendar-alt"></i> - {{ event.event_day }} {{ event.event_date_begins|date:"jS F Y" }}</p>
+                {% else %}
+                <p><i class="far fa-calendar-alt"></i> - {{ event.event_day }}s from {{ event.event_date_begins|date:"jS F Y" }} to {{ event.event_date_ends|date:"jS F Y" }}</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p><i class="far fa-clock"></i> - {{ event.event_time_begins }} 'til {{ event.event_time_ends }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>Event Suitable For: {{ event.age_range }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>Current Places: </p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <a href="{% url 'join_event' %}" class="btn btn-primary">Join Up!</a>
+</div>
