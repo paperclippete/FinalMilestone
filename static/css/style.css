@@ -24,6 +24,7 @@ body {
 
 #site-background {
     min-height: 100vh;
+    padding-bottom: 30px;
     margin: 0;
     
 }
@@ -152,6 +153,23 @@ a:hover:visited {
 .col {
     padding-left: 0px;
 }
+
+/*View one event styling*/
+
+.event-container {
+    margin: 60px 20px;
+    padding: 20px;
+    background-color: var(--lanwhite);
+    color: var(--langrey);
+}
+
+.event-view-image {
+    max-width: 60%;
+}
+.img-fluid {
+    max-width:90%;
+}
+
 
 
 /*Media Queries*/

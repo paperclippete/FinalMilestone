@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
-from home.views import index, about_us
+from home.views import index, about_us, back_button
 from accounts import urls as urls_accounts
 from events import urls as urls_events
 from search import urls as urls_search
@@ -26,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
     path('about_us/', about_us, name='about_us'),
+    path('back_button/', back_button, name='back_button'),
     path('accounts/', include(urls_accounts)),
     path('events/', include(urls_events)),
     path('search/', include(urls_search)),

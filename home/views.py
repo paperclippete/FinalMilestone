@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 
@@ -9,3 +9,7 @@ def index(request):
 def about_us(request):
     """Return about_us.html"""
     return render(request, 'about_us.html')
+    
+def back_button(request):
+    """Should return the user to the last page they were on"""
+    redirect(request.META['HTTP_REFERER'])
