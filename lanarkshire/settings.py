@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'events',
     'bootstrap_datepicker_plus',
     'search',
+    'bootstrap_modal_forms',
     
 ]
 
