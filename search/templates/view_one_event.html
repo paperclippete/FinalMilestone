@@ -63,18 +63,23 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <p>Current Places: </p>
+                    <p>Current Places: {{ current_places }} </p>
                 </div>
             </div>
         </div>
     </div>
     <p class="event-text">{{ event.description|capfirst }}</p>
     <a href="#" class="btn btn-secondary">Back</a>
-    <form method="POST">
-        {% csrf_token %}
-        {{form}}
-        <button action="submit" class="btn btn-primary">Join Up!</button>
-    </form>
+    {% if user_joined %}
+        <button class="btn btn-secondary" disabled>You've booked this!</button>
+        <a href="{% url 'delete_participant' event.id %}" class="btn btn-danger float-right">Cancel booking</a>
+    {% else %}
+        <form method="POST">
+            {% csrf_token %}
+            {{form}}
+            <button action="submit" class="btn btn-primary">Book a Place</button>
+        </form>
+    {% endif %}
     
 </div>
                                             
