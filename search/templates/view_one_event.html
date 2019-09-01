@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}{{ event.title }}{% endblock %}
 
+
 {% block content %}
 
 <div class="event-container layout">
@@ -69,6 +70,10 @@
         </div>
     </div>
     <p class="event-text">{{ event.description|capfirst }}</p>
+    <div id="easy-map">
+        {% load easy_maps_tags %}
+        {% easy_map event.post_code 200 200 12 using "easy_maps/map.html" %}
+    </div>
     <a href="#" class="btn btn-secondary">Back</a>
     {% if user_joined %}
         <button class="btn btn-secondary" disabled>You've booked this!</button>
@@ -82,6 +87,9 @@
     {% endif %}
     
 </div>
+
+{% block js %}
+{% endblock %}
                                             
 
 {% endblock %}

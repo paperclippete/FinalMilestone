@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'bootstrap_datepicker_plus',
     'search',
     'bootstrap_modal_forms',
+    'easy_maps'
     
 ]
 
@@ -154,5 +155,9 @@ EMAIL_PORT = 587
 
 # Crispy Forms Pack
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Easy Maps Settings
+EASY_MAPS_GOOGLE_KEY = os.getenv("GOOGLE_API_KEY")
+EASY_MAPS_CENTER = (55.757509, -4.000647)
 
 
