@@ -56,8 +56,8 @@ class Event(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     age_range = models.CharField(max_length=20, choices=AGE_RANGE_CHOICES, blank=False, default="Please Choose")
-    town = models.CharField(max_length=20, choices=TOWN_CHOICES, blank=False, default="Please Choose")
     address = models.CharField(max_length=60)
+    town = models.CharField(max_length=20, choices=TOWN_CHOICES, blank=False, default="Please Choose")
     post_code = models.CharField(max_length=8)
     event_type = models.CharField(max_length=40, choices=EVENT_TYPE_CHOICES, blank=False, default="Please Choose")
     event_date_begins = models.DateField()
@@ -79,8 +79,17 @@ class Participant(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     
     def __str__(self):
-        return "{0} joined {1}".format(
-            self.user.email, self.event.title)
+        return "{0} {1} joined {2}".format(
+            self.user.first_name, self.user.last_name, self.event.title)
+            
+class Like(models.Model):
+    """User Likes and saves Event"""
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return "{0} {1} liked {2}".format(
+            self.user.first_name, self.user.last_name, self.event.title)
     
     
         
