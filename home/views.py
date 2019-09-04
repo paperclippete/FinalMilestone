@@ -10,6 +10,3 @@ def about_us(request):
     """Return about_us.html"""
     return render(request, 'about_us.html')
     
-def back_button(request):
-    """Should return the user to the last page they were on"""
-    redirect(request.META['HTTP_REFERER'])
