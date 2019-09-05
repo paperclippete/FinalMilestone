@@ -5,6 +5,8 @@ from .forms import CreateEventForm, JoinEvent, LikeEvent
 from bootstrap_modal_forms.generic import BSModalCreateView, BSModalReadView
 from django.urls import reverse, reverse_lazy
 from .models import Event, Participant, Like
+from django.contrib.auth.models import User
+
 
 # Create your views here.
 @login_required
@@ -42,6 +44,7 @@ def view_one_event(request, pk):
         user_joined = None
     user_queue = Participant.objects.filter(event=event).count()
     current_places = event.max_participants - user_queue
+    event_host = User.objects.get(id=event.event_host.id)
     # Ensures map renders at correct location
     full_address = event.address + ' ' + event.town + ' ' + event.post_code
     context = {
@@ -51,7 +54,8 @@ def view_one_event(request, pk):
         'current_places': str(current_places),
         'full_address': full_address,
         'user_joined': bool(user_joined),
-        'user_liked': bool(user_liked)
+        'user_liked': bool(user_liked),
+        'event_host': event_host
     }
     
     # Allow user to join an event    
@@ -94,9 +98,9 @@ def delete_like(request, pk):
     """Removes event from user like list"""
     event = get_object_or_404(Event, pk=pk)
     user = request.user
-    like = Like.objects.filter(event=event).filter(user=user)
+    like = Like.objects.get(event=event, user=user)
     like.delete()
-    return render(request, 'view_one_event.html', context)
+    return redirect(view_one_event, pk)
     
     
      

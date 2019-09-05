@@ -6,45 +6,49 @@
 {% block content %}
 
 <div class="event-container layout">
-    <h5 class="card-title">{{ event.title|title }}</h5>
-        <span class="event-host">Hosted by: <strong>{{ event.event_host|title }}</strong></span>
+    <h3>{{ event.title|title }}</h3>
+        <span class="event-host">Hosted by: <a href="mailto: {{ event_host.email }}"><strong>{{ event.event_host|title }}</strong></a> <i class="far fa-envelope"></i> </span>
     <div class="divider"></div>
-    <div class="media">
-        <div class="event-view-image">
-            {% if event.image %}
-            <img src="{{ MEDIA_URL }}{{ event.image }}" class="mr-3 img-fluid event-image" alt="{{ event.event_type }} Image"> 
-            {% else %} 
-                {% if event.event_type == "Arts and Crafts" %}
-                    <img src="{{ MEDIA_URL }}images/craft_event.jpg" class="mr-3 img-fluid event-image" alt="Arts and Crafts Image"> 
-                {% elif event.event_type == "Education" %}
-                    <img src="{{ MEDIA_URL }}images/education_event.jpg" class="mr-3 img-fluid event-image" alt="Education Image"> 
-                {% elif event.event_type == "Nature" %}
-                    <img src="{{ MEDIA_URL }}images/nature_event.jpg" class="mr-3 img-fluid event-image" alt="Nature Image"> 
-                {% elif event.event_type == "Physical and Exercise" %}
-                    <img src="{{ MEDIA_URL }}images/physical_event.jpg" class="mr-3 img-fluid event-image" alt="Physical and Exercise Image"> 
-                {% elif event.event_type == "Health and Wellbeing" %}
-                    <img src="{{ MEDIA_URL }}images/wellbeing_event.jpg" class="mr-3 img-fluid event-image" alt="Health and Wellbeing Image"> 
-                {% elif event.event_type == "Entertainment" %}
-                    <img src="{{ MEDIA_URL }}images/entertainment_event.jpg" class="mr-3 img-fluid event-image" alt="Entertainment Image"> 
-                {% endif %} 
-            {% endif %}
+    <div class="row event-info">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+            <div class="event-view-image">
+                {% if event.image %}
+                <img src="{{ MEDIA_URL }}{{ event.image }}" class="img-fluid event-image" alt="{{ event.event_type }} Image"> 
+                {% else %} 
+                    {% if event.event_type == "Arts and Crafts" %}
+                        <img src="{{ MEDIA_URL }}images/craft_event.jpg" class="img-fluid event-image" alt="Arts and Crafts Image"> 
+                    {% elif event.event_type == "Education" %}
+                        <img src="{{ MEDIA_URL }}images/education_event.jpg" class="img-fluid event-image" alt="Education Image"> 
+                    {% elif event.event_type == "Nature" %}
+                        <img src="{{ MEDIA_URL }}images/nature_event.jpg" class="img-fluid event-image" alt="Nature Image"> 
+                    {% elif event.event_type == "Physical and Exercise" %}
+                        <img src="{{ MEDIA_URL }}images/physical_event.jpg" class="img-fluid event-image" alt="Physical and Exercise Image"> 
+                    {% elif event.event_type == "Health and Wellbeing" %}
+                        <img src="{{ MEDIA_URL }}images/wellbeing_event.jpg" class="img-fluid event-image" alt="Health and Wellbeing Image"> 
+                    {% elif event.event_type == "Entertainment" %}
+                        <img src="{{ MEDIA_URL }}images/entertainment_event.jpg" class="img-fluid event-image" alt="Entertainment Image"> 
+                    {% endif %} 
+                {% endif %}
+                <div class="like-button">
+                {% if user.is_authenticated %}
+                    {% if user_liked %}
+                        <a href="{% url 'delete_like' event.id %}" class="btn btn-outline-danger"><i class="fas fa-heart"></i></a>
+                    {% else %}
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ like_form }}
+                            <button action="submit" name="like_form" class="btn btn-outline-danger"><i class="far fa-heart"></i></button>
+                        </form>
+                    {% endif %}
+                {% endif %}
+                </div>
+            </div>
         </div>
-        {% if user.is_authenticated %}
-            {% if user_liked %}
-                <a href="{% url 'delete_like' event.id %}" class="btn btn-danger float-right"><i class="fas fa-heart"></i></a>
-            {% else %}
-                <form method="POST">
-                    {% csrf_token %}
-                    {{ like_form }}
-                    <button action="submit" name="like_form" class="btn btn-primary"><i class="far fa-heart"></i></button>
-                </form>
-            {% endif %}
-        {% endif %}
-        <div class="media-body event-info">
-            
-            <div class="row">
+        
+        <div class="col-sm-12 col-md-6 col-lg-6">
+            <div class="row card-row">
                 <div class="col col-xs-6">
-                    <p><i class="fas fa-location-arrow"></i> - {{ event.town }}</p>
+                    <p><i class="fas fa-location-arrow"></i> - <a href="#" data-toggle="modal" data-target="#mapModal">{{ event.town }}</a></p>
                 </div>
                 <div class="col col-xs-6">
                     {% if event.price == null %}
@@ -54,7 +58,7 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="row">
+            <div class="row card-row">
                 <div class="col">
                     {% if event.event_date_begins == event.event_date_ends %}
                     <p><i class="far fa-calendar-alt"></i> - {{ event.event_day }} {{ event.event_date_begins|date:"jS F Y" }}</p>
@@ -63,36 +67,32 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="row">
+            <div class="row card-row">
                 <div class="col">
                     <p><i class="far fa-clock"></i> - {{ event.event_time_begins }} 'til {{ event.event_time_ends }}</p>
                 </div>
             </div>
-            <div class="row">
+            <div class="row card-row">
                 <div class="col">
-                    <p>Event Suitable For: {{ event.age_range }}</p>
+                    <p><i class="fas fa-users"></i> - {{ event.age_range }}</p>
                 </div>
             </div>
-            <div class="row">
+            <div class="row card-row">
                 <div class="col">
                     <p>Current Places: {{ current_places }} </p>
                 </div>
             </div>
         </div>
     </div>
+    <div class="divider"></div>
     <p class="event-text">{{ event.description|capfirst }}</p>
-    <div id="easy-map">
-        {% load easy_maps_tags %}
-        {% easy_map full_address 200 200 12 using "easy_maps/map.html" %}
-    </div>
-    <a href="#" class="btn btn-secondary">Back</a>
+    
     {% if user.is_authenticated %}
         {% if current_places != '0' %}
             {% if user_joined %}
-                <button class="btn btn-secondary" disabled>You've booked this!</button>
-                <a href="{% url 'delete_participant' event.id %}" class="btn btn-danger float-right">Cancel booking</a>
+                <a href="{% url 'delete_participant' event.id %}" class="btn btn-danger">Cancel booking</a>
             {% else %}
-                <form method="POST">
+                <form class="join-form" method="POST">
                     {% csrf_token %}
                     {{ join_form }}
                     <button action="submit" name="join_form" class="btn btn-primary">Book a Place</button>
@@ -100,18 +100,42 @@
             {% endif %}
         {% else %}
             {% if user_joined %}
-                <button class="btn btn-secondary" disabled>You've booked this!</button>
-                <a href="{% url 'delete_participant' event.id %}" class="btn btn-danger float-right">Cancel booking</a>
+                <a href="{% url 'delete_participant' event.id %}" class="btn btn-danger">Cancel booking</a>
             {% else %}
-                <button class="btn btn-secondary" disabled>Sorry - Event Full!</button>
+                <button class="btn btn-secondary float-right" disabled>Sorry - Event Full!</button>
             {% endif %}
         
         {% endif %}
     {% else %}
-        <a href="{% url 'login' %}" class="btn btn-primary">Login to book!</button>
+        <a href="{% url 'login' %}" class="btn btn-primary">Login to book!</a>
     {% endif %}
+        <a href="#" class="btn btn-secondary float-right">Back</a>
+
     
     
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{event.title }} Location</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <p>{{ full_address }}</p>
+                <div id="easy-map">
+                    {% load easy_maps_tags %} {% easy_map full_address  %}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% block js %}

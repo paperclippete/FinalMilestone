@@ -73,15 +73,24 @@ body {
     color: #007bff;
 }
 
+.site-title-small {
+    font-family: var(--title-font);
+    font-weight: 500;
+}
+
+.change-word-small {
+    top: -1.4em;
+    font-size: 50%;
+}
+
 .placeholder {
-    height: 74px;
     width: 100%;
     padding-top: 15px;
 }
 
 #user-message {
     color: var(--lanwhite);
-    margin: 0 30px;
+    margin: 0 30px 20px 30px;
     padding: 10px;
     text-align: center;
     box-shadow: 
@@ -115,16 +124,41 @@ body {
 
 /*Index Styles*/
 
-#site-title {
+.title-layout {
+    text-align: center;
+}
+
+.site-title {
     font-family: var(--title-font);
-    font-size: 5.7rem;
+    font-size: 5rem;
     font-weight: 500;
+    position: relative;
+    
+}
+
+.changing-word-list {
+    font-family: var(--title-font);
+    font-weight: 500;
+    font-size: 2rem;
+    padding: 0;
+    position: relative;
+    top: 1.9rem;
+    left: 1.7%;
+    text-align: left;
+    margin-bottom: 0;
+    width: fit-content;
+    visibility:hidden;
+}
+
+.index-placeholder {
+    height: 0px !important;
 }
 
 .index-buttons {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0px 10px;
     
 }
 
@@ -135,7 +169,11 @@ body {
 
 /*Events Page Styles*/
 .card-row {
-    margin-right: 15px;
+    margin: 0;
+}
+
+.card-col {
+    padding-bottom: 20px;
 }
 
 .card {
@@ -146,7 +184,7 @@ body {
 
 .card-img-top {
     width: 100%;
-    height: 20vw;
+    height: 36vw;
     object-fit: cover;
 }
 
@@ -182,22 +220,102 @@ body {
 }
 
 .event-view-image {
-    max-width: 60%;
-}
-.img-fluid {
-    max-width:90%;
+    position: relative;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
+.event-info {
+    margin: 20px -15px 0px -15px;
+    
+}
+
+.event-text {
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+
+.easy-map-googlemap {
+    width: 100% !important;
+    height: 300px !important;
+}
+
+.gm-style-mtc {
+    visibility: hidden;
+}
+
+.modal {
+    color: var(--langrey);
+}
+
+.join-form {
+    display: inline-block;
+}
+
+.like-button {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+}
+
+.btn-outline-danger {
+    border: none;
+}
 
 
 /*Media Queries*/
+
+/*Site Title styling for all screen sizes*/
+/*Tablet*/
+@media screen and (min-width: 768px) {
+    .site-title {
+        font-size: 8rem;
+    }
+    .changing-word-list {
+        font-size: 2.4rem;
+        top: 2.8rem;
+        left: 13.8%;
+        width: fit-content;
+    }
+}
+/*Small Laptop*/
+@media screen and (min-width: 992px) {
+    .site-title {
+        font-size: 12rem;
+    }
+    .changing-word-list {
+        font-size: 3.8rem;
+        top: 4.4rem;
+        left: 9.1%;
+        width: fit-content;
+        
+    }
+}
+/*Extra-large screens*/
+@media screen and (min-width: 1200px) {
+    .changing-word-list {
+        top: 4.3rem;
+        left: 19.6%;
+    }
+}
+
+/*General styling for desktop/laptop*/
 @media screen and (min-width: 992px) {
     .lanarkshire-form {
         margin-left: 100px;
         margin-right: 140px;
     }
-    #site-title {
-    font-size: 9rem;
-    font-weight: 500;
-}
+    
+    .event-container {
+    margin: 0 60px 60px 60px;
+    }
+    .card-img-top {
+        height: 14vw;
+    }
+    .placeholder {
+        height: 74px;
+    }
+    #user-message {
+        margin: 0 60px;
+    }
 }
