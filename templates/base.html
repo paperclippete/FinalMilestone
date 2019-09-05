@@ -9,13 +9,14 @@
     <link href="https://fonts.googleapis.com/css?family=Muli:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'fonts/font-awesome/css/all.min.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" />
+    {% block css %}{% endblock %}
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <title>Love Lanarkshire | {% block title %}{% endblock %}</title>
 </head>
 <body>
     <!-- Sitewide Nav Bar -->
     <nav class="navbar navbar-expand-lg fixed-top navbar-effect">
-        <a class="navbar-brand" href="{% url 'index' %}">Love Lanarkshire</a>
+        <a class="navbar-brand site-title-small" href="{% url 'index' %}"><sup class="change-word-small">Love</sup>Lanarkshire</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
         </button>
@@ -48,7 +49,7 @@
     <div id="site-background">
         <section id="site-content">
         <!-- User message will render here -->
-        <div class="placeholder">  
+        <div class="placeholder index-placeholder">  
             {% if messages %}
             <div id="user-message">
                 {% for message in messages %}

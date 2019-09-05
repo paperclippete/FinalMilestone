@@ -2,10 +2,20 @@
 {% load static %}
 {% block title %}Home{% endblock %}
 
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/animate.css' %}" type="text/css" />
+{% endblock %}
+
 {% block content %}
-<div class="layout">
-    <p id="change-word">Love</p>
-    <h1 id="site-title">Lanarkshire</h1>
+
+<ul class="changing-word-list" data-in-effect="fadeIn" data-out-effect="fadeOut">
+    <li class="changing-word-list-item">Laugh</li>
+    <li class="changing-word-list-item">Learn</li>
+    <li class="changing-word-list-item">Live</li>
+    <li class="changing-word-list-item" data-in-effect="wobble">Love</li>
+</ul>
+<div class="layout title-layout">
+    <h1 class="site-title">Lanarkshire</h1>
     <p id="site-description">Find and post local classes, events and activities.</p>
 </div>
 
@@ -24,4 +34,9 @@
     <a href="{% url 'view_all_events' %}" class="btn btn-primary btn-lg">View All of our Amazing Events</a>
 
 </div>
+
+{% block js %}
+<script src="{% static 'js/lettering.js' %}"></script>
+<script src="{% static 'js/textillate.js' %}"></script>
+{% endblock %}
 {% endblock %}

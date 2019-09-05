@@ -56,7 +56,10 @@ $(document).ready(function() {
     })
     
     
-    
-    
+    $(function () {
+	$('.changing-word-list').textillate();
+    })
+   
+
     
 });
