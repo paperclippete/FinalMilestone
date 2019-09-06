@@ -2,13 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 import datetime
 
+# Choice selections for model and forms
 
-# Create your models here.
-class Event(models.Model):
-    """A User created Event"""
-    
-    # Choice selections
-    AGE_RANGE_CHOICES = [
+AGE_RANGE_CHOICES = [
         (None, 'Please Choose'),
         ('Babies and Toddlers', 'Babies and Toddlers'),
         ('Children', 'Children'),
@@ -16,7 +12,7 @@ class Event(models.Model):
         ('Adults', 'Adults'),
         ('OAPs', 'OAPs')
     ]
-    TOWN_CHOICES = [
+TOWN_CHOICES = [
         (None, 'Please Choose'),
         ('Airdrie', 'Airdrie'),
         ('Bellshill', 'Bellshill'),
@@ -33,7 +29,7 @@ class Event(models.Model):
         ('Strathaven', 'Strathaven'),
         ('Wishaw', 'Wishaw'),
     ]
-    EVENT_TYPE_CHOICES = [
+EVENT_TYPE_CHOICES = [
         (None, 'Please Choose'),
         ('Arts and Crafts', 'Arts and Crafts'),
         ('Educational', 'Educational'),
@@ -42,7 +38,7 @@ class Event(models.Model):
         ('Health and Wellbeing', 'Health and Wellbeing'),
         ('Physical and Exercise', 'Physical and Exercise')
     ]
-    DAY_CHOICES = [
+DAY_CHOICES = [
         (None, 'Please Choose'),
         ('Monday', 'Monday'),
         ('Tuesday', 'Tuesday'),
@@ -52,6 +48,11 @@ class Event(models.Model):
         ('Saturday', 'Saturday'),
         ('Sunday', 'Sunday'),
     ]
+
+# Create your models here.
+class Event(models.Model):
+    """A User created Event"""
+    
     title = models.CharField(max_length=254)
     description = models.TextField()
     price = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
