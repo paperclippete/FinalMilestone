@@ -31,12 +31,26 @@
     </form>
 
 
-    <a href="{% url 'view_all_events' %}" class="btn btn-primary btn-lg">View All of our Amazing Events</a>
+    <a href="{% url 'search' %}" class="btn btn-primary btn-lg">View All of our Amazing Events</a>
 
 </div>
 
 {% block js %}
 <script src="{% static 'js/lettering.js' %}"></script>
 <script src="{% static 'js/textillate.js' %}"></script>
+<script>
+    $('.placeholder').addClass('index-placeholder');
+    $('.changing-word-list').textillate({
+        selector: '.texts',
+        loop: false,
+        minDisplayTime: 2000,
+        initialDelay: 0,
+        autoStart: true,
+        inEffects: [],
+        outEffects: [],
+        });
+    
+    
+</script>
 {% endblock %}
 {% endblock %}

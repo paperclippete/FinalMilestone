@@ -168,8 +168,34 @@ body {
 
 
 /*Events Page Styles*/
+.filter-row {
+    margin: 0;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.form-group {
+    width: 100%
+}
+
+@media screen and (min-width: 992px) {
+    .filter-row {
+        justify-content: space-between;
+        flex-direction: row;
+    }
+    #div_id_town, 
+    #div_id_event_type,
+    #div_id_day {
+        width: 30%;
+    }
+}
+
 .card-row {
     margin: 0;
+}
+
+.top-row {
+    margin-top: 10px;
 }
 
 .card-col {
@@ -296,6 +322,13 @@ body {
     .changing-word-list {
         top: 4.3rem;
         left: 19.6%;
+    }
+}
+/*4K screens*/
+@media screen and (min-width: 2560px) {
+    .changing-word-list {
+        top: 4.3rem;
+        left: 33.6%;
     }
 }
 

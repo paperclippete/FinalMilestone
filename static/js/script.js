@@ -39,8 +39,12 @@ $(document).ready(function() {
     // Solid Navbar colour on toggler click
     $(".navbar-toggler").on('click', function(){
         let colour = $('body').css("background-color");
-        $('.navbar').css({"background-color": colour});
-        $('.navbar').toggleClass('navbar-effect');
+        if ($('.navbar').css("background-color") === colour) {
+            return $('.navbar').css({"background-color": colour});
+        } else {
+            $('.navbar').css({"background-color": colour});
+            $('.navbar').toggleClass('navbar-effect');
+        }
     })
     
     // Solid Navbar on scroll
@@ -56,9 +60,7 @@ $(document).ready(function() {
     })
     
     
-    $(function () {
-	$('.changing-word-list').textillate();
-    })
+    
    
 
     
