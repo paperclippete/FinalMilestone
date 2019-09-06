@@ -6,6 +6,7 @@ from bootstrap_modal_forms.generic import BSModalCreateView, BSModalReadView
 from django.urls import reverse, reverse_lazy
 from .models import Event, Participant, Like
 from django.contrib.auth.models import User
+import datetime
 
 
 # Create your views here.
@@ -33,6 +34,8 @@ def post_event(request):
 def view_one_event(request, pk):
     """Displays event information for site user"""
     event = get_object_or_404(Event, pk=pk)
+    print(event.event_date_begins)
+    print(datetime.date.today())
     user = request.user
     join_form = JoinEvent(request.POST or None)
     like_form = LikeEvent(request.POST or None)

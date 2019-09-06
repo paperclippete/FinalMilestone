@@ -1,10 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Events{% endblock %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
-    <div class="row">
+    <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Find an Awesome Event <i class="fas fa-sort-amount-down"></i></button>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            <form method="POST">
+                <div class="row filter-row">
+                {% csrf_token %}
+                {{ filter_form|crispy }}
+                </div>
+                <button action="submit" class="btn btn-primary float-right">Filter</button>
+            </form>
+            
+        </div>
+    </div>
+    <div class="row top-row">
         {% for event in events %}
         <div class="col-sm-12 col-md-6 col-lg-4 card-col">
             <div class="card">
