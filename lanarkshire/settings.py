@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'bootstrap_datepicker_plus',
     'search',
     'bootstrap_modal_forms',
-    'easy_maps'
+    'easy_maps',
+    'membership'
     
 ]
 

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib import auth, messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from membership.models import Membership
 from .forms import UserLoginForm, UserRegistrationForm
 
 # Create your views here.
@@ -51,12 +52,11 @@ def register(request):
     if request.method == "POST":
         if registration_form.is_valid():
             # Ensure username saves as lowercase to the db
-            form_data = registration_form.save(commit=False)
-            print(form_data)
-            form_data.username.lower()
-            form_data.save()
+            registration_form.save()
             user = auth.authenticate(username=request.post['username'],
                                      password=request.post['password1'])
+            membership = Membership(user=user)
+            membership.save()
             if user:
                 auth.login(user=user, request=request)
                 messages.success(request, f"{user.first_name}, you have successfully registered!")
