@@ -45,17 +45,21 @@ def search(request):
             price = request.POST['price']
             if price: 
                 events = Event.objects.filter(price=None)
-                
-    if len(events) == 0:
-        messages.error(request, f"Sorry, we found 0 results! Please search again!")
-        return redirect('index')
     
+    results = len(events.exclude(event_date_ends__lt=datetime.date.today()))
+                
     context = {
         'filter_form': filter_form,
         # This will ensure no finished events appear in the search
-        'events': events.exclude(event_date_ends__lt=datetime.date.today())
+        'events': events.exclude(event_date_ends__lt=datetime.date.today()),
+        'results': results
     }
     
-    return render(request, 'view_all_events.html', context)
+    if len(events.exclude(event_date_ends__lt=datetime.date.today())) == 0:
+        messages.error(request, f"Sorry, we found 0 results! Please search again!")
+        return redirect('index')
+    
+    else:
+        return render(request, 'view_all_events.html', context)
 
 

@@ -89,17 +89,11 @@ body {
 }
 
 #user-message {
-    color: var(--lanwhite);
+    background-color: #f1fae5b5;
+    color: var(--langrey);
     margin: 0 30px 20px 30px;
     padding: 10px;
     text-align: center;
-    box-shadow: 
-    0 0 0.1vw 0.4vw #b3d7ff, 
-    0 0 0.4vw 0.6vw #7ebafb, 
-    0 0 1.8vw 0.2vw #007bff, 
-    inset 0 0 0.8vw 0.1vw #007bff, 
-    inset 0 0 0.4vw 0.2vw #64acf9, 
-    inset 0 0 0vw 0.1vw #b3d7ff;
     border-radius: 0.6rem;
     
 }
