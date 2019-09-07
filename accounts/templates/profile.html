@@ -1,13 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}{{ profile.first_name|title }}'s Profile{% endblock %}
+{% block title %}{{ user.first_name|title }}'s Profile{% endblock %}
 
 {% block content %}
 <p>Love</p>
 <h1>Lanarkshire</h1>
 <p>Profile</p>
 
-<p>{{ profile.email }}</p>
+<p>{{ user.email }}</p>
+
+{% if membership.bronze %}
+    <p>Hello Bronze</p>
+{% else %}
+    <p>Oh no!</p>
+    
+{% endif %}
+
 
 
 {% endblock %}

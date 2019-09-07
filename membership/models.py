@@ -7,6 +7,8 @@ class Membership(models.Model):
     """User membership of site"""
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bronze = models.BooleanField(default=True)
-    silver = models.BooleanField()
-    gold = models.BooleanField()
-    posts_remaining = models.IntegerField()
+    silver = models.BooleanField(null=True)
+    gold = models.BooleanField(null=True)
+    posts_remaining = models.IntegerField(default=0)
+    
+    

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import auth, messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -53,8 +53,8 @@ def register(request):
         if registration_form.is_valid():
             # Ensure username saves as lowercase to the db
             registration_form.save()
-            user = auth.authenticate(username=request.post['username'],
-                                     password=request.post['password1'])
+            user = auth.authenticate(username=request.POST['username'],
+                                     password=request.POST['password1'])
             membership = Membership(user=user)
             membership.save()
             if user:
@@ -71,13 +71,13 @@ def register(request):
 @login_required     
 def user_profile(request):
     """The user's profile page"""
-    if request.user.is_authenticated:
-        user = User.objects.get(email=request.user.email)
-        context = {
-            'profile': user
-        }
-        return render(request, 'profile.html', context)
-    else:
-        return redirect(reverse('login'))
+    user = get_object_or_404(User, pk=request.user.id)
+    membership = Membership.objects.get(user=user)
+    context = {
+        'user': user,
+        'membership': membership
+    }
+    return render(request, 'profile.html', context)
+    
     
     
