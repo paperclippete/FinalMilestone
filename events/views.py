@@ -13,16 +13,15 @@ import datetime
 @login_required
 def post_event(request):
     """Renders Create Event Form"""
-    post_event_form = CreateEventForm()
+    post_event_form = CreateEventForm(request.POST or None)
     context = {
         'post_event_form': post_event_form
     }
     if request.method == "POST":
-        post_event_form = CreateEventForm(request.POST)
         if post_event_form.is_valid():
             post_event_form.instance.event_host = request.user
             post_event_form.save()
-            post_event_form = CreateEventForm()
+            
         else:
             post_event_form.add_error(None, f"Oops {post_event_form.error}")
     else:    
@@ -34,8 +33,6 @@ def post_event(request):
 def view_one_event(request, pk):
     """Displays event information for site user"""
     event = get_object_or_404(Event, pk=pk)
-    print(event.event_date_begins)
-    print(datetime.date.today())
     user = request.user
     join_form = JoinEvent(request.POST or None)
     like_form = LikeEvent(request.POST or None)
@@ -95,7 +92,7 @@ def delete_participant(request, pk):
     participant = Participant.objects.filter(event=event).filter(user=user)
     participant.delete()
     messages.success(request, f"You are no longer booked for { event.title }")
-    return redirect('view_all_events')
+    return redirect('search')
     
 def delete_like(request, pk):
     """Removes event from user like list"""
