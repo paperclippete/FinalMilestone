@@ -6,23 +6,27 @@
 
 {% block head_js %}
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script type="text/javascript" src="{% static 'js/stripe.js' %}"></script>
 <script type="text/javascript">
     //<![CDATA[
         Stripe.publishableKey = '{{ publishable }}';
     //]]>
 </script>
-<script type="text/javascript" src="{% static 'js/stripe.js' %}"></script>
+
 {% endblock %}
 
 {% block content %}
 <div class="lanarkshire-form">
-    <form method="POST">
+    <form method="POST" id="payment-form">
+        <div id="credit-card-errors" style="display: none;">
+        <div class="alert-message block-message error" id="stripe-error-message"></div>
+    </div>
         {% csrf_token %}
         {{ order_form|crispy }}
     {% if membership_level != 'bronze' %}
         {{ payment_form|crispy }}
     {% endif %}
-        <button action="submit" class="btn btn-primary btn-block btn-lg">Login</button>
+        <input class="btn btn-primary btn-block btn-lg"id="submit_payment_btn" name="commit" type="submit" value="Submit Payment">
     </form>
 </div>
 
