@@ -29,14 +29,12 @@ def membership(request, membership_level):
                 membership.gold = False
                 membership.posts_remaining = 0
                 membership.save()
-                print('membership done')
                 order = order_form.save(commit=False)
                 order.membership = membership
                 order.user = user
                 order.level = membership_level
                 order.date = timezone.now()
                 order.save()
-                print('order done')
                 messages.success(request, "You are now a Bronze member!")
                 return redirect(reverse('user_profile'))
         elif membership_level == 'silver': 
@@ -47,14 +45,12 @@ def membership(request, membership_level):
                 membership.gold = False
                 membership.posts_remaining = 2
                 membership.save()
-                print('membership done')
                 order = order_form.save(commit=False)
                 order.membership = membership
                 order.user = user
                 order.level = membership_level
                 order.date = timezone.now()
                 order.save()
-                print('order done')
                 try:
                     customer = stripe.Charge.create(
                         amount = int(20 * 100),
