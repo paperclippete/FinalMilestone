@@ -43,6 +43,10 @@ body {
     padding: 0px 30px;
 }
 
+.btn-secondary {
+    color: #fff;
+}
+
 
 /*Navbar Styles*/
 
@@ -280,6 +284,28 @@ body {
 
 .btn-outline-danger {
     border: none;
+}
+
+/*User Profile Page*/
+
+.profile-button {
+    margin: 20px 0;
+}
+
+.mem-card {
+    margin-top: 10px;
+}
+
+.bronze-text {
+    color: #AD591F;
+}
+
+.silver-text {
+    color: #908D8A;
+}
+
+.gold-text {
+    color: #A45C14
 }
 
 
