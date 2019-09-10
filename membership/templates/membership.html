@@ -16,6 +16,22 @@
 {% endblock %}
 
 {% block content %}
+
+<div class="event-container layout">
+    <h3>Hi {{ user.first_name|title }}</h3>
+    <p class="membership-info">
+    {% if membership_level == 'bronze' %}
+        You've chosen to be a<span class="bronze-text"><strong> BRONZE</strong></span> member, this is completely free! Please fill out the form for our records.
+    {% elif membership_level == 'silver' %}
+        You've chosen to be a<span class="silver-text"><strong> SILVER</strong></span> member. Please complete the following form to pay the <strong><i class="fas fa-pound-sign"></i> 20 </strong> membership.
+    {% elif membership_level == 'gold' %}
+        You've chosen to be a<span class="gold-text"><strong> GOLD</strong></span> member. Please complete the following form to pay the <strong><i class="fas fa-pound-sign"></i> 120 </strong> membership.
+    {% endif %} 
+    </p>
+    <div class="divider"></div>
+</div>
+
+
 <div class="lanarkshire-form">
     <form method="POST" id="payment-form">
         <div id="credit-card-errors" style="display: none;">
