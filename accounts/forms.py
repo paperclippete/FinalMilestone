@@ -37,3 +37,10 @@ class UserRegistrationForm(UserCreationForm):
         if password1 != password2:
             raise ValidationError('Your passwords do not match')
         return password2
+        
+
+class EditUserForm(forms.ModelForm):
+    """Allows user to update their details"""
+    class Meta:
+	    model = User
+	    fields = ['username', 'email', 'first_name', 'last_name']

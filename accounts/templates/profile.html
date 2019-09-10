@@ -1,20 +1,145 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}{{ user.first_name|title }}'s Profile{% endblock %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-<p>Love</p>
-<h1>Lanarkshire</h1>
-<p>Profile</p>
+<div class="event-container layout">
+    <h3>Hi {{ user.first_name|title }}</h3>
+    <p class="membership-info">
+    {% if membership.bronze %}
+        Your membership is<span class="bronze-text"><strong> BRONZE</strong></span>, you can join as many exciting events as you like!
+    {% elif membership.silver %}
+        Your membership is<span class="silver-text"><strong> SILVER</strong></span>, you have {{ membership.posts_remaining }} posts remaining.
+    {% elif membership.gold %}
+        Your membership is<span class="gold-text"><strong> GOLD</strong></span>, you have {{ membership.posts_remaining }} posts remaining.
+    {% endif %} 
+    </p>
+    <div class="divider"></div>
+    <div class="profile-button">
+        <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#edit_user" aria-expanded="false" aria-controls="collapseExample">Edit your details <i class="fas fa-user-edit"></i></button>
+        <div class="collapse" id="edit_user">
+            <div class="card card-body">
+                <form method="POST">
+                    <div class="row filter-row">
+                    {% csrf_token %}
+                    {{edit_form|crispy }}
+                    </div>
+                    <button action="submit" class="btn btn-primary float-right">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="profile-button">
+        <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#change_membership" aria-expanded="false" aria-controls="collapseExample">Edit/ Upgrade your membership <i class="fas fa-medal"></i></button>
+        <div class="collapse" id="change_membership">
+            <div class="row card-row">
+                {% if membership.bronze %}
+                <div class="col-sm-4 mem-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title bronze-text"><strong>Bronze</strong></h5>
+                            <div class="divider"></div>
+                            <p class="card-text">Our free tier allows you to join as many events as you wish!</p>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-secondary float-right" disabled>Enjoy!</button>
+                        </div>
+                    </div>
+                </div>
+                {% elif membership.silver or membership.gold %}
+                <div class="col-sm-4 mem-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title bronze-text"><strong>Bronze</strong></h5>
+                            <div class="divider"></div>
+                            <p class="card-text">Our free tier allows you to join as many events as you wish! You can join Bronze at any time but will lose any posts still included in your current membership.</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{% url 'membership' 'bronze' %}" class="btn btn-primary float-right">Join Bronze</a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="col-sm-4 mem-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title silver-text"><strong>Silver</strong></h5>
+                            <div class="divider"></div>
+                            <p class="card-text">Our initial paid tier allows you to post and host events! For a one-time payment of £20 you can post 2 events! {% if membership.gold %} You can join Silver at any time but will lose any posts still included in your current membership. {% endif %}</p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{% url 'membership' 'silver' %}" class="btn btn-primary float-right">Join Silver</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 mem-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title gold-text"><strong>Gold</strong></h5>
+                            <div class="divider"></div>
+                            <p class="card-text">Our top membership tier allows you to post and host more events! For a one-time payment of £120 you can post 15 events! </p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="{% url 'membership' 'gold' %}" class="btn btn-primary float-right">Join Gold</a>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="profile-button">
+        <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#liked_events" aria-expanded="false" aria-controls="collapseExample">Your Saved Events <i class="fas fa-heart"></i></button>
+        <div class="collapse" id="liked_events">
+            <div class="card card-body">
+                
+            </div>
+        </div>
+    </div>
+    <div class="profile-button">
+        <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#booked_events" aria-expanded="false" aria-controls="collapseExample">Your Booked Events <i class="far fa-calendar-alt"></i></button>
+        <div class="collapse" id="booked_events">
+            <div class="card card-body">
+                
+            </div>
+        </div>
+    </div>
+    <div class="profile-button">
+        <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#event_history" aria-expanded="false" aria-controls="collapseExample">Event History <i class="fas fa-history"></i></button>
+        <div class="collapse" id="event_history">
+            <div class="card card-body">
+                
+            </div>
+        </div>
+    </div>
+    <div class="divider"></div>
+    {% if membership.silver or membership.gold %}
+    <div class="profile-button">
+        <button class="btn btn-success btn-lg btn-block" type="button" data-toggle="collapse" data-target="#event_hosting" aria-expanded="false" aria-controls="collapseExample">Your Events <i class="fas fa-history"></i></button>
+        <div class="collapse" id="event_hosting">
+            <div class="card card-body">
+                
+            </div>
+        </div>
+    </div>
+    <div class="profile-button">
+        <button class="btn btn-success btn-lg btn-block" type="button" data-toggle="collapse" data-target="#post_event" aria-expanded="false" aria-controls="collapseExample">Post a New Event <i class="fas fa-history"></i></button>
+        <div class="collapse" id="post_event">
+            <div class="card card-body">
+                
+            </div>
+        </div>
+    </div>
+    {% endif %}
 
-<p>{{ user.email }}</p>
-
-{% if membership.bronze %}
-    <p>Hello Bronze</p>
-{% else %}
-    <p>Oh no!</p>
     
-{% endif %}
+</div>
+
+
+
+
 
 
 
