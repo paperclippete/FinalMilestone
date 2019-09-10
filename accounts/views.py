@@ -3,7 +3,7 @@ from django.contrib import auth, messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from membership.models import Membership
-from .forms import UserLoginForm, UserRegistrationForm
+from .forms import UserLoginForm, UserRegistrationForm, EditUserForm
 
 # Create your views here.
 
@@ -73,9 +73,16 @@ def user_profile(request):
     """The user's profile page"""
     user = get_object_or_404(User, pk=request.user.id)
     membership = Membership.objects.get(user=user)
+    edit_form = EditUserForm(instance=request.user)
+    if request.method == "POST":
+        edit_form = EditUserForm(request.POST, instance=request.user)
+        if edit_form.is_valid():
+            edit_form.save()
+            messages.success(request, "You have updated your details!")
     context = {
         'user': user,
-        'membership': membership
+        'membership': membership,
+        'edit_form': edit_form
     }
     return render(request, 'profile.html', context)
     
