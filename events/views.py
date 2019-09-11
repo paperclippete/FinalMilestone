@@ -51,9 +51,13 @@ def view_one_event(request, pk):
     else: 
         user_liked = None
         user_joined = None
+    
+    
     user_queue = Participant.objects.filter(event=event).count()
     current_places = event.max_participants - user_queue
     event_host = User.objects.get(id=event.event_host.id)
+    print(user.is_authenticated)
+    print(event_host)
     # Ensures map renders at correct location
     full_address = event.address + ' ' + event.town + ' ' + event.post_code
     context = {

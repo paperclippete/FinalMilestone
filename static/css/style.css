@@ -47,6 +47,9 @@ body {
     color: #fff;
 }
 
+.hidden-m {
+    display: none;
+}
 
 /*Navbar Styles*/
 
@@ -241,6 +244,32 @@ body {
     padding: 20px;
     background-color: var(--lanwhite);
     color: var(--langrey);
+    position: relative;
+}
+
+.background-image {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #f1fae5c2;
+    background-blend-mode: overlay;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.flex-col > .col > p {
+    margin-bottom: 0px;
+}
+
+#easy-map-large {
+    border: solid 1px var(--langrey);
 }
 
 .event-view-image {
@@ -250,7 +279,7 @@ body {
 }
 
 .event-info {
-    margin: 20px -15px 0px -15px;
+    margin: 20px 0px;
     
 }
 
@@ -280,6 +309,11 @@ body {
     position: absolute;
     top: 6px;
     right: 6px;
+    
+}
+
+.fa-heart {
+    font-size: 2rem;
 }
 
 .btn-outline-danger {
@@ -370,5 +404,11 @@ body {
     }
     #user-message {
         margin: 0 60px;
+    }
+    .hidden-m {
+        display: inline;
+    }
+    .hidden-lg {
+        display: none;
     }
 }

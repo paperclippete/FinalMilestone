@@ -6,80 +6,83 @@
 {% block content %}
 
 <div class="event-container layout">
+    <div class="like-button">
+    {% if user.is_authenticated %}
+        {% if user_liked %}
+            <a href="{% url 'delete_like' event.id %}" class="btn btn-outline-danger"><i class="fas fa-heart"></i></a>
+        {% else %}
+            <form method="POST">
+                {% csrf_token %}
+                {{ like_form }}
+                <button action="submit" name="like_form" class="btn btn-outline-danger"><i class="far fa-heart"></i></button>
+            </form>
+        {% endif %}
+    {% endif %}
+    </div>
     <h3>{{ event.title|title }}</h3>
-        <span class="event-host">Hosted by: <a href="mailto: {{ event_host.email }}"><strong>{{ event.event_host|title }}</strong></a> <i class="far fa-envelope"></i> </span>
+    <span class="event-host">Hosted by: <a href="mailto: {{ event_host.email }}"><strong>{{ event.event_host|title }}</strong></a> <i class="far fa-envelope"></i> </span>
+    
     <div class="divider"></div>
-    <div class="row event-info">
-        <div class="col-sm-12 col-md-6 col-lg-6">
-            <div class="event-view-image">
-                {% if event.image %}
-                <img src="{{ MEDIA_URL }}{{ event.image }}" class="img-fluid event-image" alt="{{ event.title }} Image"> 
-                {% else %} 
-                    {% if event.event_type == "Arts and Crafts" %}
-                        <img src="{{ MEDIA_URL }}images/craft_event.jpg" class="img-fluid event-image" alt="Arts and Crafts Image"> 
-                    {% elif event.event_type == "Educational" %}
-                        <img src="{{ MEDIA_URL }}images/education_event.jpg" class="img-fluid event-image" alt="Education Image"> 
-                    {% elif event.event_type == "Nature" %}
-                        <img src="{{ MEDIA_URL }}images/nature_event.jpg" class="img-fluid event-image" alt="Nature Image"> 
-                    {% elif event.event_type == "Physical and Exercise" %}
-                        <img src="{{ MEDIA_URL }}images/physical_event.jpg" class="img-fluid event-image" alt="Physical and Exercise Image"> 
-                    {% elif event.event_type == "Health and Wellbeing" %}
-                        <img src="{{ MEDIA_URL }}images/wellbeing_event.jpg" class="img-fluid event-image" alt="Health and Wellbeing Image"> 
-                    {% elif event.event_type == "Entertainment" %}
-                        <img src="{{ MEDIA_URL }}images/entertainment_event.jpg" class="img-fluid event-image" alt="Entertainment Image"> 
-                    {% endif %} 
-                {% endif %}
-                <div class="like-button">
-                {% if user.is_authenticated %}
-                    {% if user_liked %}
-                        <a href="{% url 'delete_like' event.id %}" class="btn btn-outline-danger"><i class="fas fa-heart"></i></a>
-                    {% else %}
-                        <form method="POST">
-                            {% csrf_token %}
-                            {{ like_form }}
-                            <button action="submit" name="like_form" class="btn btn-outline-danger"><i class="far fa-heart"></i></button>
-                        </form>
-                    {% endif %}
-                {% endif %}
+    <div class="background-image" {% if event.image %}style="background-image:url({{ MEDIA_URL }}{{ event.image }})" 
+        {% else %} 
+            {% if event.event_type == "Arts and Crafts" %}
+                style="background-image:url({{ MEDIA_URL }}images/craft_event.jpg)" 
+            {% elif event.event_type == "Educational" %}
+                style="background-image:url({{ MEDIA_URL }}images/education_event.jpg)" 
+            {% elif event.event_type == "Nature" %}
+                style="background-image:url({{ MEDIA_URL }}images/nature_event.jpg)" 
+            {% elif event.event_type == "Physical and Exercise" %}
+                style="background-image:url({{ MEDIA_URL }}images/physical_event.jpg)"
+            {% elif event.event_type == "Health and Wellbeing" %}
+                style="background-image:url({{ MEDIA_URL }}images/wellbeing_event.jpg)"
+            {% elif event.event_type == "Entertainment" %}
+                style="background-image:url({{ MEDIA_URL }}images/entertainment_event.jpg)" 
+            {% endif %} 
+        {% endif %})>
+        <div class="row event-info">
+            <div class="col-sm-12 col-md-6 col-lg-6 flex-col">
+                <div class="row card-row">
+                    <div class="col">
+                        <p><i class="fas fa-location-arrow"></i> - {{ event.address }}, {{ event.town }}, {{ event.post_code }} </p>
+                    </div>
+                </div>
+                <div class="row card-row">
+                    <div class="col">
+                        {% if event.price == null %}
+                        <p><i class="fas fa-pound-sign"></i> - free!</p>
+                        {% else %}
+                        <p><i class="fas fa-pound-sign"></i> - £{{ event.price }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row card-row">
+                    <div class="col">
+                        {% if event.event_date_begins == event.event_date_ends %}
+                        <p><i class="far fa-calendar-alt"></i> - {{ event.event_day }} {{ event.event_date_begins|date:"jS F Y" }}</p>
+                        {% else %}
+                        <p><i class="far fa-calendar-alt"></i> - {{ event.event_day }}s from {{ event.event_date_begins|date:"jS F Y" }} to {{ event.event_date_ends|date:"jS F Y" }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row card-row">
+                    <div class="col">
+                        <p><i class="far fa-clock"></i> - {{ event.event_time_begins }} 'til {{ event.event_time_ends }}</p>
+                    </div>
+                </div>
+                <div class="row card-row">
+                    <div class="col">
+                        <p><i class="fas fa-users"></i> - {{ event.age_range }}</p>
+                    </div>
+                </div>
+                <div class="row card-row">
+                    <div class="col">
+                        <p>Current Places: {{ current_places }} </p>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="col-sm-12 col-md-6 col-lg-6">
-            <div class="row card-row">
-                <div class="col col-xs-6">
-                    <p><i class="fas fa-location-arrow"></i> - <a href="#" data-toggle="modal" data-target="#mapModal">{{ event.town }}</a></p>
-                </div>
-                <div class="col col-xs-6">
-                    {% if event.price == null %}
-                    <p><i class="fas fa-pound-sign"></i> - free!</p>
-                    {% else %}
-                    <p><i class="fas fa-pound-sign"></i> - £{{ event.price }}</p>
-                    {% endif %}
-                </div>
-            </div>
-            <div class="row card-row">
-                <div class="col">
-                    {% if event.event_date_begins == event.event_date_ends %}
-                    <p><i class="far fa-calendar-alt"></i> - {{ event.event_day }} {{ event.event_date_begins|date:"jS F Y" }}</p>
-                    {% else %}
-                    <p><i class="far fa-calendar-alt"></i> - {{ event.event_day }}s from {{ event.event_date_begins|date:"jS F Y" }} to {{ event.event_date_ends|date:"jS F Y" }}</p>
-                    {% endif %}
-                </div>
-            </div>
-            <div class="row card-row">
-                <div class="col">
-                    <p><i class="far fa-clock"></i> - {{ event.event_time_begins }} 'til {{ event.event_time_ends }}</p>
-                </div>
-            </div>
-            <div class="row card-row">
-                <div class="col">
-                    <p><i class="fas fa-users"></i> - {{ event.age_range }}</p>
-                </div>
-            </div>
-            <div class="row card-row">
-                <div class="col">
-                    <p>Current Places: {{ current_places }} </p>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <div id="easy-map-large">
+                    {% load easy_maps_tags %} {% easy_map full_address  %}
                 </div>
             </div>
         </div>
@@ -87,7 +90,9 @@
     <div class="divider"></div>
     <p class="event-text">{{ event.description|capfirst }}</p>
     
-    {% if user.is_authenticated %}
+    {% if user.is_authenticated and user == event_host %}
+        <button class="btn btn-primary"><i class="fas fa-edit"></i> Edit Event</button>
+    {% elif user.is_authenticated and user != event_host %}    
         {% if current_places != '0' %}
             {% if user_joined %}
                 <a href="{% url 'delete_participant' event.id %}" class="btn btn-danger"><i class="fas fa-user-minus"></i> Cancel booking</a>
@@ -115,29 +120,7 @@
     
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{event.title }} Location</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-            </div>
-            <div class="modal-body">
-                <p>{{ full_address }}</p>
-                <div id="easy-map">
-                    {% load easy_maps_tags %} {% easy_map full_address  %}
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
+ 
 {% block js %}
 {% endblock %}
                                             
