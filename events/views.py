@@ -5,6 +5,7 @@ from .forms import CreateEventForm, JoinEvent, LikeEvent
 from bootstrap_modal_forms.generic import BSModalCreateView, BSModalReadView
 from django.urls import reverse, reverse_lazy
 from .models import Event, Participant, Like
+from membership.models import Membership
 from django.contrib.auth.models import User
 import datetime
 
@@ -14,19 +15,27 @@ import datetime
 def post_event(request):
     """Renders Create Event Form"""
     post_event_form = CreateEventForm(request.POST or None)
+    user = request.user
+    if request.method == "POST" and post_event_form.is_valid():
+        event = post_event_form.save(commit=False)
+        event.event_host = user
+        event.save()
+        membership = Membership.objects.get(user=user)
+        membership.posts_remaining -= 1
+        membership.save()
+        current_places = event.max_participants
+        context = {
+            'event': event,
+            'current_places': current_places
+        }
+        messages.success(request, f"You have posted {request.POST['title']}!")
+        return render(request, 'view_one_event.html', context)
+
+
     context = {
         'post_event_form': post_event_form
     }
-    if request.method == "POST":
-        if post_event_form.is_valid():
-            post_event_form.instance.event_host = request.user
-            post_event_form.save()
-            
-        else:
-            post_event_form.add_error(None, f"Oops {post_event_form.error}")
-    else:    
-        return render(request, 'post_event.html', context)
-    
+
     return render(request, 'post_event.html', context)
     
 
