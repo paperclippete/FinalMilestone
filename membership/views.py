@@ -19,83 +19,36 @@ def membership(request, membership_level):
     payment_form = MakePaymentForm(request.POST or None)
     order_form = OrderMembershipForm(request.POST or None, instance=request.user)
     user = request.user
-    if request.method == "POST":
-        print(request.POST)
-        if membership_level == 'bronze':
-            if order_form.is_valid():
-                membership = Membership.objects.get(user=user)
-                membership.bronze = True
-                membership.silver = False
-                membership.gold = False
-                membership.posts_remaining = 0
-                membership.save()
-                order = order_form.save(commit=False)
-                order.membership = membership
-                order.user = user
-                order.level = membership_level
-                order.date = timezone.now()
-                order.save()
-                messages.success(request, "You are now a Bronze member!")
+    membership = Membership.objects.get(user=user)
+    if request.method == "POST" and order_form.is_valid():
+        membership.bronze = True if membership_level == 'bronze' else False
+        membership.silver = True if membership_level == 'silver' else False
+        membership.gold = True if membership_level == 'gold' else False
+        membership.posts_remaining = 0 if membership_level == 'bronze' else 2 if membership_level == 'silver' else 15
+        membership.save()
+        order = order_form.save(commit=False)
+        order.membership = membership
+        order.user = user
+        order.level = membership_level
+        order.date = timezone.now()
+        order.save()
+        if payment_form and payment_form.is_valid():
+            price = 20 if membership_level == 'silver' else 120
+            try:
+                customer = stripe.Charge.create(
+                    amount = int(price * 100),
+                    currency = "GBP",
+                    description = request.user.email,
+                    card = payment_form.cleaned_data['stripe_id'],
+                )
+            except stripe.error.CardError:
+                messages.error(request, "Your card was declined!")
+                    
+            if customer.paid:
+                messages.success(request, "You have successfully paid")
                 return redirect(reverse('user_profile'))
-        elif membership_level == 'silver': 
-            if order_form.is_valid() and payment_form.is_valid():
-                membership = Membership.objects.get(user=user)
-                membership.bronze = False
-                membership.silver = True
-                membership.gold = False
-                membership.posts_remaining = 2
-                membership.save()
-                order = order_form.save(commit=False)
-                order.membership = membership
-                order.user = user
-                order.level = membership_level
-                order.date = timezone.now()
-                order.save()
-                try:
-                    customer = stripe.Charge.create(
-                        amount = int(20 * 100),
-                        currency = "GBP",
-                        description = request.user.email,
-                        card = payment_form.cleaned_data['stripe_id'],
-                    )
-                except stripe.error.CardError:
-                    messages.error(request, "Your card was declined!")
-                    
-                if customer.paid:
-                    messages.success(request, "You have successfully paid")
-                    return redirect(reverse('user_profile'))
-                else:
-                    messages.error(request, "Unable to take payment, try again!")
-                
-        elif membership_level == 'gold':
-            if order_form.is_valid() and payment_form.is_valid():
-                membership = Membership.objects.get(user=user)
-                membership.bronze = False
-                membership.silver = False
-                membership.gold = True
-                membership.posts_remaining = 15
-                membership.save()
-                order = order_form.save(commit=False)
-                order.membership = membership
-                order.user = user
-                order.level = membership_level
-                order.date = timezone.now()
-                order.save()
-                try:
-                    customer = stripe.Charge.create(
-                        amount = int(150 * 100),
-                        currency = "GBP",
-                        description = request.user.email,
-                        card = payment_form.cleaned_data['stripe_id'],
-                    )
-                except stripe.error.CardError:
-                    messages.error(request, "Your card was declined!")
-                    
-                if customer.paid:
-                    messages.success(request, "You have successfully paid")
-                    return redirect(reverse('user_profile'))
-                else:
-                    messages.error(request, "Unable to take payment, try again!")
+            else:
+                messages.error(request, "Unable to take payment, try again!")
         
     context = {
         'membership_level': membership_level,

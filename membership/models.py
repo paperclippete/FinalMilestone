@@ -20,7 +20,7 @@ class Order(models.Model):
     first_name = models.CharField(max_length=50, blank=False)
     last_name = models.CharField(max_length=50, blank=False)
     street_address1 = models.CharField(max_length=40, blank=False)
-    street_address2 = models.CharField(max_length=40, blank=False)
+    street_address2 = models.CharField(max_length=40, blank=True)
     postcode = models.CharField(max_length=20, blank=False)
     town_or_city = models.CharField(max_length=40, blank=False)
     date = models.DateTimeField(blank=False)
