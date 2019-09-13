@@ -25,7 +25,9 @@ $(document).ready(function() {
     
     // FAB Button for setting site theme
     $('#zoomBtn').click(function() {
+        $('.zoom-menu').toggleClass('hidden')
         $('.zoom-btn-sm').toggleClass('scale-out');
+        
         
     });
     
