@@ -42,10 +42,10 @@ def membership(request, membership_level):
                     card = payment_form.cleaned_data['stripe_id'],
                 )
             except stripe.error.CardError:
-                messages.error(request, "Your card was declined!")
+                messages.error(request, "Sorry, your card was declined!")
                     
             if customer.paid:
-                messages.success(request, "You have successfully paid")
+                messages.success(request, "You have successfully paid!")
                 return redirect(reverse('user_profile'))
             else:
                 messages.error(request, "Unable to take payment, try again!")
