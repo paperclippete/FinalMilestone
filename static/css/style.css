@@ -217,6 +217,10 @@ body {
     transition: background-color 0.4s ease-in-out 0s;
 }
 
+#navbarNav {
+    text-align: center;
+}
+
 .navbar {
     background-color: var(--dark-color);
     -webkit-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.75);
@@ -237,7 +241,7 @@ body {
 
 .navbar-brand:hover:visited,
 .nav-link:hover:visited {
-    color: var(--langrey);
+    color: var(--lanwhite);
 }
 
 .site-title-small {

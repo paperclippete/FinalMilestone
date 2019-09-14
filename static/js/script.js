@@ -74,6 +74,22 @@ $(document).ready(function() {
         }
     }
     
+    //nav-link bounce effect
+    $('.navbar-brand').mouseenter(function() {
+        $(this).addClass("animated tada")
+    }) 
+    
+    $('.nav-item').mouseleave(function() {
+        $("a", this).removeClass("animated tada")
+    })
+    
+    $('.nav-item').mouseenter(function() {
+        $("a", this).addClass("animated tada")
+    }) 
+    
+    $('.nav-item').mouseleave(function() {
+        $("a", this).removeClass("animated tada")
+    })
     
 
     
