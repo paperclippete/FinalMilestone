@@ -4,6 +4,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from membership.models import Membership
 from .forms import UserLoginForm, UserRegistrationForm, EditUserForm
+from membership.forms import OrderMembershipForm
+from django.conf import settings
+import stripe
+
 
 # Create your views here.
 
@@ -74,6 +78,7 @@ def user_profile(request):
     user = get_object_or_404(User, pk=request.user.id)
     membership = Membership.objects.get(user=user)
     edit_form = EditUserForm(instance=request.user)
+    order_form = OrderMembershipForm(request.POST or None, instance=request.user)
     if request.method == "POST":
         edit_form = EditUserForm(request.POST, instance=request.user)
         if edit_form.is_valid():
@@ -82,7 +87,9 @@ def user_profile(request):
     context = {
         'user': user,
         'membership': membership,
-        'edit_form': edit_form
+        'edit_form': edit_form,
+        'order_form': order_form,
+        'publishable': settings.STRIPE_PUBLISHABLE
     }
     return render(request, 'profile.html', context)
     

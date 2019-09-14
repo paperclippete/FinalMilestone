@@ -3,16 +3,20 @@
 {% block title %}{{ user.first_name|title }}'s Profile{% endblock %}
 {% load crispy_forms_tags %}
 
+{% block head_js %}
+<script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+<script type="text/javascript" src="{% static 'js/stripe.js' %}"></script>
+
+{% endblock %}
+
 {% block content %}
 <div class="event-container layout">
     <h3>Hi {{ user.first_name|title }}</h3>
     <p class="membership-info">
     {% if membership.bronze %}
         Your membership is<span class="bronze-text"><strong> BRONZE</strong></span>, you can join as many exciting events as you like!
-    {% elif membership.silver %}
-        Your membership is<span class="silver-text"><strong> SILVER</strong></span>, you have {{ membership.posts_remaining }} posts remaining.
-    {% elif membership.gold %}
-        Your membership is<span class="gold-text"><strong> GOLD</strong></span>, you have {{ membership.posts_remaining }} posts remaining.
+    {% else %}
+        Your membership is{% if membership.silver %}<span class="silver-text"><strong> SILVER{% else %}<span class="gold-text"><strong> GOLD{% endif %}</strong></span>, you have {{ membership.posts_remaining }} {% if membership.posts_remaining != 1 %} posts {% else %} post {% endif %} remaining.
     {% endif %} 
     </p>
     <div class="divider"></div>
@@ -47,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-                {% elif membership.silver or membership.gold %}
+                {% else %}
                 <div class="col-sm-4 mem-card">
                     <div class="card">
                         <div class="card-body">
@@ -56,7 +60,7 @@
                             <p class="card-text">Our free tier allows you to join as many events as you wish! You can join Bronze at any time but will lose any posts still included in your current membership.</p>
                         </div>
                         <div class="card-footer">
-                            <a href="{% url 'membership' 'bronze' %}" class="btn btn-primary float-right">Join Bronze</a>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-level="bronze">Open modal for bronze</button>
                         </div>
                     </div>
                 </div>
@@ -69,7 +73,8 @@
                             <p class="card-text">Our initial paid tier allows you to post and host events! For a one-time payment of £20 you can post 2 events! {% if membership.gold %} You can join Silver at any time but will lose any posts still included in your current membership. {% endif %}</p>
                         </div>
                         <div class="card-footer">
-                            <a href="{% url 'membership' 'silver' %}" class="btn btn-primary float-right">Join Silver</a>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-level="silver">Open modal for silver</button>
+
                         </div>
                     </div>
                 </div>
@@ -81,7 +86,7 @@
                             <p class="card-text">Our top membership tier allows you to post and host more events! For a one-time payment of £120 you can post 15 events! </p>
                         </div>
                         <div class="card-footer">
-                            <a href="{% url 'membership' 'gold' %}" class="btn btn-primary float-right">Join Gold</a>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-level="gold">Open modal for gold</button>
                         </div>
                         
                     </div>
@@ -94,7 +99,6 @@
         <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#liked_events" aria-expanded="false" aria-controls="collapseExample">Your Saved Events <i class="fas fa-heart"></i></button>
         <div class="collapse" id="liked_events">
             <div class="card card-body">
-                
             </div>
         </div>
     </div>
@@ -133,14 +137,140 @@
         </div>
     </div>
     {% endif %}
-
-    
 </div>
 
+<!--Modal for membership upgrade-->
 
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" id="payment-form" action="" data-token="{{ publishable }}">
+        {% csrf_token %}
+        {{ order_form|crispy }}
+            <fieldset>
+                <label for="card-element">Credit or Debit card</label>
+                <!-- Stripe widget inserted below -->
+                <div id="card-element"></div>
+                    <div id="card-errors" class="white-text red" role="alert"></div>
+            </fieldset>
+            <div class="card-action">
+            <!-- save / submit new feature + payment -->
+                <button type="submit" class="btn btn-primary btn-block btn-lg">Submit Payment</button>
+            </div>
+        </form>
+          
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
+{% block js %}
+<script>
+    $('#exampleModal').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var membership_level = button.data('level'); // Extract info from data-* attributes
+    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    var modal = $(this)
+    modal.find('.modal-title').text('Change to ' + membership_level);
+    if (membership_level === 'bronze') {
+        modal.find('form').attr('action', "{% url 'membership' 'bronze' %}");
+    }
+    else if (membership_level === 'silver') {
+        modal.find('form').attr('action', "{% url 'membership' 'silver' %}");
+    }
+    else {
+        modal.find('form').attr('action', "{% url 'membership' 'gold' %}");
+    }
+})
+    // Create a Stripe client.
+    var formToken = document.querySelector("#payment-form");
+    var stripe = Stripe(formToken.dataset.token);
+    
+    
+    // Create an instance of Elements.
+    var elements = stripe.elements();
+    
+    // Custom styling can be passed to options when creating an Element.
+    // (Note that this demo uses a wider set of styles than the guide below.)
+    var style = {
+        base: {
+            color: '#32325d',
+            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+            fontSmoothing: 'antialiased',
+            fontSize: '16px',
+            '::placeholder': {
+                color: '#aab7c4'
+            }
+        },
+        invalid: {
+            color: '#fa755a',
+            iconColor: '#fa755a'
+        }
+    };
+    
+    // Create an instance of the card Element.
+    var card = elements.create('card', {
+        style: style
+    });
+    
+    // Add an instance of the card Element into the `card-element` <div>.
+    card.mount('#card-element');
+    console.log("1")
+    // Handle real-time validation errors from the card Element.
+    card.addEventListener('change', function (event) {
+        var displayError = document.getElementById('card-errors');
+        if (event.error) {
+            displayError.textContent = event.error.message;
+        } else {
+            displayError.textContent = '';
+        }
+    });
+    console.log("2")
+    // Handle form submission.
+    var form = document.getElementById('payment-form');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+    
+        stripe.createToken(card).then(function (result) {
+            if (result.error) {
+                // Inform the user if there was an error.
+                var errorElement = document.getElementById('card-errors');
+                errorElement.textContent = result.error.message;
+            } else {
+                // Send the token to your server.
+                stripeTokenHandler(result.token);
+            }
+        });
+    });
+    
+    // Submit the form with the token ID.
+    function stripeTokenHandler(token) {
+        // Insert the token ID into the form so it gets submitted to the server
+        var form = document.getElementById('payment-form');
+        var hiddenInput = document.createElement('input');
+        hiddenInput.setAttribute('type', 'hidden');
+        hiddenInput.setAttribute('name', 'stripeToken');
+        hiddenInput.setAttribute('value', token.id);
+        form.appendChild(hiddenInput);
+    
+        // Submit the form
+        form.submit();
+    }
 
-
-
+</script>
 
 {% endblock %}
+{% endblock %}
+
+
