@@ -37,57 +37,41 @@
         <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#change_membership" aria-expanded="false" aria-controls="collapseExample">Edit/ Upgrade your membership <i class="fas fa-medal"></i></button>
         <div class="collapse" id="change_membership">
             <div class="row card-row">
-                {% if membership.bronze %}
                 <div class="col-sm-4 mem-card">
                     <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title bronze-text"><strong>Bronze</strong></h5>
-                            <div class="divider"></div>
-                            <p class="card-text">Our free tier allows you to join as many events as you wish!</p>
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn-secondary float-right" disabled>Enjoy!</button>
-                        </div>
-                    </div>
-                </div>
-                {% else %}
-                <div class="col-sm-4 mem-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title bronze-text"><strong>Bronze</strong></h5>
-                            <div class="divider"></div>
-                            <p class="card-text">Our free tier allows you to join as many events as you wish! You can join Bronze at any time but will lose any posts still included in your current membership.</p>
-                        </div>
-                        <div class="card-footer">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-level="bronze">Open modal for bronze</button>
-                        </div>
-                    </div>
-                </div>
-                {% endif %}
-                <div class="col-sm-4 mem-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title silver-text"><strong>Silver</strong></h5>
-                            <div class="divider"></div>
-                            <p class="card-text">Our initial paid tier allows you to post and host events! For a one-time payment of £20 you can post 2 events! {% if membership.gold %} You can join Silver at any time but will lose any posts still included in your current membership. {% endif %}</p>
-                        </div>
-                        <div class="card-footer">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-level="silver">Open modal for silver</button>
-
-                        </div>
+                        <ul class="price">
+                            <li class="header bronze-header"><strong>BRONZE</strong></li>
+                            <li class="bronze-text"><strong>Free</strong></li>
+                            <li>Join Events</li>
+                            <li>N/A</li>
+                            {% if membership.bronze %}
+                            <li class="grey"><button class="btn btn-secondary btn-block" disabled>Enjoy!</button></li>
+                            {% else %}
+                            <li class="grey"><button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal" data-level="bronze">Change</button></li>
+                            {% endif %}
+                        </ul>
                     </div>
                 </div>
                 <div class="col-sm-4 mem-card">
                     <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title gold-text"><strong>Gold</strong></h5>
-                            <div class="divider"></div>
-                            <p class="card-text">Our top membership tier allows you to post and host more events! For a one-time payment of £120 you can post 15 events! </p>
-                        </div>
-                        <div class="card-footer">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-level="gold">Open modal for gold</button>
-                        </div>
-                        
+                        <ul class="price">
+                            <li class="header silver-header"><strong>SILVER</strong></li>
+                            <li class="silver-text"><strong>£20</strong></li>
+                            <li>Join and Post Events</li>
+                            <li>2 Posts</li>
+                            <li class="grey"><button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal" data-level="silver">Purchase</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4 mem-card">
+                    <div class="card">
+                        <ul class="price">
+                            <li class="header gold-header"><strong>GOLD</strong></li>
+                            <li class="gold-text"><strong>£120</strong></li>
+                            <li>Join and Post Events</li>
+                            <li>15 Posts</li>
+                            <li class="grey"><button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal" data-level="gold">Purchase</button></li>
+                        </ul>
                     </div>
                 </div>
                 
@@ -150,14 +134,17 @@
         </button>
             </div>
             <div class="modal-body">
+                <!--Form will display for changing to bronze membership-->
                 <form method="POST" id="bronze-form" action="{% url 'membership' 'bronze' %}">
-                    {% csrf_token %} {{ order_form|crispy }}
-                    
+                    {% csrf_token %} 
+                    {{ order_form|crispy }}
                     <button type="submit" class="btn btn-primary btn-block btn-lg">Submit Request</button>    
                 </form>
-
+                
+                <!--Form with payment element will display for changing to silver or gold membership-->
                 <form method="POST" id="payment-form" action="" data-token="{{ publishable }}">
-                    {% csrf_token %} {{ order_form|crispy }}
+                    {% csrf_token %} 
+                    {{ order_form|crispy }}
                     <fieldset class="form-group">
                         <label for="card-element" class="col-form-label">Credit or Debit Card</label>
                         <!-- Stripe widget inserted below -->
@@ -167,12 +154,10 @@
                             <button type="submit" class="btn btn-primary btn-block btn-lg">Submit Payment</button>
                         </div>
                     </fieldset>
-                    
                 </form>
-
+                
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
                 </div>
             </div>
         </div>
@@ -183,14 +168,14 @@
     $('#exampleModal').on('show.bs.modal', function(event) {
     var button = $(event.relatedTarget) // Button that triggered the modal
     var membership_level = button.data('level'); // Extract info from data-* attributes
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+    
+    // Update modal with required membership forms
     var modal = $(this)
     modal.find('.modal-title').html(`You've chosen to be a<span class="${membership_level}-text"><strong> ${membership_level.toUpperCase()}</strong></span> member!`);
+    
     if (membership_level === 'bronze') {
         modal.find('#payment-form').css('display', 'none');
         modal.find('#bronze-form').css('display', 'block');
-        
     }
     else if (membership_level === 'silver') {
         modal.find('#payment-form').css('display', 'block');
@@ -202,11 +187,11 @@
         modal.find('#bronze-form').css('display', 'none');
         modal.find('form').attr('action', "{% url 'membership' 'gold' %}");
     }
-})
+});
     
 </script>
+<!--Stripe JS below will handle display of card element in modal form-->
 <script type="text/javascript" src="{% static 'js/stripe.js' %}"></script>
-
 
 {% endblock %}
 {% endblock %}
