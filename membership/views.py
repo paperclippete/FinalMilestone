@@ -33,23 +33,27 @@ def membership(request, membership_level):
         order.date = timezone.now()
         order.save()
         price = 20 if membership_level == 'silver' else 120
-        try:
-            token = request.POST['stripeToken']
-            customer = stripe.Charge.create(
-                amount = int(price * 100),
-                currency = "GBP",
-                description = request.user.email,
-                source=token,
-            )
-        except stripe.error.CardError:
-            messages.error(request, "Sorry, your card was declined!")
-                
-        if customer.paid:
-            messages.success(request, "You have successfully paid!")
+        print(membership_level)
+        if membership_level == 'bronze':
+            messages.success(request, "Membership updated!")
             return redirect(reverse('user_profile'))
         else:
-            messages.error(request, "Unable to take payment, try again!")
-    
-    return redirect(reverse('user_profile'))
+            try:
+                token = request.POST['stripeToken']
+                customer = stripe.Charge.create(
+                    amount = int(price * 100),
+                    currency = "GBP",
+                    description = request.user.email,
+                    source=token,
+                )
+            except stripe.error.CardError:
+                messages.error(request, "Sorry, your card was declined!")
+                
+            if customer.paid:
+                messages.success(request, "You have successfully paid! Membership updated!")
+                return redirect(reverse('user_profile'))
+            else:
+                messages.error(request, "Unable to take payment, try again!")
+            
     
     
