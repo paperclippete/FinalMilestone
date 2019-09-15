@@ -1,0 +1,41 @@
+<div class="col-sm-12 col-md-6 col-lg-4 card-col">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ event.title|title }}</h5>
+            <span class="event-host">Hosted by: <strong>{{ event.event_host|title }}</strong></span>
+            <div class="divider"></div>
+            <p class="card-text">{{ event.description|capfirst|truncatewords:8 }}</p>
+            <div class="container card-container">
+                <div class="row">
+                    <div class="col col-xs-6">
+                        <p><i class="fas fa-location-arrow"></i> - {{ event.town }}</p>
+                    </div>
+                    <div class="col col-xs-6">
+                        {% if event.price == null %}
+                        <p><i class="fas fa-pound-sign"></i> - free!</p>
+                        {% else %}
+                        <p><i class="fas fa-pound-sign"></i> - £{{ event.price }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {% if event.event_date_begins == event.event_date_ends %}
+                        <p><i class="far fa-calendar-alt"></i> - {{ event.event_day }} {{ event.event_date_begins|date:"jS F Y" }}</p>
+                        {% else %}
+                        <p><i class="far fa-calendar-alt"></i> - {{ event.event_day }}s from {{ event.event_date_begins|date:"jS F Y" }} to {{ event.event_date_ends|date:"jS F Y" }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p><i class="far fa-clock"></i> - {{ event.event_time_begins }} 'til {{ event.event_time_ends }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a href="{% url 'view_one_event' event.id %}" class="btn btn-success btn-block">View Event</a>
+        </div>
+    </div>
+</div>

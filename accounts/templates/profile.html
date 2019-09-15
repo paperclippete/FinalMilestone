@@ -81,9 +81,14 @@
     <div class="profile-button">
         <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#liked_events" aria-expanded="false" aria-controls="collapseExample">Your Saved Events <i class="fas fa-heart"></i></button>
         <div class="collapse" id="liked_events">
-            <div class="card card-body">
+            <div class="card card-body h-scroll">
+                <div class="row">
+                {% for event in user_liked_events %}
+                    {% include "view_events_partial.html" %}
+                {% endfor %}
             </div>
         </div>
+        
     </div>
     <div class="profile-button">
         <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#booked_events" aria-expanded="false" aria-controls="collapseExample">Your Booked Events <i class="far fa-calendar-alt"></i></button>

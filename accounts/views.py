@@ -3,6 +3,7 @@ from django.contrib import auth, messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from membership.models import Membership
+from events.models import Like, Participant, Event
 from .forms import UserLoginForm, UserRegistrationForm, EditUserForm
 from membership.forms import OrderMembershipForm
 from django.conf import settings
@@ -76,6 +77,11 @@ def register(request):
 def user_profile(request):
     """The user's profile page"""
     user = get_object_or_404(User, pk=request.user.id)
+    user_liked = Like.objects.filter(user=user).values('event')
+    user_liked_events = Event.objects.filter(id__in=user_liked)
+    print(user_liked_events)
+    user_participant_events = Participant.objects.filter(user=user)
+    user_hosted_events = Event.objects.filter(event_host=user)
     membership = Membership.objects.get(user=user)
     edit_form = EditUserForm(instance=request.user)
     order_form = OrderMembershipForm(request.POST or None, instance=request.user)
@@ -89,7 +95,11 @@ def user_profile(request):
         'membership': membership,
         'edit_form': edit_form,
         'order_form': order_form,
-        'publishable': settings.STRIPE_PUBLISHABLE
+        'publishable': settings.STRIPE_PUBLISHABLE,
+        'user_liked_events': user_liked_events,
+        'user_participant_events': user_participant_events,
+        'user_hosted_events': user_hosted_events
+        
     }
     return render(request, 'profile.html', context)
     
