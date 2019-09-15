@@ -31,7 +31,6 @@ var card = elements.create('card', {
 
 // Add an instance of the card Element into the `card-element` <div>.
 card.mount('#card-element');
-console.log("1")
 // Handle real-time validation errors from the card Element.
 card.addEventListener('change', function(event) {
     var displayError = document.getElementById('card-errors');
@@ -42,7 +41,6 @@ card.addEventListener('change', function(event) {
         displayError.textContent = '';
     }
 });
-console.log("2")
 // Handle form submission.
 var form = document.getElementById('payment-form');
 form.addEventListener('submit', function(event) {
