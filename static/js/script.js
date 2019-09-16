@@ -8,7 +8,7 @@ $(document).ready(function() {
             return $('.navbar').css({"background-color": '--dark-color'});
         } else {
             $('.navbar').css({"background-color": '--dark-color'});
-            $('.navbar').toggleClass('navbar-effect');
+            $('.navbar').removeClass('navbar-effect');
         }
     });
     
@@ -77,23 +77,46 @@ $(document).ready(function() {
     //nav-link bounce effect
     $('.navbar-brand').mouseenter(function() {
         $(this).addClass("animated tada")
-    }) 
+    }); 
     
     $('.nav-item').mouseleave(function() {
         $("a", this).removeClass("animated tada")
-    })
+    });
     
     $('.nav-item').mouseenter(function() {
         $("a", this).addClass("animated tada")
-    }) 
+    }); 
     
     $('.nav-item').mouseleave(function() {
         $("a", this).removeClass("animated tada")
-    })
-    
-
-    
-   
-
+    });
     
 });
+
+// Horizontal Slider by https://codepen.io/toddwebdev
+
+
+
+function modalMemForm(event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var membership_level = button.data('level'); // Extract info from data-* attributes
+
+    // Update modal with required membership forms
+    var modal = $(this)
+    modal.find('.modal-title').html(`You've chosen to be a<span class="${membership_level}-text"><strong> ${membership_level.toUpperCase()}</strong></span> member!`);
+
+    if (membership_level === 'bronze') {
+        modal.find('#payment-form').css('display', 'none');
+        modal.find('#bronze-form').css('display', 'block');
+    }
+    else if (membership_level === 'silver') {
+        modal.find('#payment-form').css('display', 'block');
+        modal.find('#bronze-form').css('display', 'none');
+        modal.find('form').attr('action', "{% url 'membership' 'silver' %}");
+    }
+    else {
+        modal.find('#payment-form').css('display', 'block');
+        modal.find('#bronze-form').css('display', 'none');
+        modal.find('form').attr('action', "{% url 'membership' 'gold' %}");
+    }
+}

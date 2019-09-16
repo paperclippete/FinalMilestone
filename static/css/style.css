@@ -495,6 +495,10 @@ body {
     border: none;
 }
 
+.back-btn {
+    margin-top: 10px;
+}
+
 /*User Profile Page*/
 
 .profile-button {
@@ -558,14 +562,27 @@ body {
     background-color: #eee;
 }
 
+.h-card {
+    margin-left: 0px;
+    padding: 15px 0px 5px 0px;
+}
+
+.flex-nowrap {
+    margin: 0px;
+}
+
 .h-scroll {
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
-    margin-left: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    padding-bottom: 5px;
-    padding-top: 15px;
+    transition: all 0.2s;
+    will-change: transform;
+    user-select: none;
+    cursor: pointer;
+}
+
+.active {
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
 }
 
 .h-scroll::-webkit-scrollbar {
@@ -574,6 +591,15 @@ body {
 
 .h-card-col {
     max-width: 80%;
+    padding: 0px 5px;
+}
+
+.container-fluid {
+    padding: 0px 0px;
+}
+
+.grey-card {
+    background-color: var(--lanlightgrey);
 }
 
 /*Profile Upgrade Modal*/
@@ -647,6 +673,14 @@ body {
 }
 
 /*General styling for desktop/laptop*/
+
+@media screen and (min-width: 768px) {
+    .back-btn {
+        float: right !important;
+        margin-top: 0;
+    }
+}
+
 
 @media screen and (min-width: 992px) {
     .lanarkshire-form {
