@@ -3,9 +3,12 @@
 {% block title %}{{ user.first_name|title }}'s Profile{% endblock %}
 {% load crispy_forms_tags %}
 
+{% block css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-horizon/0.1.1/bootstrap-horizon.css">
+{% endblock %}
+
 {% block head_js %}
 <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
-
 {% endblock %}
 
 {% block content %}
@@ -82,10 +85,13 @@
         <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#liked_events" aria-expanded="false" aria-controls="collapseExample">Your Saved Events <i class="fas fa-heart"></i></button>
         <div class="collapse" id="liked_events">
             <div class="card card-body h-scroll">
-                <div class="row">
-                {% for event in user_liked_events %}
-                    {% include "view_events_partial.html" %}
-                {% endfor %}
+                <div class="container-fluid">
+                    <div class="row flex-row flex-nowrap">
+                    {% for event in user_liked_events %}
+                        {% include "view_events_partial.html" %}
+                    {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -94,7 +100,11 @@
         <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#booked_events" aria-expanded="false" aria-controls="collapseExample">Your Booked Events <i class="far fa-calendar-alt"></i></button>
         <div class="collapse" id="booked_events">
             <div class="card card-body">
-                
+                <div class="row row-horizon">
+                {% for event in user_participant_events %}
+                    {% include "view_events_partial.html" %}
+                {% endfor %}
+                </div>
             </div>
         </div>
     </div>

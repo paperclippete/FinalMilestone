@@ -558,6 +558,24 @@ body {
     background-color: #eee;
 }
 
+.h-scroll {
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    margin-left: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 5px;
+    padding-top: 15px;
+}
+
+.h-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.h-card-col {
+    max-width: 80%;
+}
+
 /*Profile Upgrade Modal*/
 
 .card-action {
@@ -566,7 +584,7 @@ body {
 
 /*Media Queries*/
 
-/*Site Title styling for all screen sizes*/
+/*Site Title and Profile Horizontal Scroll styling for all screen sizes*/
 
 /*Tablet*/
 
@@ -580,6 +598,9 @@ body {
         left: 13.8%;
         width: fit-content;
     }
+    .h-card-col {
+        max-width: 44%;
+}
 }
 
 /*Small Laptop*/
@@ -595,6 +616,10 @@ body {
         width: fit-content;
 
     }
+    .h-card-col {
+        max-width: 38%;
+        
+    }
 }
 
 /*Extra-large screens*/
@@ -604,6 +629,9 @@ body {
         top: 4.3rem;
         left: 19.6%;
     }
+    .h-card-col {
+        max-width: 23%;
+    }
 }
 
 /*4K screens*/
@@ -612,6 +640,9 @@ body {
     .changing-word-list {
         top: 4.3rem;
         left: 33.6%;
+    }
+    .h-card-col {
+        max-width: 23%;
     }
 }
 
