@@ -8,6 +8,7 @@ from .forms import UserLoginForm, UserRegistrationForm, EditUserForm
 from membership.forms import OrderMembershipForm
 from django.conf import settings
 import stripe
+import datetime
 
 
 # Create your views here.
@@ -78,10 +79,12 @@ def user_profile(request):
     """The user's profile page"""
     user = get_object_or_404(User, pk=request.user.id)
     user_liked = Like.objects.filter(user=user).values('event')
-    user_liked_events = Event.objects.filter(id__in=user_liked)
-    print(user_liked_events)
-    user_participant_events = Participant.objects.filter(user=user)
-    user_hosted_events = Event.objects.filter(event_host=user)
+    user_liked_events = Event.objects.filter(id__in=user_liked).order_by('event_date_begins')
+    user_participant = Participant.objects.filter(user=user).values('event')
+    user_participant_events = Event.objects.filter(id__in=user_participant).exclude(event_date_ends__lt=datetime.date.today()).order_by('event_date_begins')
+    user_participated_events = Event.objects.filter(id__in=user_participant).exclude(event_date_ends__gt=datetime.date.today()).order_by('-event_date_begins')
+    user_hosted_events = Event.objects.filter(event_host=user).exclude(event_date_ends__lt=datetime.date.today()).order_by('event_date_begins')
+    user_past_hosted_events = Event.objects.filter(event_host=user).exclude(event_date_ends__gt=datetime.date.today()).order_by('-event_date_begins')
     membership = Membership.objects.get(user=user)
     edit_form = EditUserForm(instance=request.user)
     order_form = OrderMembershipForm(request.POST or None, instance=request.user)
@@ -98,7 +101,9 @@ def user_profile(request):
         'publishable': settings.STRIPE_PUBLISHABLE,
         'user_liked_events': user_liked_events,
         'user_participant_events': user_participant_events,
-        'user_hosted_events': user_hosted_events
+        'user_hosted_events': user_hosted_events,
+        'user_participated_events': user_participated_events,
+        'user_past_hosted_events': user_past_hosted_events
         
     }
     return render(request, 'profile.html', context)

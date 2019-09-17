@@ -399,7 +399,7 @@ body {
 }
 
 .card-footer {
-    background-color: var(--lanwhite);
+    background-color: inherit;
     border: 0;
 }
 
@@ -599,7 +599,7 @@ body {
 }
 
 .grey-card {
-    background-color: var(--lanlightgrey);
+    background-color: var(--langreylight);
 }
 
 /*Profile Upgrade Modal*/

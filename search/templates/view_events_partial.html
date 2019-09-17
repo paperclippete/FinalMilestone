@@ -1,5 +1,5 @@
 <div class="col-12 h-card-col">
-    <div class="card">
+    <div {% if event in user_hosted_events %} class="card" {% elif event in user_past_hosted_events %} class="card grey-card" {% endif %}>
         <div class="card-body">
             <h5 class="card-title">{{ event.title|title }}</h5>
             <span class="event-host">Hosted by: <strong>{{ event.event_host|title }}</strong></span>
@@ -35,6 +35,10 @@
             </div>
         </div>
         <div class="card-footer">
+            {% if user is event.event_host %}
+            <a href="{% url 'edit_event' event.id %}" class="btn btn-success btn-block">Edit Event</a>
+            <a href="{% url 'delete_event' event.id %}" class="btn btn-success btn-block">Delete Event</a>
+            {% endif %}
             <a href="{% url 'view_one_event' event.id %}" class="btn btn-success btn-block">View Event</a>
         </div>
     </div>
