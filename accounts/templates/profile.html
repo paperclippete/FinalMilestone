@@ -84,26 +84,35 @@
     <div class="profile-button">
         <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#liked_events" aria-expanded="false" aria-controls="collapseExample">Your Saved Events <i class="fas fa-heart"></i></button>
         <div class="collapse" id="liked_events">
-            <div class="card card-body h-scroll">
+            <div class="card card-body h-card">
                 <div class="container-fluid">
-                    <div class="row flex-row flex-nowrap">
+                    {% if user_liked_events|length == 0 %}
+                       <p class="text-center">You have no saved events!</p> 
+                    {% else %}
+                    <div class="row flex-row flex-nowrap h-scroll">
                     {% for event in user_liked_events %}
                         {% include "view_events_partial.html" %}
                     {% endfor %}
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
-        
     </div>
     <div class="profile-button">
         <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#booked_events" aria-expanded="false" aria-controls="collapseExample">Your Booked Events <i class="far fa-calendar-alt"></i></button>
         <div class="collapse" id="booked_events">
-            <div class="card card-body">
-                <div class="row row-horizon">
-                {% for event in user_participant_events %}
-                    {% include "view_events_partial.html" %}
-                {% endfor %}
+            <div class="card card-body h-card">
+                <div class="container-fluid">
+                    {% if user_participant_events|length == 0 %}
+                       <p class="text-center">You have no booked events!</p> 
+                    {% else %}
+                    <div class="row flex-row flex-nowrap h-scroll">
+                    {% for event in user_participant_events %}
+                        {% include "view_events_partial.html" %}
+                    {% endfor %}
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -111,8 +120,18 @@
     <div class="profile-button">
         <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#event_history" aria-expanded="false" aria-controls="collapseExample">Event History <i class="fas fa-history"></i></button>
         <div class="collapse" id="event_history">
-            <div class="card card-body">
-                
+            <div class="card card-body h-card">
+                <div class="container-fluid">
+                    {% if user_participated_events|length == 0 %}
+                       <p class="text-center">You have no attended events!</p> 
+                    {% else %}
+                    <div class="row flex-row flex-nowrap h-scroll">
+                    {% for event in user_participated_events %}
+                        {% include "view_events_partial.html" %}
+                    {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
@@ -121,18 +140,24 @@
     <div class="profile-button">
         <button class="btn btn-success btn-lg btn-block" type="button" data-toggle="collapse" data-target="#event_hosting" aria-expanded="false" aria-controls="collapseExample">Your Events <i class="fas fa-history"></i></button>
         <div class="collapse" id="event_hosting">
-            <div class="card card-body">
-                
+            <div class="card card-body h-card">
+                <div class="container-fluid">
+                    {% if user_hosted_events|length == 0 %}
+                       <p class="text-center">You have no hosted events... yet!</p> 
+                    {% else %}
+                    <div class="row flex-row flex-nowrap h-scroll">
+                    {% for event in user_hosted_events %}
+                        {% include "view_events_partial.html" %}
+                    {% endfor %}
+                    
+                    </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
     <div class="profile-button">
-        <button class="btn btn-success btn-lg btn-block" type="button" data-toggle="collapse" data-target="#post_event" aria-expanded="false" aria-controls="collapseExample">Post a New Event <i class="fas fa-history"></i></button>
-        <div class="collapse" id="post_event">
-            <div class="card card-body">
-                
-            </div>
-        </div>
+        <a href={% url 'post_event' %} class="btn btn-success btn-lg btn-block">Post a New Event <i class="fas fa-history"></i></a>
     </div>
     {% endif %}
 </div>
@@ -178,37 +203,60 @@
         </div>
     </div>
 
+{% endblock %}
+
 {% block js %}
-<script>
-    $('#exampleModal').on('show.bs.modal', function(event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var membership_level = button.data('level'); // Extract info from data-* attributes
-    
-    // Update modal with required membership forms
-    var modal = $(this)
-    modal.find('.modal-title').html(`You've chosen to be a<span class="${membership_level}-text"><strong> ${membership_level.toUpperCase()}</strong></span> member!`);
-    
-    if (membership_level === 'bronze') {
-        modal.find('#payment-form').css('display', 'none');
-        modal.find('#bronze-form').css('display', 'block');
-    }
-    else if (membership_level === 'silver') {
-        modal.find('#payment-form').css('display', 'block');
-        modal.find('#bronze-form').css('display', 'none');
-        modal.find('form').attr('action', "{% url 'membership' 'silver' %}");
-    }
-    else {
-        modal.find('#payment-form').css('display', 'block');
-        modal.find('#bronze-form').css('display', 'none');
-        modal.find('form').attr('action', "{% url 'membership' 'gold' %}");
-    }
+<script type="text/javascript">
+$(function() {
+    $('#exampleModal').on('show.bs.modal', modalMemForm);
 });
+$(function() {
+    $('.collapse').on('shown.bs.collapse', (function() {
+        $('.collapse .h-card .container-fluid .h-scroll:visible').each(function() {
+            let slider = this;
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+            
+            slider.addEventListener('mousedown', (e) => {
+                isDown = true;
+                slider.classList.add('active');
+                startX = e.pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
+            });
     
+            slider.addEventListener('mouseleave', () => {
+                isDown = false;
+                slider.classList.remove('active');
+            });
+            
+            slider.addEventListener('mouseup', () => {
+                isDown = false;
+                slider.classList.remove('active');
+            });
+            
+            slider.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - slider.offsetLeft;
+                const walk = (x - startX) * 3; //scroll-fast
+                slider.scrollLeft = scrollLeft - walk;
+                console.log(walk);
+             });
+        
+        });
+    }));
+    
+});
+   
+
+    
+
 </script>
 <!--Stripe JS below will handle display of card element in modal form-->
 <script type="text/javascript" src="{% static 'js/stripe.js' %}"></script>
 
-{% endblock %}
+
 {% endblock %}
 
 
