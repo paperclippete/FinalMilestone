@@ -138,7 +138,7 @@
     <div class="divider"></div>
     {% if membership.silver or membership.gold %}
     <div class="profile-button">
-        <button class="btn btn-success btn-lg btn-block" type="button" data-toggle="collapse" data-target="#event_hosting" aria-expanded="false" aria-controls="collapseExample">Your Events <i class="fas fa-history"></i></button>
+        <button class="btn btn-success btn-lg btn-block" type="button" data-toggle="collapse" data-target="#event_hosting" aria-expanded="false" aria-controls="collapseExample">Your Events</button>
         <div class="collapse" id="event_hosting">
             <div class="card card-body h-card">
                 <div class="container-fluid">
@@ -159,7 +159,11 @@
         </div>
     </div>
     <div class="profile-button">
-        <a href={% url 'post_event' %} class="btn btn-success btn-lg btn-block">Post a New Event <i class="fas fa-history"></i></a>
+        {% if membership.posts_remaining == 0 %}
+            <button class="btn btn-secondary btn-lg btn-block">Post a New Event</button>
+        {% else %}
+            <a href={% url 'post_event' %} class="btn btn-success btn-lg btn-block">Post a New Event</a>
+        {% endif %}
     </div>
     {% endif %}
 </div>

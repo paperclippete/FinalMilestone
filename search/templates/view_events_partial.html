@@ -35,9 +35,11 @@
             </div>
         </div>
         <div class="card-footer">
-            {% if user is event.event_host %}
-            <a href="{% url 'edit_event' event.id %}" class="btn btn-success btn-block">Edit Event</a>
-            <a href="{% url 'delete_event' event.id %}" class="btn btn-success btn-block">Delete Event</a>
+            {% if user == event.event_host %}
+            <div class="card-btns">
+                <a href="{% url 'edit_event' event.id %}" class="btn btn-primary">Edit Event</a>
+                <a href="{% url 'delete_event' event.id %}" class="btn btn-primary">Delete Event</a>
+            </div>
             {% endif %}
             <a href="{% url 'view_one_event' event.id %}" class="btn btn-success btn-block">View Event</a>
         </div>

@@ -14,10 +14,10 @@ import datetime
 @login_required
 def post_event(request):
     """Renders Create Event Form"""
-    post_event_form = CreateEventForm(request.POST or None)
+    event_form = CreateEventForm(request.POST or None)
     user = request.user
-    if request.method == "POST" and post_event_form.is_valid():
-        event = post_event_form.save(commit=False)
+    if request.method == "POST" and event_form.is_valid():
+        event = event_form.save(commit=False)
         event.event_host = user
         event.save()
         membership = Membership.objects.get(user=user)
@@ -33,11 +33,45 @@ def post_event(request):
 
 
     context = {
-        'post_event_form': post_event_form
+        'event_form': event_form
     }
 
     return render(request, 'post_event.html', context)
     
+@login_required
+def edit_event(request, pk):
+    """Allows Event Host to make changes to an upcoming event and re-publish a finished event"""
+    event = get_object_or_404(Event, pk=pk)
+    event_form = CreateEventForm(request.POST or None, instance=event)
+    context = {
+        'event_form': event_form
+    }
+    user = request.user
+    if request.method == "POST":
+        if event_form.is_valid():
+            edit = event_form.save(commit=False)
+            edit.event_host = user
+            edit.save()
+            if event.event_date_begins < datetime.date.today():
+                membership = Membership.objects.get(user=user)
+                if membership.posts_remaining == 0:
+                    messages.error(request, "Sorry, you have no posts remaining!")
+                    return redirect('user_profile')
+                else:
+                    membership.posts_remaining -= 1
+                    membership.save()
+            messages.success(request, "You have updated your event!")
+            return redirect('user_profile')
+    return render(request, 'post_event.html', context)
+
+@login_required    
+def delete_event(request, pk):
+    """Allows Event Host to delete event"""
+    event = get_object_or_404(Event, pk=pk)
+    event.delete()
+    messages.success(request, "You have successfully deleted this event!")
+    return redirect('user_profile')
+
 
 def view_one_event(request, pk):
     """Displays event information for site user"""
@@ -51,13 +85,9 @@ def view_one_event(request, pk):
     else: 
         user_liked = None
         user_joined = None
-    
-    
     user_queue = Participant.objects.filter(event=event).count()
     current_places = event.max_participants - user_queue
     event_host = User.objects.get(id=event.event_host.id)
-    print(user.is_authenticated)
-    print(event_host)
     # Ensures map renders at correct location
     full_address = event.address + ' ' + event.town + ' ' + event.post_code
     context = {
