@@ -5,18 +5,17 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<p>Love</p>
-<h1>Lanarkshire</h1>
-<p>Login</p>
 
 <div class="lanarkshire-form">
-    <form method="POST">
-        {% csrf_token %}
-        {{ login_form|crispy }}
-        <button action="submit" class="btn btn-primary btn-block btn-lg">Login</button>
+    <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %} {{ login_form|crispy }}
+            
+            <p><a href="{% url 'password_reset' %}">Forgotten Password?</a></p>
+            
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </div>
     </form>
 </div>
 
-<p><a href="{% url 'password_reset' %}">Forgotten Password</a></p>
 
 {% endblock %}
