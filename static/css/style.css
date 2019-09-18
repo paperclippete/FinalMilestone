@@ -71,6 +71,7 @@ body {
     display: none;
 }
 
+
 /*FAB Button*/
 
 .zoom {
@@ -245,7 +246,8 @@ body {
 }
 
 .navbar-brand:hover:visited,
-.nav-link:hover:visited {
+.nav-link:hover:visited,
+a:not([href]):hover:visited {
     color: var(--lanwhite);
 }
 
@@ -277,15 +279,8 @@ body {
 /*Site-wide Forms Styling*/
 
 .lanarkshire-form {
-    margin: 0px 20px;
+    margin: 0px 3rem;
     padding-bottom: 20px;
-}
-
-@media screen and (min-width: 992px) {
-    .lanarkshire-form {
-        margin-left: 100px;
-        margin-right: 100px;
-    }
 }
 
 .form-button {
@@ -653,6 +648,9 @@ body {
     .h-card-col {
         max-width: 38%;
         
+    }
+    .lanarkshire-form {
+        margin: 0px 5rem;
     }
 }
 

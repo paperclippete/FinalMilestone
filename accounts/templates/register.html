@@ -5,12 +5,9 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<p>Love</p>
-<h1>Lanarkshire</h1>
-<p>Register</p>
-<p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
 
 <div class="lanarkshire-form">
+    <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
     <form method="POST">
         {% csrf_token %}
         {{ registration_form|crispy }}

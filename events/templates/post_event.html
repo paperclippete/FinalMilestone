@@ -15,8 +15,8 @@
 <div class="lanarkshire-form">
     <form method="POST">
         {% csrf_token %}
-        {{ post_event_form|crispy }}
-        {{ post_event_form.media }}
+        {{ event_form|crispy }}
+        {{ event_form.media }}
         <button action="submit" class="btn btn-primary btn-block btn-lg form-button">Post Event</button>
     </form>
 </div>
