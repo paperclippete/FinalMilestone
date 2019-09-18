@@ -401,6 +401,7 @@ body {
 .card-footer {
     background-color: inherit;
     border: 0;
+    
 }
 
 .event-host,
@@ -599,7 +600,14 @@ body {
 }
 
 .grey-card {
-    background-color: var(--langreylight);
+    background-color: #dedede;
+}
+
+.card-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 5px;
 }
 
 /*Profile Upgrade Modal*/
