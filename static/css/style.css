@@ -71,6 +71,46 @@ body {
     display: none;
 }
 
+/*Footer Styles*/
+
+footer {
+    background-color: var(--dark-color)
+}
+
+#services {
+    text-align: center;
+    transform: translatez(0);
+    padding-left: 0;
+    margin: 5px 0;
+}
+
+#services li {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    margin: 0 20px;
+    list-style: none;
+}
+
+#services li div {
+    width: 40px;
+    height: 40px;
+    color: var(--dark-color);
+    font-size: 1.8em;
+    text-align: center;
+    line-height: 40px;
+    background-color: var(--lanwhite);
+    border-radius: 100px;
+    transition: all 0.5s ease;
+}
+
+#services li a {
+    color: var(--dark-color);
+}
+
+#services li div:hover {
+    transform: rotate(360deg);
+}
 
 /*FAB Button*/
 
@@ -245,9 +285,14 @@ body {
     color: var(--lanwhite);
 }
 
-.navbar-brand:hover:visited,
-.nav-link:hover:visited,
-a:not([href]):hover:visited {
+.navbar-brand:visited,
+.nav-link:visited,
+.navbar-brand:hover,
+.nav-link:hover {
+    color: var(--lanwhite);
+}
+
+a:not([href]):hover {
     color: var(--lanwhite);
 }
 
@@ -336,6 +381,51 @@ a:not([href]):hover:visited {
     border: solid 1px var(--dark-color);
 }
 
+/*About Us Page*/
+
+.lan-photos {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+    justify-content: center;
+    padding-bottom: 20px;
+    margin: 0;
+}
+
+.photo-col {
+    flex: 25%;
+    max-width: 30%;
+    padding: 0 4px;
+}
+
+.photo-col-up {
+    margin-top: -25px;
+}
+
+.photo-col img {
+    margin-top: 8px;
+    vertical-align: middle;
+    width: 100%;
+}
+
+#about-us-text {
+    color: var(--langrey);
+    text-align: center;
+}
+
+.about-us-p {
+    margin-top: 15px;
+}
+
+.about-us-p a {
+    color: var(--langrey);
+}
+
+.tagline {
+    margin-top: 15px;
+    size: 1.2rem;
+    font-weight: bolder;
+}
 
 /*Events Page Styles*/
 
@@ -396,7 +486,7 @@ a:not([href]):hover:visited {
 .card-footer {
     background-color: inherit;
     border: 0;
-    
+
 }
 
 .event-host,
@@ -629,7 +719,7 @@ a:not([href]):hover:visited {
     }
     .h-card-col {
         max-width: 44%;
-}
+    }
 }
 
 /*Small Laptop*/
@@ -647,7 +737,7 @@ a:not([href]):hover:visited {
     }
     .h-card-col {
         max-width: 38%;
-        
+
     }
     .lanarkshire-form {
         margin: 0px 5rem;

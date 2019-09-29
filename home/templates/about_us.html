@@ -3,8 +3,45 @@
 {% block title %}About Us{% endblock %}
 
 {% block content %}
-<p>Love</p>
-<h1>Lanarkshire</h1>
-<p>Find and post local classes, events and activities.</p>
-
+<div class="layout title-layout">
+    <h1 class="site-title"><sup class="change-word-small">Love</sup>Lanarkshire</h1>
+</div>
+<div class="row lan-photos">
+    <div class="col photo-col">
+        <img src="{{ MEDIA_URL }}images/airdrie.jpg" class="img-thumbnail" title="Airdrie Town Hall" alt="Airdrie Town Hall">
+        <img src="{{ MEDIA_URL }}images/cuningarloop2.jpg" class="img-thumbnail" title="Cuningar Loop, Rutherglen" alt="Cuningar Loop, Rutherglen">
+        <img src="{{ MEDIA_URL }}images/chatelherault.jpg" class="img-thumbnail" title="Chatelherault Park, Hamilton" alt="Chatelherault Park, Hamilton">
+        <img src="{{ MEDIA_URL }}images/newlanark.jpg" class="img-thumbnail" title="New Lanark" alt="New Lanark">
+    </div>
+    <div class="col photo-col photo-col-up">
+        <img src="{{ MEDIA_URL }}images/fountain.jpg" class="img-thumbnail" title="The Fountain, Lesmahagow" alt="The Fountain, Lesmahagow">
+        <img src="{{ MEDIA_URL }}images/cuningarloop.jpg" class="img-thumbnail" title="Cuningar Loop, Rutherglen" alt="Cuningar Loop, Rutherglen">
+        <img src="{{ MEDIA_URL }}images/leadhills.jpg" class="img-thumbnail" title="Leadhills and Wanlockhead Railway" alt="Leadhills and Wanlockhead Railway">
+    </div>
+    <div class="col photo-col">                
+        <img src="{{ MEDIA_URL }}images/bothwellcastle.jpg" class="img-thumbnail" title="Bothwell Castle" alt="Bothwell Castle">
+        <img src="{{ MEDIA_URL }}images/newmains.jpg" class="img-thumbnail" title="Newmains Community Trust" alt="Newmains Community Trust">
+        <img src="{{ MEDIA_URL }}images/rutherglen.jpg" class="img-thumbnail" title="Rutherglen Town Hall" alt="Rutherglen Town Hall">
+        <img src="{{ MEDIA_URL }}images/summerlee.jpg" class="img-thumbnail" title="Summerlee Museum, Coatbridge" alt="Summerlee Museum of Industrial Life, Coatbridge">
+    </div>
+</div>
+<div id="about-us-text" class="event-container layout">
+    <h2>Welcome to <sup class="change-word-small">LOVE</sup>LANARKSHIRE</h2>
+    <div class="divider"></div>
+    <div class="about-us-p">
+        <p><sup class="change-word-small">LOVE</sup>LANARKSHIRE is a brand new way to access the best your community has to offer. You can find and join events across Lanarkshire suitable to your age and interests!</p>
+        <p>As soon as you have <a href="{% url 'register' %}">signed up</a>, you can book our events or save them for later.</p>
+        <p>We also have a membership package which allows you to post and host events too!</p>
+        <div class="divider"></div>
+        <div class="tagline">
+            <p>Share your passions, hobbies and interests with your community...</p>
+            <p>Laugh, Learn, Live and Love Lanarkshire!</p>
+        </div>
+    </div>
+</div>
 {% endblock %}
+
+{% block js %}
+{% endblock %}
+
+
