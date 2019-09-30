@@ -339,8 +339,16 @@ a:not([href]):hover {
     padding-bottom: 20px;
 }
 
+.lanarkshire-form a {
+    color: var(--lanwhite);
+}
+
 .form-button {
     margin-top: 30px;
+}
+
+.modal-body a {
+    color: var(--langrey);
 }
 
 /*Index Styles*/
@@ -751,7 +759,7 @@ a:not([href]):hover {
 
     }
     .lanarkshire-form {
-        margin: 0px 5rem;
+        margin: 0px 8rem;
     }
 }
 
@@ -790,11 +798,7 @@ a:not([href]):hover {
 
 
 @media screen and (min-width: 992px) {
-    .lanarkshire-form {
-        margin-left: 100px;
-        margin-right: 140px;
-    }
-
+    
     .event-container {
         margin: 0 60px 60px 60px;
     }
