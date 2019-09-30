@@ -25,26 +25,21 @@ def logout(request):
 def login(request):
     """Return a Login Page and log the user in"""
     login_form = UserLoginForm(request.POST or None)
-    context = {
-        'login_form': login_form,
-    }
+    
     if request.user.is_authenticated:
         return redirect(reverse('index'))
-    if request.method == "POST":
-        if login_form.is_valid():
-            user = auth.authenticate(request.POST['username_or_email'],
-                                     password=request.POST['password'])
-            if user: 
-                auth.login(user=user, request=request)
-                messages.success(request, f"Welcome {user.first_name}, you have successfully logged in!")
-                return redirect(reverse('index'))
-            else:
-                messages.error(request, "Your username or password is incorrect!")
-                  
+    user = auth.authenticate(request.POST['username_or_email'],
+                             password=request.POST['password'])
+    if user: 
+        auth.login(user=user, request=request)
+        messages.success(request, f"Welcome {user.first_name}, you have successfully logged in!")
+        return redirect(reverse('index'))
     else:
-        return render(request, 'login.html', context)
+        messages.error(request, "Wrong username or password, try again!")
+        return render(request, 'login.html')          
     
-    return render(request, 'login.html', context)            
+    
+               
                 
 
 def register(request):
