@@ -11,9 +11,6 @@ import stripe
 import datetime
 
 
-# Create your views here.
-
-
 @login_required    
 def logout(request):
     """Logout user and end session"""
@@ -25,7 +22,6 @@ def logout(request):
 def login(request):
     """Return a Login Page and log the user in"""
     login_form = UserLoginForm(request.POST or None)
-    
     if request.user.is_authenticated:
         return redirect(reverse('index'))
     user = auth.authenticate(request.POST['username_or_email'],
@@ -38,9 +34,6 @@ def login(request):
         messages.error(request, "Wrong username or password, try again!")
         return render(request, 'login.html')          
     
-    
-               
-                
 
 def register(request):
     """Return a registration form and create a new authorised user"""
@@ -68,6 +61,7 @@ def register(request):
         registration_form = UserRegistrationForm()
     
     return render(request, 'register.html', context)
+
     
 @login_required     
 def user_profile(request):
