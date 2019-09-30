@@ -7,7 +7,7 @@
 {% block content %}
 
 <div class="lanarkshire-form">
-    <form method="POST" action="{% url 'login' %}">
+    <form method="POST" action="{% url 'login_modal' %}">
             {% csrf_token %} {{ login_form|crispy }}
             
             <p><a href="{% url 'password_reset' %}">Forgotten Password?</a></p>

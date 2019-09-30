@@ -7,15 +7,14 @@ from .forms import UserLoginForm, UserRegistrationForm
 # Test User Login Form is valid and provides correct errors
 class TestUserLoginForm(TestCase):
     def test_log_in_valid(self):
-        form = UserLoginForm(
-            {"username": "TestUser", "password": "TestPassword"})
+        form = UserLoginForm({"username_or_email": "TestUser", "password": "TestPassword"})
         self.assertTrue(form.is_valid())
 
     def test_correct_error_message(self):
         form = UserLoginForm({"username": ""})
         self.assertFalse(form.is_valid())
         self.assertEqual(
-            form.errors["username"], [u"This field is required."])
+            form.errors["username_or_email"], [u"This field is required."])
 
 
 # Test User Registration Form is valid and provides correct errors
@@ -40,6 +39,7 @@ class TestUserRegistrationForm(TestCase):
 
 # Test each page loads with correct template
 class TestViews(TestCase):
+    # Will no longer work with login modal
     def test_get_login_page(self):
         page = self.client.get("/accounts/login/")
         self.assertEqual(page.status_code, 200)
