@@ -32,7 +32,7 @@ $(document).ready(function() {
     });
     
     $('.zoom-btn-sm').click(function() {
-        var btn = $(this);
+        let btn = $(this);
         
         if (btn.hasClass('zoom-btn-tangerine')) {
             localStorage.setItem('theme', 'tangerine');
@@ -59,7 +59,6 @@ $(document).ready(function() {
     });
     
     function setTheme(theme) {
-        console.log(theme);
         $(':root').css('--main-color', 'var(--'+theme+')');
         $(':root').css('--dark-color', 'var(--'+theme+'nav)');
         $(':root').css('--main-background', 'var(--'+theme+'back)');
@@ -79,8 +78,8 @@ $(document).ready(function() {
         $(this).addClass("animated tada")
     }); 
     
-    $('.nav-item').mouseleave(function() {
-        $("a", this).removeClass("animated tada")
+    $('.navbar-brand').mouseleave(function() {
+        $(this).removeClass("animated tada")
     });
     
     $('.nav-item').mouseenter(function() {
