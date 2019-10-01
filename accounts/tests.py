@@ -1,6 +1,10 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from django.shortcuts import reverse
+from django.contrib import auth
 from .forms import UserLoginForm, UserRegistrationForm
+from django.contrib.auth.models import User
+from membership.models import Membership
+
 
 # Testing Accounts Forms
 
@@ -39,25 +43,33 @@ class TestUserRegistrationForm(TestCase):
 
 # Test each page loads with correct template
 class TestViews(TestCase):
-    # Will no longer work with login modal
+    
     def test_get_login_page(self):
         page = self.client.get("/accounts/login/")
         self.assertEqual(page.status_code, 200)
         self.assertTemplateUsed(page, "login.html")
         
-
     def test_get_registration_page(self):
         page = self.client.get("/accounts/register/")
         self.assertEqual(page.status_code, 200)
         self.assertTemplateUsed(page, "register.html")
-        
-
+    
     def test_get_profile_page(self):
+        test_user = User.objects.create(username="TestUser", password="TestPassword")
+        membership = Membership.objects.create(user_id='1')
+        self.client.force_login(test_user)
+        page = self.client.get("/accounts/profile/")
+        self.assertEqual(page.status_code, 200)
+        self.assertTemplateUsed(page, "profile.html")
+        
+    def test_not_get_profile_page(self):
         page = self.client.get("/accounts/profile/")
         self.assertEqual(page.status_code, 302)
         self.client.post(reverse("login"))
     
-    def test_logout_view(self):
+    def test_not_logout_view(self):
         page = self.client.get("/accounts/logout/")
         self.assertEqual(page.status_code, 302)
         self.client.post(reverse("index"))
+
+   

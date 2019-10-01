@@ -66,8 +66,7 @@ def register(request):
     
     return render(request, 'register.html', context)
 
-    
-@login_required     
+@login_required    
 def user_profile(request):
     """The user's profile page"""
     user = get_object_or_404(User, pk=request.user.id)
