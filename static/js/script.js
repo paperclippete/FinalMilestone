@@ -1,9 +1,9 @@
-$(document).ready(function() {
-    getTheme();
+$(document).ready(() => {
+    getTheme(); 
     
 
     // Solid Navbar colour on toggler click
-    $(".navbar-toggler").on('click', function(){
+    $(".navbar-toggler").on('click', () => {
         if ($('.navbar').css("background-color") === '--dark-color') {
             return $('.navbar').css({"background-color": '--dark-color'});
         } else {
@@ -13,7 +13,7 @@ $(document).ready(function() {
     });
     
     // Solid Navbar on scroll
-    $(window).scroll(function() {
+    $(window).scroll(() => {
         if($(this).scrollTop() > 30) {
             $('.navbar').css({"background-color": '--dark-color'});
             $('.navbar').removeClass('navbar-effect');
@@ -24,15 +24,13 @@ $(document).ready(function() {
     });
     
     // FAB Button for setting site theme
-    $('#zoomBtn').click(function() {
+    $('#zoomBtn').click(() => {
         $('.zoom-menu').toggleClass('hidden')
         $('.zoom-btn-sm').toggleClass('scale-out');
-        
-        
     });
     
     $('.zoom-btn-sm').click(function() {
-        let btn = $(this);
+        const btn = $(this);
         
         if (btn.hasClass('zoom-btn-tangerine')) {
             localStorage.setItem('theme', 'tangerine');
@@ -54,14 +52,15 @@ $(document).ready(function() {
             localStorage.setItem('theme', 'blueberry');
             
         }
+    
+    getTheme();    
         
-        getTheme();
     });
     
     function setTheme(theme) {
-        $(':root').css('--main-color', 'var(--'+theme+')');
-        $(':root').css('--dark-color', 'var(--'+theme+'nav)');
-        $(':root').css('--main-background', 'var(--'+theme+'back)');
+        $(':root').css('--main-color', `var(--${theme})`);
+        $(':root').css('--dark-color', `var(--${theme}nav)`);
+        $(':root').css('--main-background', `var(--${theme}back)`);
     
     }
     
@@ -72,6 +71,8 @@ $(document).ready(function() {
             setTheme('sunshine');
         }
     }
+    
+    getTheme();
     
     //nav-link bounce effect
     $('.navbar-brand').mouseenter(function() {
@@ -99,10 +100,10 @@ function scrollSection() {
     let startX;
     let scrollLeft;
     
-    slider.addEventListener('mousedown', (e) => {
+    slider.addEventListener('mousedown', (elem) => {
         isDown = true;
         slider.classList.add('active');
-        startX = e.pageX - slider.offsetLeft;
+        startX = elem.pageX - slider.offsetLeft;
         scrollLeft = slider.scrollLeft;
     });
     
@@ -116,24 +117,24 @@ function scrollSection() {
         slider.classList.remove('active');
     });
         
-    slider.addEventListener('mousemove', (e) => {
+    slider.addEventListener('mousemove', (elem) => {
         if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX - slider.offsetLeft;
+        elem.preventDefault();
+        const x = elem.pageX - slider.offsetLeft;
         const walk = (x - startX) * 3; //scroll-fast
         slider.scrollLeft = scrollLeft - walk;
-        console.log(walk);
+        
      });
 }
     
 
 
-function modalMemForm(event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var membership_level = button.data('level'); // Extract info from data-* attributes
+function modalMemForm(event)  {
+    const button = $(event.relatedTarget) // Button that triggered the modal
+    const membership_level = button.data('level'); // Extract info from data-* attributes
 
     // Update modal with required membership forms
-    var modal = $(this)
+    const modal = $(this)
     modal.find('.modal-title').html(`You've chosen to be a<span class="${membership_level}-text"><strong> ${membership_level.toUpperCase()}</strong></span> member!`);
 
     if (membership_level === 'bronze') {
