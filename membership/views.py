@@ -14,13 +14,18 @@ import stripe
 stripe.api_key = settings.STRIPE_SECRET
 
 @login_required
-def membership(request, membership_level):
+def membership(request):
     """Returns membership upgrade with payment"""
     order_form = OrderMembershipForm(request.POST)
     user = request.user
+    membership_level = request.POST.get('membership_level')
     membership = Membership.objects.get(user=user)
+    context = {
+        'order_form': order_form,
+        'membership_level': membership_level,
+        'publishable': settings.STRIPE_PUBLISHABLE,
+    }
     if request.method == "POST" and order_form.is_valid():
-        print(request.POST)
         membership.bronze = True if membership_level == 'bronze' else False
         membership.silver = True if membership_level == 'silver' else False
         membership.gold = True if membership_level == 'gold' else False
@@ -33,7 +38,6 @@ def membership(request, membership_level):
         order.date = timezone.now()
         order.save()
         price = 20 if membership_level == 'silver' else 120
-        print(membership_level)
         if membership_level == 'bronze':
             messages.success(request, "Membership updated!")
             return redirect(reverse('user_profile'))
@@ -47,13 +51,15 @@ def membership(request, membership_level):
                     source=token,
                 )
             except stripe.error.CardError:
-                messages.error(request, "Sorry, your card was declined!")
+                messages.error(request, "Sorry, your card was declined, please try again!")
+                return render(request, 'membership.html', context)
                 
             if customer.paid:
                 messages.success(request, "You have successfully paid! Membership updated!")
                 return redirect(reverse('user_profile'))
             else:
-                messages.error(request, "Unable to take payment, try again!")
-            
-    
+                messages.error(request, "Unable to take payment at this time, please try again!")
+                return render(request, 'membership.html', context)
+    else:
+        return render(request, 'membership.html', context)    
     
