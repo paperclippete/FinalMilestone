@@ -16,17 +16,21 @@ def post_event(request):
     """Renders Create Event Form"""
     event_form = CreateEventForm(request.POST or None)
     user = request.user
+    print(request.POST)
     if request.method == "POST" and event_form.is_valid():
         event = event_form.save(commit=False)
         event.event_host = user
+        print(event.event_host)
         event.save()
         membership = Membership.objects.get(user=user)
         membership.posts_remaining -= 1
         membership.save()
         current_places = event.max_participants
+        full_address = event.address + ' ' + event.town + ' ' + event.post_code
         context = {
             'event': event,
-            'current_places': current_places
+            'current_places': current_places,
+            'full_address': full_address
         }
         messages.success(request, f"You have posted {request.POST['title']}!")
         return render(request, 'view_one_event.html', context)

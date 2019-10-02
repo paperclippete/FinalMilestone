@@ -114,16 +114,13 @@
     {% else %}
         <a href="{% url 'login' %}" class="btn btn-success"><i class="fas fa-user-check"></i> Login to book!</a>
     {% endif %}
-        <a href="{% url 'search' %}" class="btn btn-secondary back-btn">Back to Events</a>
+        <a href="{% url 'search' %}" class="btn btn-secondary back-btn float-right">Back to Events</a>
 
     
     
 </div>
 
- 
+{% endblock %}
+
 {% block js %}
 {% endblock %}
-                                            
-
-{% endblock %}
-
