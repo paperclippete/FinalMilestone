@@ -8,8 +8,8 @@ from membership.models import Membership
 
 # Testing Accounts Forms
 
-# Test User Login Form is valid and provides correct errors
 class TestUserLoginForm(TestCase):
+    """ Test User Login Form is valid and provides correct errors """
     def test_log_in_valid(self):
         form = UserLoginForm({"username_or_email": "TestUser", "password": "TestPassword"})
         self.assertTrue(form.is_valid())
@@ -21,8 +21,8 @@ class TestUserLoginForm(TestCase):
             form.errors["username_or_email"], [u"This field is required."])
 
 
-# Test User Registration Form is valid and provides correct errors
 class TestUserRegistrationForm(TestCase):
+    """ Test User Registration Form is valid and provides correct errors """
     def test_register_form_valid(self):
         form = UserRegistrationForm(
             {"username": "TestUser", "email": "Test@Email.com",
@@ -41,9 +41,8 @@ class TestUserRegistrationForm(TestCase):
             
 # Test Accounts Views
 
-# Test each page loads with correct template
-class TestViews(TestCase):
-    
+class TestAccountsViews(TestCase):
+    """ Test each page loads with correct template """
     def test_get_login_page(self):
         page = self.client.get("/accounts/login/")
         self.assertEqual(page.status_code, 200)
@@ -71,5 +70,3 @@ class TestViews(TestCase):
         page = self.client.get("/accounts/logout/")
         self.assertEqual(page.status_code, 302)
         self.client.post(reverse("index"))
-
-   
