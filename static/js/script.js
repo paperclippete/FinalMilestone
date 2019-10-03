@@ -1,4 +1,4 @@
-$(document).ready(() => {
+$(document).ready(function() {
     getTheme(); 
     
 
@@ -131,24 +131,26 @@ function scrollSection() {
 
 function modalMemForm(event)  {
     const button = $(event.relatedTarget) // Button that triggered the modal
-    const membership_level = button.data('level'); // Extract info from data-* attributes
-
+    const membershipLevel = button.data('level'); // Extract info from data-* attributes
     // Update modal with required membership forms
     const modal = $(this)
-    modal.find('.modal-title').html(`You've chosen to be a<span class="${membership_level}-text"><strong> ${membership_level.toUpperCase()}</strong></span> member!`);
+    modal.find('.modal-title').html(`You've chosen to be a<span class="${membershipLevel}-text"><strong> ${membershipLevel.toUpperCase()}</strong></span> member!`);
 
-    if (membership_level === 'bronze') {
+    if (membershipLevel === 'bronze') {
         modal.find('#payment-form').css('display', 'none');
         modal.find('#bronze-form').css('display', 'block');
     }
-    else if (membership_level === 'silver') {
+    else if (membershipLevel === 'silver') {
         modal.find('#payment-form').css('display', 'block');
         modal.find('#bronze-form').css('display', 'none');
-        modal.find('form').attr('action', "{% url 'membership' 'silver' %}");
+        modal.find('#silver_gold').attr('value', 'silver');
+
     }
     else {
         modal.find('#payment-form').css('display', 'block');
         modal.find('#bronze-form').css('display', 'none');
-        modal.find('form').attr('action', "{% url 'membership' 'gold' %}");
+        modal.find('#submit-mem-silver').css('display', 'none');
+        modal.find('#silver_gold').attr('value', 'gold');
+
     }
 }
