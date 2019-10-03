@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = False
 
 
-ALLOWED_HOSTS = [os.getenv('DEV_HOST'), 'https://love-lanarkshire-ms4.herokuapp.com/' ]
+ALLOWED_HOSTS = [os.getenv('DEV_HOST'),'https://love-lanarkshire-ms4.herokuapp.com/']
 
 
 # Application definition
