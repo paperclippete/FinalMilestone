@@ -1,6 +1,9 @@
 language: python
-python: 
-- "3.6"
-install: "pip install -r requirements.txt"
-script: 
+python:
+- '3.6'
+install: pip install -r requirements.txt
+script:
 - SECRET_KEY="secret" ./manage.py test
+env:
+  global:
+    secure: P37gugXBDpw7OQQWYNW9wP4rQUuYqy441Soj8ca/78H0PiszQZDv/H0gRVyFAbt8RqeZKLQNbqxkS/LCrN3VnRZx+ChmK5pb1XsESF4MvFPTQQQ9VMoj4wBDGgvrNlkt+y31iE59RpBdz1DPcSgruTTScJTD5NBw+3Vn8a5WjQwTsUSSzTzqlwoHNHIyiO2GJ6I1EnYqODtJyUptWeWrbZDf1S/tG564OsclBewtNLyRMR8tNOZO5LM6VIInNjMK6NydAu5jKgw18GuPMdvsQ7HYCG16OjeoEikQQ9QvTGCyDW5GTC9vrT6v48H3sGYV1vNuKKuT9FQmBRwBIo2xjrN068QNHNOpWZKQcr1FTvWM/Z1IK6ptIA8uOdbtVaJqXsTF/v8w3gLveGooMhVAMKVkB6PYI1GndcAZaskq7UQv/LN20PYCkkjEh4JKWU1Vq+TiQxjY9YnPyAZ6NZzWCS8QNfNryesP35+uAcVcrDuuW4+EOBXoTqJ3tvq6mMB3xDt2Dei8c8Hl3SlBF5P/dxHOpw3VCMhyhVQWAf4mkICrWEKlDpr/HB7bXFfBuwpXZwIOLZuZ0nvvHJ9irYOW+Fcgmhlm3hEhztuaZ43Nz8e7kT0/zhVv9/UKamkUvUxwlbw88Br3mG5hGP94w8NIh7IQRdQMh6U8zlbFrae0rAs=
