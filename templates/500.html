@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}500: Oh no!{% endblock %}
+
+{% block css %}{% endblock %}
+
+{% block content %}
+<div class="layout title-layout">
+    <h1 class="site-title">KABOOM...</h1>
+    <p>Something's gone horribly wrong here!</p>
+    <p>Don't worry though, it's not your fault, have a cup of tea, relax and try again...</p>
+    
+    <a href="{% url 'search' %}" class="btn btn-primary btn-lg">View All of our Amazing Events</a>
+
+</div>
+{% endblock %}
