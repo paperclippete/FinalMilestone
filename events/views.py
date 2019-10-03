@@ -16,7 +16,6 @@ def post_event(request):
     """Renders Create Event Form"""
     event_form = CreateEventForm(request.POST or None)
     user = request.user
-    print(request.POST)
     if request.method == "POST" and event_form.is_valid():
         event = event_form.save(commit=False)
         event.event_host = user
@@ -51,21 +50,20 @@ def edit_event(request, pk):
         'event_form': event_form
     }
     user = request.user
-    if request.method == "POST":
-        if event_form.is_valid():
-            edit = event_form.save(commit=False)
-            edit.event_host = user
-            edit.save()
-            if event.event_date_begins < datetime.date.today():
-                membership = Membership.objects.get(user=user)
-                if membership.posts_remaining == 0:
-                    messages.error(request, "Sorry, you have no posts remaining!")
-                    return redirect('user_profile')
-                else:
-                    membership.posts_remaining -= 1
-                    membership.save()
-            messages.success(request, "You have updated your event!")
-            return redirect('user_profile')
+    if request.method == "POST" and event_form.is_valid():
+        edit = event_form.save(commit=False)
+        edit.event_host = user
+        edit.save()
+        if event.event_date_begins < datetime.date.today():
+            membership = Membership.objects.get(user=user)
+            if membership.posts_remaining == 0:
+                messages.error(request, "Sorry, you have no posts remaining!")
+                return redirect('user_profile')
+            else:
+                membership.posts_remaining -= 1
+                membership.save()
+        messages.success(request, "You have updated your event!")
+        return redirect('user_profile')
     return render(request, 'post_event.html', context)
 
 @login_required    

@@ -58,8 +58,8 @@ def search(request):
     if len(events.exclude(event_date_ends__lt=datetime.date.today())) == 0:
         messages.error(request, f"Sorry, we found 0 results! Please search again!")
         return redirect('index')
+        
     
-    else:
-        return render(request, 'view_all_events.html', context)
+    return render(request, 'view_all_events.html', context)
 
 
