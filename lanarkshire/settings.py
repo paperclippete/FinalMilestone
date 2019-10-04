@@ -34,7 +34,7 @@ else:
     DEBUG = False
 
 
-ALLOWED_HOSTS = [os.getenv('DEV_HOST'),os.getenv('DEV_HOST')]
+ALLOWED_HOSTS = [os.getenv('DEV_HOST'),'love-lanarkshire-ms4.herokuapp.com']
 
 
 # Application definition
