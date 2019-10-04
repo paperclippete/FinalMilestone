@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-# import env
+if 'PRODUCTION' not in os.environ:
+    import env
 import dj_database_url
 
 
@@ -27,10 +28,13 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = False
+if os.getenv('DEVELOPMENT') == True:
+    DEBUG = True
+else:
+    DEBUG = False
 
 
-ALLOWED_HOSTS = [os.getenv('DEV_HOST'),'https://love-lanarkshire-ms4.herokuapp.com/']
+ALLOWED_HOSTS = [os.getenv('DEV_HOST'),os.getenv('DEV_HOST')]
 
 
 # Application definition
@@ -94,12 +98,11 @@ WSGI_APPLICATION = 'lanarkshire.wsgi.application'
 if "DATABASE_URL" in os.environ:
     DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
 else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
+    DATABASES = {'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+}    
 
 
 # Password validation
@@ -157,6 +160,8 @@ AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 
 AWS_S3_CUSTOM_DOMAIN = "%s.s3.amazonaws.com" % AWS_STORAGE_BUCKET_NAME
+
+AWS_DEFAULT_ACL = None
 
 
 STATIC_URL = '/static/'
