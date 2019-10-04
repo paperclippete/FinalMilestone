@@ -1,1 +1,1 @@
-web: gunicorn lanarkshire.wsgi
+web: gunicorn lanarkshire.wsgi:application
