@@ -23,7 +23,7 @@
     <span class="event-host">Hosted by: <a href="mailto: {{ event_host.email }}"><strong>{{ event.event_host|title }}</strong></a> <i class="far fa-envelope"></i> </span>
     
     <div class="divider"></div>
-    <div class="background-image" {% if event.image %}style="background-image:url({{ MEDIA_URL }}{{ event.image }})" 
+    <div class="background-image" {% if event.image %} style="background-image:url({{ event.image.url }})" 
         {% else %} 
             {% if event.event_type == "Arts and Crafts" %}
                 style="background-image:url({{ MEDIA_URL }}images/craft_event.jpg)" 

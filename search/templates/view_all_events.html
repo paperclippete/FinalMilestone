@@ -12,9 +12,9 @@
                 {% csrf_token %}
                 {{ filter_form|crispy }}
                 </div>
-                <button action="submit" class="btn btn-success float-right">Filter</button>
+                <button action="submit" id="filter-btn" class="btn btn-success float-right">Filter</button>
+                <a href="{% url 'search' %}" class="btn btn-secondary float-right">Reset</a>
             </form>
-            
         </div>
     </div>
     <div class="row top-row">
@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-image">
                     {% if event.image %}
-                        <img src="{{ MEDIA_URL }}{{ event.image }}" class="card-img-top" alt="{{ event.event_type }} Image">
+                        <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.event_type }} Image">
                     {% else %} 
                         {% if event.event_type == "Arts and Crafts" %}
                             <img src="{{ MEDIA_URL }}images/craft_event.jpg" class="card-img-top" alt="Arts and Crafts Image">
