@@ -14,26 +14,27 @@ import datetime
 @login_required
 def post_event(request):
     """Renders Create Event Form"""
-    event_form = CreateEventForm(request.POST or None)
+    event_form = CreateEventForm()
     user = request.user
-    if request.method == "POST" and event_form.is_valid():
-        event = event_form.save(commit=False)
-        event.event_host = user
-        print(event.event_host)
-        event.save()
-        membership = Membership.objects.get(user=user)
-        membership.posts_remaining -= 1
-        membership.save()
-        current_places = event.max_participants
-        full_address = event.address + ' ' + event.town + ' ' + event.post_code
-        context = {
-            'event': event,
-            'current_places': current_places,
-            'full_address': full_address
-        }
-        messages.success(request, f"You have posted {request.POST['title']}!")
-        return render(request, 'view_one_event.html', context)
-
+    if request.method == "POST":
+        event_form = CreateEventForm(request.POST, request.FILES)
+        if event_form.is_valid():
+            event = event_form.save(commit=False)
+            event.event_host = user
+            event.save()
+            membership = Membership.objects.get(user=user)
+            membership.posts_remaining -= 1
+            membership.save()
+            current_places = event.max_participants
+            full_address = event.address + ' ' + event.town + ' ' + event.post_code
+            context = {
+                'event': event,
+                'current_places': current_places,
+                'full_address': full_address,
+                'event_host': event.event_host,
+            }
+            messages.success(request, f"You have posted {request.POST['title']}!")
+            return render(request, 'view_one_event.html', context)
 
     context = {
         'event_form': event_form
@@ -79,6 +80,7 @@ def view_one_event(request, pk):
     """Displays event information for site user"""
     event = get_object_or_404(Event, pk=pk)
     user = request.user
+    print(event.image)
     join_form = JoinEvent(request.POST or None)
     like_form = LikeEvent(request.POST or None)
     if user.is_authenticated:
