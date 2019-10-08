@@ -25,6 +25,11 @@ def search(request):
             event_type = request.POST['event_type']
             if event_type: 
                 events = Event.objects.filter(event_type__iexact=event_type)
+        
+        if 'age_range' in request.POST:
+            age_range = request.POST['age_range']
+            if age_range: 
+                events = Event.objects.filter(age_range__iexact=age_range)
                 
         if 'day' in request.POST:
             day = request.POST['day']
@@ -51,7 +56,7 @@ def search(request):
     context = {
         'filter_form': filter_form,
         # This will ensure no finished events appear in the search
-        'events': events.exclude(event_date_ends__lt=datetime.date.today()),
+        'events': events.exclude(event_date_ends__lt=datetime.date.today()).order_by('event_date_begins'),
         'results': results
     }
     
