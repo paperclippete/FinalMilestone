@@ -362,7 +362,7 @@ a:not([href]):hover {
     font-size: 5rem;
     font-weight: 500;
     position: relative;
-
+    top: 1.6rem;
 }
 
 .changing-word-list {
@@ -371,7 +371,7 @@ a:not([href]):hover {
     font-size: 2rem;
     padding: 0;
     position: relative;
-    top: 1.9rem;
+    top: 2.9rem;
     left: 1.7%;
     text-align: left;
     margin-bottom: 0;
@@ -465,9 +465,14 @@ a:not([href]):hover {
     }
     #div_id_town,
     #div_id_event_type,
-    #div_id_day {
-        width: 30%;
+    #div_id_day,
+    #div_id_age {
+        width: 49%;
     }
+}
+
+#filter-btn {
+    margin-left: 8px;
 }
 
 .card-row {
