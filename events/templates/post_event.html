@@ -9,10 +9,14 @@
 {% block content %}
 
 <div class="lanarkshire-form">
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ event_form|crispy }}
         {{ event_form.media }}
+        <button class="btn btn-primary hidden" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Loading...
+        </button>
         <button action="submit" class="btn btn-primary btn-block btn-lg form-button">Post Event</button>
     </form>
 </div>

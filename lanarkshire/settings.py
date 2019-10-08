@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-# if 'PRODUCTION' not in os.environ:
-#     import env
+if 'PRODUCTION' not in os.environ:
+    import env
 import dj_database_url
 
 
@@ -28,10 +28,10 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-if os.getenv('DEVELOPMENT') == True:
-    DEBUG = True
-else:
-    DEBUG = False
+# if os.getenv('DEVELOPMENT') == True:
+DEBUG = True
+# else:
+#     DEBUG = False
 
 
 ALLOWED_HOSTS = [os.getenv('DEV_HOST'),'love-lanarkshire-ms4.herokuapp.com']
@@ -98,6 +98,7 @@ WSGI_APPLICATION = 'lanarkshire.wsgi.application'
 if "DATABASE_URL" in os.environ:
     DATABASES = {'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))}
 else:
+    print('Using dev database')
     DATABASES = {'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
