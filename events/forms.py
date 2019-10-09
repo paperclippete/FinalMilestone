@@ -12,7 +12,6 @@ class CreateEventForm(forms.ModelForm):
     event_date_ends = forms.DateField(input_formats=["%d/%m/%Y"], widget=DatePickerInput(format='%d/%m/%Y').start_of('app'))
     event_time_begins = forms.TimeField(widget=TimePickerInput())
     event_time_ends = forms.TimeField(widget=TimePickerInput())
-    image = forms.ImageField(attrs={'class': "btn btn-primary"})
 
     class Meta:
         model = Event

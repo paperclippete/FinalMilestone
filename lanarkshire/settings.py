@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'easy_maps',
     'membership',
     'storages',
+    'widget_tweaks'
     
 ]
 

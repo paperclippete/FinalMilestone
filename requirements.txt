@@ -4,14 +4,15 @@ certifi==2019.9.11
 chardet==3.0.4
 coverage==4.5.4
 dj-database-url==0.5.0
-Django==2.2.4
+Django==2.2.6
 django-appconf==1.0.3
 django-bootstrap-datepicker-plus==3.0.5
-django-bootstrap-modal-forms==1.4.2
+django-bootstrap-modal-forms==1.4.4
 django-classy-tags==0.9.0
 django-crispy-forms==1.7.2
 django-easy-maps==1.0.2
 django-storages==1.7.2
+django-widget-tweaks==1.4.5
 docutils==0.15.2
 geographiclib==1.50
 geopy==1.20.0
