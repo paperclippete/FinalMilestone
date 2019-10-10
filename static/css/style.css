@@ -362,7 +362,7 @@ a:not([href]):hover {
     font-size: 5rem;
     font-weight: 500;
     position: relative;
-    top: 1.6rem;
+    top: 0.9rem;
 }
 
 .changing-word-list {
@@ -371,7 +371,7 @@ a:not([href]):hover {
     font-size: 2rem;
     padding: 0;
     position: relative;
-    top: 2.9rem;
+    top: 2.4rem;
     left: 1.7%;
     text-align: left;
     margin-bottom: 0;
@@ -458,15 +458,19 @@ a:not([href]):hover {
     width: 100%
 }
 
+#top_div_id_image {
+    top: -46.7px;
+}
+
 @media screen and (min-width: 992px) {
     .filter-row {
         justify-content: space-between;
         flex-direction: row;
     }
-    #div_id_town,
-    #div_id_event_type,
-    #div_id_day,
-    #div_id_age {
+    .filter-row > #div_id_town,
+    .filter-row > #div_id_event_type,
+    .filter-row > #div_id_day,
+    .filter-row > #div_id_age {
         width: 49%;
     }
 }
@@ -737,8 +741,8 @@ a:not([href]):hover {
     }
     .changing-word-list {
         font-size: 2.4rem;
-        top: 2.8rem;
-        left: 13.8%;
+        top: 2.3rem;
+        left: 13.2%;
         width: fit-content;
     }
     .h-card-col {
@@ -772,7 +776,7 @@ a:not([href]):hover {
 
 @media screen and (min-width: 1200px) {
     .changing-word-list {
-        top: 4.3rem;
+        top: 3.8rem;
         left: 19.6%;
     }
     .h-card-col {

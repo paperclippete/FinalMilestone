@@ -8,7 +8,22 @@
 
 <div class="lanarkshire-form">
     <form method="POST" action="{% url 'login_modal' %}">
-            {% csrf_token %} {{ login_form|crispy }}
+            {% if event_form.errors %}
+                {% for field in event_form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% csrf_token %} 
+            {{ login_form|crispy }}
             
             <p><a href="{% url 'password_reset' %}">Forgotten Password?</a></p>
             
