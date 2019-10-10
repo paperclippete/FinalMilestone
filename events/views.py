@@ -18,10 +18,7 @@ def post_event(request):
     user = request.user
     if request.method == "POST":
         event_form = CreateEventForm(request.POST, request.FILES)
-        print(request.FILES)
-        print(event_form.errors)
         if event_form.is_valid():
-            print("hello")
             event = event_form.save(commit=False)
             event.event_host = user
             event.save()
