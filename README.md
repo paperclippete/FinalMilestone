@@ -1,11 +1,9 @@
 # Love Lanarkshire
 
-Welcome to Love Lanarkshire. 
 
-<img src="development/ResponsiveMockup.png" height="520px" width="100%">
+<img src="development/ResponsiveMockup.png" height="420px" width="100%">
 
-This is a web application that brings local communities together, allowing users to share their interests, hobbies and expertise with others in their local area. There is a robust relational database hosted with PostgresSQL. The site features a backend code devleoped with Python and the Django framework, that allows users to upload their events to the database and view a variety of event details, interact with specific events and filter and search through the database. The frontend was developed with HTML, CSS and JS and displays all events in a responsive, intuitive and coherent design. Registered users can perform CRUD operations on their own details or the events they have listed. Registered users have the ability to upgrade their membership of the site and this is facilitated by Stripe payments.
-There is a secure user registration and authentication to the site. This allows for a more personalised experience.
+Welcome to Love Lanarkshire - a web application that brings local communities together, allowing users to share their interests, hobbies and expertise with others in their local area. The site features a robust relational database hosted with PostgresSQL and a backend code devleoped with Python and the Django framework. This enables users to upload and view a variety of event details, interact with specific events and filter and search through the event database. The frontend was developed with HTML, CSS and JS and displays all events in a responsive, intuitive and coherent design. Registered users can perform CRUD operations on their own details or the events they have listed. Registered users have the ability to upgrade their membership of the site and this is facilitated by Stripe payments.
 
 View the deployed site [here](https://love-lanarkshire-ms4.herokuapp.com).
 
@@ -145,6 +143,10 @@ Using current location or allowing hosts to choose their event location on a map
 
 Creating a ratings system would improve accountability for hosts and users ensuring that Love Lanarkshire retains its community ethos.
 
+> More Dynamic Event Status
+
+As site usage increases users may like to see event status on the search page, this would involve marking fully booked events or ending soon events. There may also be an opportunity to 'feature' some events either for gold membership or a small fee.
+
 
 ### Technologies Used
 
@@ -152,36 +154,51 @@ Creating a ratings system would improve accountability for hosts and users ensur
 
 * **HTML** - used for creating content and basic layout and validated with W3C
 * **CSS** - used for customised styling and layout and validated with W3C
-* **JavaScript** - used to provide interactivity and logic to the site
-* [Python](https://www.python.org/) - used to programme the site and interact between the database and the frontend
+* **JavaScript** - used to provide interactivity and logic to the client-side and manipulation of the DOM
+* [Python](https://www.python.org/) - used to handle the logic for the site and provide connectivity between the database and the frontend
 
 
 ##### Frameworks
 
-* [Django](https://www.djangoproject.com/) - A Python framework
+* [Django](https://www.djangoproject.com/) - A Python framework that provides templating logic, support for database modelling, easy-to-implement model forms, an integrated testing suite, an admin panel and secure authentication
 * [Bootstrap](https://getbootstrap.com/) - used for responsive layout, basic styling, dropdown Navbar (JavaScript for these features was used - linked to Bootstrap and, through BS, popper.js in <script> tags)
 
 ##### Tools
 
-* [PyMongo](https://api.mongodb.com/python/current/) - An API which provides tools for working with MongoDB in Python
-* [MongoDB](https://www.mongodb.com/) - non-relational document style database used to store the recipes and users for Dessert Search
-* [WTForms](https://wtforms.readthedocs.io/en/stable/) - An API which provides form classes for ease of managing form data in Python
-* [CSS Minifier](https://cssminifier.com/) - used to minify my CSS data for deployment
-* [Favicon Generator](https://www.favicon.cc/?) - I used this to generate a Favicon
+* [Coverage.py](https://pypi.org/project/coverage/) - A tool which measures code coverage during test execution
+* [TravisCI](https://docs.travis-ci.com/user/for-beginners/) - supports the development process by automatically building and testing code changes, providing immediate feedback on the success of the change
+* [Django Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/) - styles Django Model Forms with Bootstrap
+* [Django Easy Maps](https://pypi.org/project/django-easy-maps/) - used to integrate the Google Maps API with Django and Python, also installs [Django App Conf](https://pypi.org/project/django-appconf/), [Django Classy Tags](https://pypi.org/project/django-classy-tags/), [Geographic Lib](https://pypi.org/project/geographiclib/), [Geopy](https://pypi.org/project/geopy/) and [Six](https://pypi.org/project/six/) as dependencies
+* [Django Bootstrap Datepicker Plus](https://pypi.org/project/django-bootstrap-datepicker-plus/) - provided a styled datepicker tool for the post event form
+* [DJ Database URL](https://pypi.org/project/dj-database-url/) - provides Django with a database connection dictionary
+* [Psycopg2](https://pypi.org/project/psycopg2/) - Postgres database adaptor for Python
+* [SQlite](https://www.sqlite.org/index.html) - relational database used for development
+* [PostgresSQL](https://www.postgresql.org/) - relational database used for deployed site
+* [Boto3](https://pypi.org/project/boto3/), [Botocore](https://pypi.org/project/botocore/) and [S3 Transfer](https://github.com/boto/s3transfer) - used to host and upload static and media files in S3 Buckets
+* [S3 Buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html) - used to host static and media files
+* [Stripe](https://stripe.com) - API used to create payment element and take secure payments
+* [Gunicorn](https://gunicorn.org/) - a Python WSGI HTTP Server
+* [Favicon.io](https://favicon.io/emoji-favicons/growing-heart/) - generates a Favicon
 * [W3C Validator](https://validator.w3.org/) - HTML Validator 
 * [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) - CSS Validator
 * [PyCodeStyle](https://pypi.org/project/pycodestyle/) - Python Validator
 * [JSLint](https://www.jslint.com/) - JS Validator
-* [Cloud9 IDE](https://ide.c9.io/) - this was the IDE where I developed and tested my application
-* **Git** - I pushed my files using **Git**, storing them in a repository on **GitHub**
-* [Heroku](https://heroku.com/) - I deployed my finished site through Heroku
-* [Chrome Developer Tools](https://developers.google.com/web/tools/chrome-devtools/) - used to test and check my work throughout the development process
+* [AWS Cloud9 IDE](https://www.awseducate.com/student/s/awssite) - Cloud-based IDE 
+* **Git** - used for version control
+* [Heroku](https://heroku.com/) - deployed finished site through Heroku
+* [Chrome Developer Tools](https://developers.google.com/web/tools/chrome-devtools/) - used to test and check the site throughout the development process
+* [Balsamiq](https://balsamiq.com/) - used to create wireframes
+* [CanIUse](https://caniuse.com/) - checks compatibility across Browsers
+* [BrowserStack](https://www.browserstack.com/) - tests rendering across Browsers
 
 ##### Libraries
 
 * [jQuery](https://jquery.com/) - JavaScript library used to connect with APIs and custom-code for the site which allows for DOM manipulation
 * [Google Fonts](https://fonts.google.com/) - used for customised fonts
+* [Ostrich Sans](https://www.fontsquirrel.com/fonts/ostrich-sans) - used for site title
 * [Font Awesome](https://fontawesome.com/) - used for links and icons to make the site more appealing
+* [Animate.css](https://daneden.github.io/animate.css/) - used for nav link hover effect
+* [Textillate](https://textillate.js.org/) and [Lettering.JS](http://letteringjs.com/) - used to create site title effects
 
 
 ### Testing
@@ -189,149 +206,25 @@ ___
 
 #### Manual and Automated Testing
 
-Manual testing was done for all CRUD operations from the database as well as for all links, buttons and forms in the site. I used Werkzeug Debugger throughout the development process to immediately flag errors when running my app.py file.
+Manual testing was done for all CRUD operations from the database as well as for all links, buttons and forms in the site. I used Django's Debugger throughout the development process to immediately flag errors
 
-I created a [test.py](development/testing/testdb.py) file that tested the connection to my database, ensuring data was inserted in a suitable manner and was returned to the console when requested.
+Using Django's TestCase I created tests for individual component parts of the site. This allowed me to test the forms and views would or were rendering and functioning correctly. This worked in conjunction with Coverage.py which gave an indication for parts of the app that had not been tested.
 
-Throughout the process I continually manually tested the frontend, by saving my work in the IDE and running it in Google Chrome. I used Chrome Developer Tools to ensure that my site was responsive and functioned in all screen sizes and that my styling was applied appropriately throughout. 
+Throughout the process I engaged continuous manual testing, using Chrome Developer Tools to view real time changes ensuring my site was responsive and functioned in all screen sizes and that my styling was applied appropriately throughout. 
 
 I set ```console.logs``` and ```debugger``` statements throughout my js files in order to debug through the console.
 
+I used print statements in Python to ensure that data was being handled in the manner it was supposed to be.
+
 I used jQuery to manipulate the DOM in Chrome Developer Tools in order to test my code visually before writing it within the script.
 
-I had several users log in and out of the website searching, adding, editing and deleting (CRUD) the recipes. This was to ensure that only registered users were able to delete/edit their own recipes. It also verified that the correct author showed up for each recipe. 
+I had several users log in and out of the website searching, adding, editing and deleting (CRUD) events. This was to ensure that only registered users were able to delete/edit their own events. 
 
 #### Responsiveness
 
-I tested my project throughout development using Chrome Developer Tools to check the site was responsive. I continually made adjustments to my media-queries in CSS to ensure it looked good at all screen-widths, however I realised my laptop had a different screen size to the standard. I began to investigate a range of screen sizes and realised the best option was just to make it as responsive as I possibly could!
+I tested my project throughout development using Chrome Developer Tools to check the site was responsive. I continually made adjustments to my media-queries in CSS to ensure it looked good in all screen-widths. I used Browser Stack and CanIUse to check compatobility across Browsers.
 
 #### Bugs
 
-There were several issues with my Python code, however, using the Werkzeug Debugger allowed for an immediate fix. I used the documentation for Flask, PyMongo and MongoDB to help solve any problems. I found it very difficult to get a search function that would search text and use checkboxes. I eventually had code that would work in every instance although I am aware that it could be neater.
-
-There was a 500 error displaying in the console when Fetch was trying to retrieve login details from an anonymous user. I've run out of time on my project to fix this issue but I'd look into an if statement in the fetch function or in python to catch this.
-
 There was a 400 error in the console for the favicon. I created a favicon.
 
-There is a known issue with the 'back' button on the view recipe pages, as they return to the main search page in this instance they require form resubmission. I have looked into this in various developer support resources but have yet to find a fix. Essentially I want to go back and refresh the page automatically for the user, just like using the browser back button. When a user liked a recipe and then clicked the back button it took them back to view recipe with an active like recipe button again. I fixed this by searching the current url for 'like_recipe', if it was located the back button would go back by 2 pages.
-*I have decided to send the user back to Search Results temporarily, as I feel the user's experience would be blighted by an ERR_CACHE_MISS page and the alternative of having to reset the filters or pressing the browser's back button would provide a less negative experience for the user. I then had to create a back to user home button*
-
-There is an issue with the recipe description and method not rendering correctly, they render as input in the terminal when printed but do not when rendered in the HTML template, I have attempted to fix this but there are sometimes two full stops at the end of the text. I am continuing to look for a fix.
-
-There is also an issue with duplicate ingredients not showing up, this is because I currently have each ingredient set as a key in the database and therefore can't have duplicates. I will continue to look into this.
-
-There have been several issues throughout development with my JS code breaking, I worked hard using console.logs and debuggers to pinpoint errors and fix them. There shouldn't be any errors displaying in the console except for the above 500 error, intermittently.
-
-There was a security issue related to the app.py view where the database string was returned in the URL. This could enable people to find and access the dtabase. I quickly fixed the URL parameter to be the user._id rather than users._id.
-
-### Deployment
-___
-
-#### How to Install Dessert Finder
-
-1. From your terminal enter `git clone https://github.com/paperclippete/Milestone3.git` to clone the project and download to your IDE
-
-2. Set up your Virtual Environment Variables 
-    * this can be done by creating folder named .venv to hold your variables and importing them into your app.py
-    * this can be done in your IDE bash terminal - e.g. cd .. to your root directory and type `nano.bashrc` and type in your important environment variables
-    
-    * Your environment variables should not be committed to git*
-
-
-3. You should now install the requirements by typing `$ sudo pip3 -r install requirements.txt`
-
-4. You will also have to create your own database to get full functionality from the project. [MongoDB](https://www.mongodb.com/) is free and easy to use. 
-
-> Within my Database I had two collections, recipes and users
-
-``` 
-    recipes
-    {
-    _id: ObjectId("5cfd48d8b93f0ccb1dcbe754")
-    ingredients: Object
-        key: "value"
-    dairy_free: bool
-    gluten_free: bool
-    main_ingredient: "string"
-    recipe_description: "string"
-    title: "string"
-    image: "string"
-    method: "string"
-    author: "string"
-    vegan: bool
-    prep_time: "string"
-    serves: "string"
-    like_count: Int
-    likes: Array
-        0: ObjectId("5cfd48d8b93f0ccb1dcbe754")
-    }
-    
-    users
-    { 
-    id: ObjectId("5cfd4210b93f0ccb1dcbe74f")
-    last_name: "string"
-    first_name: "string"
-    password: "string" (hashed)
-    username: "string"
-    }
-```    
-
-#### How to Deploy your Site
-
-I committed my code to GitHub at regular intervals. I am now using git more often, making sure to give detailed commit messages as I know it provides version control.
-
-1. In order to deploy the site to Heroku, you must create a Procfile and requirements.txt. *These will tell Heroku how to run your app.*
-    * To create a Procfile - `echo web: python (your filename).py > Procfile ` 
-    * To create a requirements.txt - `sudo pip3 freeze --local > requirements.txt ` 
-
-2. Next, log into Heroku and set up the remote.
-    ``` 
-    
- 
-    heroku login  
-    
-    git remote add heroku(url) 
-
-
-    ``` 
-
-3. You then need to setup your Heroku Enivronment Variables and you can do this in two ways, either through the terminal or by navigating to [Heroku](http://heroku.com).
-
-4. On navigating to the Heroku website, log in and select your app from the dashoboard.
-
-5. Choose settings and click on 'Reveal Config Vars' and insert the environment variables that are essential for your project to run. For example, 
-
-    > IP - 0.0.0.0 
-    PORT - 8080 
-    MONGO_URI - mongodb+srv://root*your password*@myfirstcluster-ug8tc.mongodb.net/*your database*?retryWrites=true 
-    DB_NAME - *your database name*
-    SECRET KEY - *create a secret key*
-    
-    * You should never reveal any of these environment variables to ensure you maintain the security of your database *
-
-6. You should then send your committed code to Heroku using `git push heroku master` and view your deployed site on the URL provided within your Heroku dashboard.
-
-#### Differences between Development and Deployed version
-
-The difference between the deployed version and the development version is that I'm using a minified CSS file whereas I used SASS to compile my styling during development. I also set the debug to false for deployment.
-
-### Credits
-___
-
-#### Content
-The recipes and recipe images were inserted for testing purposes were taken from the [BBC website](https://www.bbc.co.uk/food).
-
-The background image was from [Pexels](https://www.pexels.com/search/website%20background%20food/), the video was from [Videvo](https://www.videvo.net/). The cake images and icons were from [FlatIcon](https://www.flaticon.com/).
-
-**This site has been created for educational purposes only**
-
-#### Media
-The images and text were sourced from the sites listed above. All images have been used for educational purposes only.
-
-#### Acknowledgements
-
-I used Ian Lunn's [Hover](https://ianlunn.github.io/Hover/) for my navbar link hover effects. I have clearly marked the borrowed code in my CSS.
-
-I used [W3Schools](https://www.w3schools.com/) code as a basis for my custom checkboxes.
-
-Throughout this project I have sought support and guidance from [Stack-Overflow](https://stackoverflow.com/), Code-Institue [Slack](https://slack.com/intl/en-gb/) Community, [W3Schools](https://www.w3schools.com/), [CSS Tricks](https://css-tricks.com/), [Pretty Printed](https://prettyprinted.com/) YouTube videos.
