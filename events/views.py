@@ -45,25 +45,27 @@ def post_event(request):
 def edit_event(request, pk):
     """Allows Event Host to make changes to an upcoming event and re-publish a finished event"""
     event = get_object_or_404(Event, pk=pk)
-    event_form = CreateEventForm(request.POST or None, instance=event)
+    event_form = CreateEventForm(instance=event)
     context = {
         'event_form': event_form
     }
     user = request.user
-    if request.method == "POST" and event_form.is_valid():
-        edit = event_form.save(commit=False)
-        edit.event_host = user
-        edit.save()
-        if event.event_date_begins < datetime.date.today():
-            membership = Membership.objects.get(user=user)
-            if membership.posts_remaining == 0:
-                messages.error(request, "Sorry, you have no posts remaining!")
-                return redirect('user_profile')
-            else:
-                membership.posts_remaining -= 1
-                membership.save()
-        messages.success(request, "You have updated your event!")
-        return redirect('user_profile')
+    if request.method == "POST":
+        event_form = CreateEventForm(request.POST, request.FILES, instance=event)
+        if event_form.is_valid():
+            edit = event_form.save(commit=False)
+            edit.event_host = user
+            edit.save(force_update=True)
+            if event.event_date_begins < datetime.date.today():
+                membership = Membership.objects.get(user=user)
+                if membership.posts_remaining == 0:
+                    messages.error(request, "Sorry, you have no posts remaining!")
+                    return redirect('user_profile')
+                else:
+                    membership.posts_remaining -= 1
+                    membership.save()
+            messages.success(request, "You have updated your event!")
+            return redirect('user_profile')
     return render(request, 'post_event.html', context)
 
 @login_required    
@@ -79,7 +81,6 @@ def view_one_event(request, pk):
     """Displays event information for site user"""
     event = get_object_or_404(Event, pk=pk)
     user = request.user
-    print(event.image)
     join_form = JoinEvent(request.POST or None)
     like_form = LikeEvent(request.POST or None)
     if user.is_authenticated:
@@ -89,6 +90,9 @@ def view_one_event(request, pk):
         user_liked = None
         user_joined = None
     user_queue = Participant.objects.filter(event=event).count()
+    user_list_id = Participant.objects.filter(event=event).values('user')
+    user_list = User.objects.filter(id__in=user_list_id)
+    date = datetime.datetime.now()
     current_places = event.max_participants - user_queue
     event_host = User.objects.get(id=event.event_host.id)
     # Ensures map renders at correct location
@@ -101,7 +105,9 @@ def view_one_event(request, pk):
         'full_address': full_address,
         'user_joined': bool(user_joined),
         'user_liked': bool(user_liked),
-        'event_host': event_host
+        'event_host': event_host,
+        'user_list': user_list,
+        'date': date
     }
     
     # Allow user to join an event    
