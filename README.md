@@ -147,6 +147,10 @@ Creating a ratings system would improve accountability for hosts and users ensur
 
 As site usage increases users may like to see event status on the search page, this would involve marking fully booked events or ending soon events. There may also be an opportunity to 'feature' some events either for gold membership or a small fee.
 
+> Further range of testing suites
+
+As site usage expands so will the requirement for a range of tests to ensure new features can be added without breaking the site.
+
 
 ### Technologies Used
 
@@ -214,11 +218,44 @@ Throughout the process I engaged continuous manual testing, using Chrome Develop
 
 I set ```console.logs``` and ```debugger``` statements throughout my js files in order to debug through the console.
 
-I used print statements in Python to ensure that data was being handled in the manner it was supposed to be.
+I used ```print()``` statements in Python to ensure that data was being handled in the manner it was supposed to be.
 
 I used jQuery to manipulate the DOM in Chrome Developer Tools in order to test my code visually before writing it within the script.
 
-I had several users log in and out of the website searching, adding, editing and deleting (CRUD) events. This was to ensure that only registered users were able to delete/edit their own events. 
+I had several users log in and out of the website searching, adding, editing and deleting (CRUD) events. This was to ensure that only registered users were able to delete/edit their own events.
+
+
+Test it...
+
+There is a test account available on Love Lanarkshire to show the full functionality of the site...
+
+```
+Username = TestUser
+Password = PassTest!
+
+```
+
+There are also test cards for testing the Stripe payments in membership upgrade on the user's profile page...
+
+```
+Successful Card
+    card number: 4242 4242 4242 4242
+    CVC: Any 3 digit number
+    Expiry: Any date in the future
+    Zip Code: A 5 digit number
+    
+Declined Card
+    card number: 4000 0000 0000 0002
+    CVC: Any 3 digit number
+    Expiry: Any date in the future
+    Zip Code: A 5 digit number
+    
+Failed CVC 
+    card number: 4000 0000 0000 0127
+    CVC: Any 3 digit number
+    Expiry: Any date in the future
+    Zip Code: A 5 digit number
+```
 
 #### Responsiveness
 
@@ -226,5 +263,94 @@ I tested my project throughout development using Chrome Developer Tools to check
 
 #### Bugs
 
-There was a 400 error in the console for the favicon. I created a favicon.
+There was a 404 error in the console during development despite a favicon being present. This continued to appear in the production version - I had to try different favicons in production.
 
+There were numerous build errors whilst using Travis CI. Most recently due to uninstalling unused dependencies that were called in view files.
+
+There were issues implementing S3 buckets for storage of media files and static files, I ensured to have the correct packages installed, tested the secret keys were working and custom_storages.py was recognised. It is now functioning as expected.
+
+There is a known issue with ```sys:1: ResourceWarning: unclosed <ssl.SSLSocket fd=11, family=AddressFamily.AF_INET, type=2049, proto=6, laddr=('172.31.88.137', 43552), raddr=('52.95.148.22', 443)>``` appearing in the development terminal when viewing the view_one_event.html. The site continues to function correctly but this issue will require further investigation. It is most likely caused by a dependency.
+
+
+### Deployment
+___
+
+#### How to Install Love Lanarkshire
+
+1. From your terminal enter `https://github.com/paperclippete/FinalMilestone.git` to clone the project and download to your IDE
+
+2. Set up your Virtual Environment Variables 
+    * this can be done by creating a file in your root folder called env.py. It will hold your variables and secret keys. You should import this file into your settings.py file
+    * this can also be done in your IDE bash terminal - e.g. cd .. to your root directory and type `nano.bashrc` and type in your important environment variables
+    
+    * Your environment variables should not be committed to git*
+
+
+3. You should now install the requirements by typing `$ sudo pip3 -r install requirements.txt`
+
+4. You will also have to create your own database to get full functionality from the project. [PostgresSQL](https://www.postgresql.org/) is free and easy to integrate with this project. 
+
+5. Once you have set up your project `python3 manage.py makemigrations` and `python3 manage.py migrate` will create the database below using the models.py files in the projects
+
+<img src="development/LoveLanDb.jpg" height="420px" width="100%">
+
+
+#### How to Deploy your Site
+
+Always commit your code with git - it will provide version control and saves your work.
+
+1. In order to deploy the site to Heroku, you must install gunicorn `$ sudo pip3 install gunicorn` and then create a Procfile and requirements.txt. *These will tell Heroku how to run your app.*
+    * To create a Procfile - `echo web: gunicorn lanarkshire.wsgi:application > Procfile ` 
+    * To create a requirements.txt - `sudo pip3 freeze --local > requirements.txt ` 
+
+2. Next, log into Heroku and set up the remote.
+    ``` 
+    
+ 
+    heroku login  
+    
+    git remote add heroku(url) 
+
+
+    ``` 
+
+3. You then need to setup your Heroku Enivronment Variables and you can do this in two ways, either through the terminal or by navigating to [Heroku](http://heroku.com).
+
+4. On navigating to the Heroku website, log in and select your app from the dashoboard.
+
+5. Choose settings and click on 'Reveal Config Vars' and insert the environment variables that are essential for your project to run. For example, 
+
+    > SECRET_KEY - *secret key*
+    AWS_ACCESS_KEY_ID - *secret key from AWS S3 buckets* 
+    DATABASE_URL - *your database name*
+    STRIPE_SECRET - *secret key for Stripe API*
+    
+    
+    * You should never reveal any of these environment variables to ensure you maintain the security of your site *
+
+6. You should then send your committed code to Heroku using `git push heroku master` and view your deployed site on the URL provided within your Heroku dashboard. You can also set up your Heroku dashboard to build and deploy every time you push to GitHub and your build passes the CI Tests.
+
+
+#### Differences between Development and Deployed version
+
+The difference between the deployed version and the development version is that I'm using a PostgresSQL database instead of SQLite. I am also hosting all of my static and media files on S3 buckets. The debugger is false in production.
+
+### Credits
+___
+
+#### Content
+The  Lanarkshire images were from local Lanarkshire websites and are used for educational purposes only.
+
+The default event images were sourced from [Pexels](https://www.pexels.com/search/), [Unsplash](https://unsplash.com/s/photos/wellbeing) and [Pixabay](https://pixabay.com/images/search/wellbeing/)
+
+**This site has been created for educational purposes only**
+
+#### Media
+
+The images and text were sourced from the sites listed above. All images have been used for educational purposes only.
+
+#### Acknowledgements
+
+Any code snippets sourced from elsewhere are clearly marked in the code.
+
+Throughout this project I have sought support and guidance from [Stack-Overflow](https://stackoverflow.com/), Code-Institue [Slack](https://slack.com/intl/en-gb/) Community, [W3Schools](https://www.w3schools.com/), [CSS Tricks](https://css-tricks.com/), [Pretty Printed](https://prettyprinted.com/) and [Coding for Entrepreneurs](https://www.codingforentrepreneurs.com/) YouTube videos. 
