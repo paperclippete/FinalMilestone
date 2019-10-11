@@ -28,10 +28,10 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-# if os.getenv('DEVELOPMENT') == True:
-DEBUG = True
-# else:
-#     DEBUG = False
+if os.getenv('DEVELOPMENT') == True:
+    DEBUG = True
+else:
+    DEBUG = False
 
 
 ALLOWED_HOSTS = [os.getenv('DEV_HOST'),'love-lanarkshire-ms4.herokuapp.com']
