@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-# if 'PRODUCTION' not in os.environ:
-#     import env
+if 'PRODUCTION' not in os.environ:
+    import env
 import dj_database_url
 
 
