@@ -91,7 +91,9 @@
     <p class="event-text">{{ event.description|capfirst }}</p>
     
     {% if user.is_authenticated and user == event_host %}
-        <button class="btn btn-success"><i class="fas fa-edit"></i> Edit Event</button>
+        <a href="{% url 'edit_event' event.id %}" class="btn btn-success"><i class="fas fa-edit"></i> Edit Event</a>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#bookedModal"><i class="fas fa-users"></i> View Event Attendees</button>
+
     {% elif user.is_authenticated and user != event_host %}    
         {% if current_places != '0' %}
             {% if user_joined %}
@@ -114,13 +116,51 @@
     {% else %}
         <a href="{% url 'login' %}" class="btn btn-success"><i class="fas fa-user-check"></i> Login to book!</a>
     {% endif %}
-        <a href="{% url 'search' %}" class="btn btn-secondary back-btn float-right">Back to Events</a>
+        <a href="{% url 'search' %}" class="btn btn-secondary back-btn">Back to Events</a>
 
     
     
 </div>
 
+<!-- Modal -->
+<div class="modal fade printable" id="bookedModal" tabindex="-1" role="dialog" aria-labelledby="bookedModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bookedModalLabel">Event Attendees</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <h4>Current Attendees for {{ event.title }}</h4>
+                <p class="light-text">{{ date|date:"jS F Y" }} - {{ date|time:"G:i" }}</p>
+                {% for user in user_list %}
+                <p>{{ user.first_name }} {{ user.last_name }} - <a href="mailto:{{ user.email }}"> {{ user.email }}</a></p>
+                {% endfor %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="print-btn" class="btn btn-primary" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block js %}
+<script>
+  $().ready(function() {
+      $('.modal.printable').on('shown.bs.modal', function() {
+          $('.modal-dialog', this).addClass('focused');
+          $('body').addClass('modalprinter');
+  
+      }).on('hidden.bs.modal', function() {
+          $('.modal-dialog', this).removeClass('focused');
+          $('body').removeClass('modalprinter');
+      });
+  });
+</script>
+
 {% endblock %}

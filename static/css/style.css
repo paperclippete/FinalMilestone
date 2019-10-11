@@ -71,6 +71,10 @@ body {
     display: none;
 }
 
+.light-text {
+    color: var(--langreylight);
+}
+
 /*Footer Styles*/
 
 footer {
@@ -499,7 +503,7 @@ a:not([href]):hover {
 
 .card-img-top {
     width: 100%;
-    height: 36vw;
+    height: 47vw;
     object-fit: cover;
 }
 
@@ -798,10 +802,17 @@ a:not([href]):hover {
 
 /*General styling for desktop/laptop*/
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 384px) {
     .back-btn {
         float: right !important;
         margin-top: 0;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    
+    .card-img-top {
+        height: 30vw;
     }
 }
 
@@ -812,7 +823,7 @@ a:not([href]):hover {
         margin: 0 60px 60px 60px;
     }
     .card-img-top {
-        height: 14vw;
+        height: 15vw;
     }
     .placeholder {
         height: 74px;
@@ -822,5 +833,42 @@ a:not([href]):hover {
     }
     .modal-dialog {
         max-width: 700px;
+    }
+}
+
+/* Print Section on modal */
+
+@media print {
+    body.modalprinter * {
+        visibility: hidden;
+    }
+
+    body.modalprinter .modal-dialog.focused {
+        position: absolute;
+        padding: 0;
+        margin: 0;
+        left: 0;
+        top: 0;
+    }
+
+    body.modalprinter .modal-dialog.focused .modal-content {
+        border-width: 0;
+    }
+
+    body.modalprinter .modal-dialog.focused .modal-content .modal-header .modal-title,
+    body.modalprinter .modal-dialog.focused .modal-content .modal-body,
+    body.modalprinter .modal-dialog.focused .modal-content .modal-body * {
+        visibility: visible;
+        width: 100%;
+    }
+
+    body.modalprinter .modal-dialog.focused .modal-content .modal-header,
+    body.modalprinter .modal-dialog.focused .modal-content .modal-body {
+        padding: 0;
+        width: 100%;
+    }
+
+    body.modalprinter .modal-dialog.focused .modal-content .modal-header .modal-title {
+        margin-bottom: 20px;
     }
 }
