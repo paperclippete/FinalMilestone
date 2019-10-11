@@ -151,6 +151,10 @@ As site usage increases users may like to see event status on the search page, t
 
 As site usage expands so will the requirement for a range of tests to ensure new features can be added without breaking the site.
 
+> Receipt and Order History
+
+More users with more membership transactions will necessitate a receipting system or order history panel. This is not currently offered by the site but should be a priority for future development.
+
 
 ### Technologies Used
 
@@ -292,7 +296,7 @@ ___
 
 5. Once you have set up your project `python3 manage.py makemigrations` and `python3 manage.py migrate` will create the database below using the models.py files in the projects
 
-<img src="development/LoveLanDb.jpg" height="420px" width="100%">
+<img src="development/LoveLanDb.jpg" height="550px" width="100%">
 
 
 #### How to Deploy your Site
@@ -305,13 +309,10 @@ Always commit your code with git - it will provide version control and saves you
 
 2. Next, log into Heroku and set up the remote.
     ``` 
-    
- 
     heroku login  
     
-    git remote add heroku(url) 
-
-
+    git remote add heroku(url)
+    
     ``` 
 
 3. You then need to setup your Heroku Enivronment Variables and you can do this in two ways, either through the terminal or by navigating to [Heroku](http://heroku.com).
