@@ -837,6 +837,7 @@ a:not([href]):hover {
 }
 
 /* Print Section on modal */
+/* Jackson Pires - Print Bootstrap Modal*/
 
 @media print {
     body.modalprinter * {
