@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import CreateEventForm, JoinEvent, LikeEvent
-from bootstrap_modal_forms.generic import BSModalCreateView, BSModalReadView
 from django.urls import reverse, reverse_lazy
 from .models import Event, Participant, Like
 from membership.models import Membership
