@@ -155,6 +155,14 @@ As site usage expands so will the requirement for a range of tests to ensure new
 
 More users with more membership transactions will necessitate a receipting system or order history panel. This is not currently offered by the site but should be a priority for future development.
 
+> Allow events to have a date range
+
+Resetting the user queue and allowing an event to span over a period of time would increase useability of the site. At present a host can choose a date range but can only have one event queue of x max participants for the event date range. It is possible to work around but as site activity increases this will become an issue.
+
+> Allow an event to span a weekend
+
+Choosing multiple days would increase functionality for events that would span a time period.
+
 
 ### Technologies Used
 
