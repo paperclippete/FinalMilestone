@@ -31,29 +31,10 @@ $(document).ready(function() {
     
     $('.zoom-btn-sm').click(function() {
         const btn = $(this);
-        
-        if (btn.hasClass('zoom-btn-tangerine')) {
-            localStorage.setItem('theme', 'tangerine');
-            
-        }
-        else if (btn.hasClass('zoom-btn-grass')) {
-            localStorage.setItem('theme', 'grass');
-            
-        }
-        else if (btn.hasClass('zoom-btn-raspberry')) {
-            localStorage.setItem('theme', 'raspberry');
-            
-        }
-        else if (btn.hasClass('zoom-btn-sunshine')) {
-            localStorage.setItem('theme', 'sunshine');
-           
-        }
-        else {
-            localStorage.setItem('theme', 'blueberry');
-            
-        }
+        let color = btn.attr('id')
+        localStorage.setItem('theme', color);
     
-    getTheme();    
+        getTheme();    
         
     });
     
@@ -75,21 +56,18 @@ $(document).ready(function() {
     getTheme();
     
     //nav-link bounce effect
-    $('.navbar-brand').mouseenter(function() {
+    $('.navbar-brand').hover(function() {
         $(this).addClass("animated tada")
-    }); 
-    
-    $('.navbar-brand').mouseleave(function() {
+    }, function() {
         $(this).removeClass("animated tada")
-    });
-    
-    $('.nav-item').mouseenter(function() {
-        $("a", this).addClass("animated tada")
     }); 
     
-    $('.nav-item').mouseleave(function() {
+    
+    $('.nav-item').hover(function() {
+        $("a", this).addClass("animated tada")
+    }, function() {
         $("a", this).removeClass("animated tada")
-    });
+    }); 
     
 });
 
