@@ -1,21 +1,20 @@
-# Love Lanarkshire
+# <div style="text-align:center">[Love Lanarkshire](https://love-lanarkshire-ms4.herokuapp.com)</div>
 
 
 <img src="development/ResponsiveMockup.png" height="420px" width="100%">
 
 Welcome to Love Lanarkshire - a web application that brings local communities together, allowing users to share their interests, hobbies and expertise with others in their local area. The site features a robust relational database hosted with PostgresSQL and a backend code devleoped with Python and the Django framework. This enables users to upload and view a variety of event details, interact with specific events and filter and search through the event database. The frontend was developed with HTML, CSS and JS and displays all events in a responsive, intuitive and coherent design. Registered users can perform CRUD operations on their own details or the events they have listed. Registered users have the ability to upgrade their membership of the site and this is facilitated by Stripe payments.
 
-View the deployed site [here](https://love-lanarkshire-ms4.herokuapp.com).
 
 <img src="https://travis-ci.org/paperclippete/FinalMilestone.svg?branch=master">
 
-| Contents  |
-|-----------|
-|[UX](#UX) |
-|[Features](#Features)|
-|[Testing](#Testing)|
-|[Deployment](#Deployment)|
-|[Credits](#Credits)|
+| Contents                          |
+|-----------------------------------|
+|[UX](#UX)                          |
+|[Features](#Features)              |
+|[Testing](#Testing)                |
+|[Deployment](#Deployment)          |
+|[Credits](#Credits)                |
 
 ### UX
 ___
@@ -120,6 +119,10 @@ This is essentially a user dashboard that houses all of the most crucial user fu
 
 Using the Stripe API and plugin means that users can have confidence in submitting their payment details to Love Lanarkshire. It also means that Stripe will handle all verification and encryption of user payment details ensuring that Love Lanarkshire can keep their user details safe.
 
+> Print List for Event Hosts
+
+Event hosts can print a list of their attendees without printing the whole HTML page, this makes it easy to see at a glance and economical to print.
+
 
 #### Features for the Future
 
@@ -199,8 +202,7 @@ Choosing multiple days would increase functionality for events that would span a
 * [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) - CSS Validator
 * [PyCodeStyle](https://pypi.org/project/pycodestyle/) - Python Validator
 * [JSLint](https://www.jslint.com/) - JS Validator
-* [AWS Cloud9 IDE](https://www.awseducate.com/student/s/awssite) - Cloud-based IDE 
-* **Git** - used for version control
+* [Git](https://git-scm.com/) - used for version control
 * [Heroku](https://heroku.com/) - deployed finished site through Heroku
 * [Chrome Developer Tools](https://developers.google.com/web/tools/chrome-devtools/) - used to test and check the site throughout the development process
 * [Balsamiq](https://balsamiq.com/) - used to create wireframes
@@ -220,11 +222,9 @@ Choosing multiple days would increase functionality for events that would span a
 ### Testing
 ___
 
-#### Manual and Automated Testing
+#### Manual Testing
 
-Manual testing was done for all CRUD operations from the database as well as for all links, buttons and forms in the site. I used Django's Debugger throughout the development process to immediately flag errors
-
-Using Django's TestCase I created tests for individual component parts of the site. This allowed me to test the forms and views would or were rendering and functioning correctly. This worked in conjunction with Coverage.py which gave an indication for parts of the app that had not been tested.
+Manual testing was done for all CRUD operations from the database as well as for all links, buttons and forms in the site. 
 
 Throughout the process I engaged continuous manual testing, using Chrome Developer Tools to view real time changes ensuring my site was responsive and functioned in all screen sizes and that my styling was applied appropriately throughout. 
 
@@ -269,19 +269,71 @@ Failed CVC
     Zip Code: A 5 digit number
 ```
 
+#### Automated Testing
+
+I used Django's Debugger throughout the development process to immediately flag errors. It would automatically test for broken links, templating issues or URL routing errors and provide a traceback in order to fis errors.
+
+Using Django's TestCase I created tests for individual component parts of the site. This allowed me to test the forms and views would or were rendering and functioning correctly. This worked in conjunction with Coverage.py which gave an indication for parts of the app that had not been tested.
+
+An example of a test for form validation would be...
+
+```
+
+class TestUserLoginForm(TestCase):
+    """ Test User Login Form is valid and provides correct errors """
+    def test_log_in_valid(self):
+        form = UserLoginForm({"username_or_email": "TestUser", "password": "TestPassword"})
+        self.assertTrue(form.is_valid())
+        
+```
+
+An example of a test for a Django view would be...
+
+```
+
+class TestAccountsViews(TestCase):
+    """ Test each page loads with correct template """
+    def test_get_login_page(self):
+        page = self.client.get("/accounts/login/")
+        self.assertEqual(page.status_code, 200)
+        self.assertTemplateUsed(page, "login.html")
+        
+```
+
+Having created tests in a file named ```test.py``` you can run your tests with...
+
+```
+python3 manage.py test
+
+```
+
+You can also use Coverage to run your tests and provide statistics on where testing has not been done...
+
+```
+python 3 coverage
+
+```
+
+
 #### Responsiveness
 
 I tested my project throughout development using Chrome Developer Tools to check the site was responsive. I continually made adjustments to my media-queries in CSS to ensure it looked good in all screen-widths. I used Browser Stack and CanIUse to check compatobility across Browsers.
 
 #### Bugs
 
-There was a 404 error in the console during development despite a favicon being present. This continued to appear in the production version - I had to try different favicons in production.
+There was a 404 error in the console during development despite a favicon being present. This continued to appear in the production version - I had to try different favicons in production, eventually I solved the issue by saving my favicon in the static folder.
 
 There were numerous build errors whilst using Travis CI. Most recently due to uninstalling unused dependencies that were called in view files.
 
-There were issues implementing S3 buckets for storage of media files and static files, I ensured to have the correct packages installed, tested the secret keys were working and custom_storages.py was recognised. It is now functioning as expected.
+There were issues implementing S3 buckets for storage of media files and static files, I ensured I had the correct packages installed, tested the secret keys were working and custom_storages.py was recognised. It is now functioning as expected.
 
 There is a known issue with ```sys:1: ResourceWarning: unclosed <ssl.SSLSocket fd=11, family=AddressFamily.AF_INET, type=2049, proto=6, laddr=('172.31.88.137', 43552), raddr=('52.95.148.22', 443)>``` appearing in the development terminal when viewing the view_one_event.html. The site continues to function correctly but this issue will require further investigation. It is most likely caused by a dependency.
+
+During manual user testing there was a bug with the search button on the index page not being disabled - it is better UX to disable the button until a user enters a search term. 
+
+During testing certain hover links did not behave as expected this was due to css specificity, I fixed this issue by being more specific in my style file.
+
+There was an issue with the membership modal. There is only one modal that is changed on the client-side dependent on the button that launches it. JS could not inject the Django templating syntax into the HTML, therefore the links would not work. I resolved this by adding a hidden input and using Python to check the request.POST for a membership hidden input.
 
 
 ### Deployment
@@ -289,20 +341,36 @@ ___
 
 #### How to Install Love Lanarkshire
 
-1. From your terminal enter `https://github.com/paperclippete/FinalMilestone.git` to clone the project and download to your IDE
+1. From your terminal enter the following to clone the project and copy the files to your IDE.
+
+```
+git clone https://github.com/paperclippete/FinalMilestone.git
+
+``` 
 
 2. Set up your Virtual Environment Variables 
-    * this can be done by creating a file in your root folder called env.py. It will hold your variables and secret keys. You should import this file into your settings.py file
-    * this can also be done in your IDE bash terminal - e.g. cd .. to your root directory and type `nano.bashrc` and type in your important environment variables
-    
+    * This can be done by creating a file in your root folder called `env.py`. It will hold your variables and secret keys. You should import this file into your `settings.py` file
+
     * Your environment variables should not be committed to git*
 
 
-3. You should now install the requirements by typing `$ sudo pip3 -r install requirements.txt`
+3. You should now install the requirements, dependent on your environment you may have to use the [sudo](https://en.wikipedia.org/wiki/Sudo) command 
+
+```
+sudo pip3 -r install requirements.txt
+
+```
 
 4. You will also have to create your own database to get full functionality from the project. [PostgresSQL](https://www.postgresql.org/) is free and easy to integrate with this project. 
 
-5. Once you have set up your project `python3 manage.py makemigrations` and `python3 manage.py migrate` will create the database below using the models.py files in the projects
+5. Once you have set up your project the Django migrations files will create the database below using the `models.py` files in the projects
+
+```
+python3 manage.py makemigrations
+
+python3 manage.py migrate 
+
+```
 
 <img src="development/LoveLanDb.jpg" height="550px" width="100%">
 
@@ -311,17 +379,26 @@ ___
 
 Always commit your code with git - it will provide version control and saves your work.
 
-1. In order to deploy the site to Heroku, you must install gunicorn `$ sudo pip3 install gunicorn` and then create a Procfile and requirements.txt. *These will tell Heroku how to run your app.*
-    * To create a Procfile - `echo web: gunicorn lanarkshire.wsgi:application > Procfile ` 
-    * To create a requirements.txt - `sudo pip3 freeze --local > requirements.txt ` 
+1. In order to deploy the site to Heroku, you must install gunicorn and then create a Procfile and requirements.txt. *These will tell Heroku how to run your app.*
+
+```
+sudo pip3 install gunicorn
+
+echo web: gunicorn lanarkshire.wsgi:application > Procfile
+
+sudo pip3 freeze --local > requirements.txt 
+
+```
+   
 
 2. Next, log into Heroku and set up the remote.
-    ``` 
-    heroku login  
     
-    git remote add heroku(url)
+``` 
+heroku login  
     
-    ``` 
+git remote add heroku(url)
+    
+``` 
 
 3. You then need to setup your Heroku Enivronment Variables and you can do this in two ways, either through the terminal or by navigating to [Heroku](http://heroku.com).
 
@@ -329,20 +406,20 @@ Always commit your code with git - it will provide version control and saves you
 
 5. Choose settings and click on 'Reveal Config Vars' and insert the environment variables that are essential for your project to run. For example, 
 
-    > SECRET_KEY - *secret key*
-    AWS_ACCESS_KEY_ID - *secret key from AWS S3 buckets* 
-    DATABASE_URL - *your database name*
-    STRIPE_SECRET - *secret key for Stripe API*
+    > SECRET_KEY - secret key
+    AWS_ACCESS_KEY_ID - secret key from AWS S3 buckets 
+    DATABASE_URL - your database name
+    STRIPE_SECRET - secret key for Stripe API
     
     
-    * You should never reveal any of these environment variables to ensure you maintain the security of your site *
+* You should never reveal any of these environment variables to ensure you maintain the security of your site *
 
 6. You should then send your committed code to Heroku using `git push heroku master` and view your deployed site on the URL provided within your Heroku dashboard. You can also set up your Heroku dashboard to build and deploy every time you push to GitHub and your build passes the CI Tests.
 
 
 #### Differences between Development and Deployed version
 
-The difference between the deployed version and the development version is that I'm using a PostgresSQL database instead of SQLite. I am also hosting all of my static and media files on S3 buckets. The debugger is false in production.
+The difference between the deployed version and the development version is that I'm using a PostgresSQL database instead of SQLite. I am also hosting all of my static and media files on S3 buckets. All static files have been minified where possible. The debugger is false in production.
 
 ### Credits
 ___
