@@ -558,15 +558,22 @@ a:not([href]):hover {
     padding-left: 0px;
 }
 
-#booked-sticker {
+.no-hover:hover {
+    color: #dc3545; 
+    text-decoration: none; 
+}
+
+.booked-sticker {
     position: absolute;
-    top: 42px;
-    left: 24px;
-    color: #dc3545;
+    top: 91px;
+    left: 159px;
+    color: var(--lanwhite);
+    font-family: var(--title-font);
     font-weight: 700;
-    border: 5px solid #dc3545;
+    letter-spacing: 2px;
     font-size: 4rem;
     transform: rotate(-10deg);
+    text-shadow: 0 0 3px var(--langrey);
 }
 
 /*View one event styling*/
@@ -777,6 +784,17 @@ a:not([href]):hover {
 
 /*Site Title and Profile Horizontal Scroll styling for all screen sizes*/
 
+
+/*Smallest Screens*/
+
+@media screen and (max-width: 320.1px) {
+   .booked-sticker {
+        top: 73px;
+        left: 122px;
+        font-size: 3.7rem;
+    } 
+}
+
 /*Tablet*/
 
 @media screen and (min-width: 768px) {
@@ -791,6 +809,13 @@ a:not([href]):hover {
     }
     .h-card-col {
         max-width: 44%;
+    }
+    .booked-sticker {
+        top: 145px;
+        left: 150px;
+        font-size: 4rem;
+        transform: rotate(-10deg);
+
     }
 }
 
@@ -814,6 +839,13 @@ a:not([href]):hover {
     .lanarkshire-form {
         margin: 0px 8rem;
     }
+    .booked-sticker {
+        top: 68px;
+        left: 109px;
+        font-size: 4rem;
+        transform: rotate(-10deg);
+
+    }
 }
 
 /*Extra-large screens*/
@@ -826,6 +858,11 @@ a:not([href]):hover {
     .h-card-col {
         max-width: 23%;
     }
+    .booked-sticker {
+        top: 127px;
+        left: 168px;
+        font-size: 4rem;
+    }
 }
 
 /*4K screens*/
@@ -837,6 +874,10 @@ a:not([href]):hover {
     }
     .h-card-col {
         max-width: 23%;
+    }
+    .booked-sticker {
+        top: 290px;
+        left: 168px;
     }
 }
 
