@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from events.models import Event
+from events.models import Like, Participant
+from django.contrib.auth.models import User
 from .forms import FilterEventsForm
 from django.contrib import messages
 import datetime
@@ -13,8 +15,8 @@ def search(request):
     else:
         events = Event.objects.all()
     
-    filter_form = FilterEventsForm(request.POST or None)
     
+    filter_form = FilterEventsForm(request.POST or None)
     if request.method == "POST":
         if 'town' in request.POST:
             town = request.POST['town']
@@ -52,12 +54,25 @@ def search(request):
                 events = Event.objects.filter(price=None)
     
     results = len(events.exclude(event_date_ends__lt=datetime.date.today()))
+    user = request.user
+    if user.is_authenticated:
+        user_liked_list = Like.objects.filter(user=user)
+        user_liked = events.filter(id__in=user_liked_list)
+        user_joined_list = Participant.objects.filter(user=user)
+        user_joined = events.filter(id__in=user_joined_list)
+
+    else: 
+        user_liked = None
+        user_joined = None
+    
                 
     context = {
         'filter_form': filter_form,
         # This will ensure no finished events appear in the search
         'events': events.exclude(event_date_ends__lt=datetime.date.today()).order_by('event_date_begins'),
-        'results': results
+        'results': results,
+        'user_liked': user_liked,
+        'user_joined': user_joined
     }
     
     if len(events.exclude(event_date_ends__lt=datetime.date.today())) == 0:
