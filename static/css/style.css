@@ -253,23 +253,51 @@ footer {
     color: var(--lanwhite);
 }
 
-.btn-primary:hover {
-    color: var(--lanwhite) !important;
-    background-color: var(--langreylight) !important;
-    border: solid 1px var(--langreylight);
+#search-button:hover,
+#filter-button:hover {
+    color: var(--dark-color);
+    background-color: var(--lanwhite);
+    border: solid 1px var(--dark-color);
+    opacity: 0.45;
 }
 
+.btn-primary:hover,
 .btn-success:hover {
-    color: var(--lanwhite) !important;
-    background-color: var(--langreymid) !important;
-    border: solid 1px var(--langreymid);
+    color: var(--lanwhite);
+    background-color: var(--main-color);
+    border: solid 1px var(--dark-color);
+    opacity: 0.45;
 }
 
 .btn:focus,
 .btn-primary:focus,
 .btn-secondary:focus {
-    box-shadow: 0 0 0 0.2rem rgba(60, 60, 60, .37) !important;
+    box-shadow: 0 0 0 0.2rem rgba(249, 249, 249, .37) !important;
 }
+
+button:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(249, 249, 249, .37);
+
+}
+
+.btn-primary:disabled {
+    color: var(--dark-color);
+    background-color: var(--lanwhite);
+    border: solid 1px var(--dark-color);
+}
+    
+.btn:disabled {
+    opacity: 0.45;
+}  
+
+.form-control:focus {
+    color: var(--langrey);
+    border-color: var(--dark-color);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(249, 249, 249, .37);
+}
+
 
 /*Navbar Styles*/
 
@@ -474,7 +502,7 @@ a:not([href]):hover {
     .filter-row > #div_id_town,
     .filter-row > #div_id_event_type,
     .filter-row > #div_id_day,
-    .filter-row > #div_id_age {
+    .filter-row > #div_id_age_range {
         width: 49%;
     }
 }
@@ -528,6 +556,17 @@ a:not([href]):hover {
 
 .col {
     padding-left: 0px;
+}
+
+#booked-sticker {
+    position: absolute;
+    top: 42px;
+    left: 24px;
+    color: #dc3545;
+    font-weight: 700;
+    border: 5px solid #dc3545;
+    font-size: 4rem;
+    transform: rotate(-10deg);
 }
 
 /*View one event styling*/
@@ -607,6 +646,7 @@ a:not([href]):hover {
 
 .like-heart {
     font-size: 2rem;
+    color: #dc3545;
 }
 
 .btn-outline-danger {
