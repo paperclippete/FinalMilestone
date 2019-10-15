@@ -21,15 +21,15 @@
 
     <form action="{% url 'search' %}" method="GET">
         <div class="input-group input-group-lg search-box">
-            <input type="text" name="query" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+            <input id="search-query" type="text" name="query" class="form-control" aria-label="Search query">
             <div class="input-group-append">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Search</button>
+                <button id="search-btn" class="btn btn-primary" type="submit" disabled><i class="fas fa-search"></i> Search</button>
             </div>
         </div>
     </form>
 
 
-    <a href="{% url 'search' %}" class="btn btn-primary btn-lg">View All of our Amazing Events</a>
+    <a href="{% url 'search' %}" id="search-button" class="btn btn-primary btn-lg">View All of our Amazing Events</a>
 
 </div>
 
@@ -50,6 +50,8 @@
         outEffects: [],
         });
     
+    $("#search-query").focus(disableBtn);
+    $("#search-query").blur(enableBtn);
     
 </script>
 {% endblock %}
