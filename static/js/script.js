@@ -71,6 +71,16 @@ $(document).ready(function() {
     
 });
 
+// Disable button on index
+const disableBtn = () => {   
+    $("#search-btn").prop('disabled', false);
+};
+    
+const enableBtn = () => {
+    $("#search-btn").prop('disabled', true);
+};
+
+
 // Horizontal Slider by https://codepen.io/toddwebdev
 function scrollSection() {
     let slider = this;
@@ -118,18 +128,11 @@ function modalMemForm(event)  {
         modal.find('#payment-form').css('display', 'none');
         modal.find('#bronze-form').css('display', 'block');
     }
-    else if (membershipLevel === 'silver') {
-        modal.find('#payment-form').css('display', 'block');
-        modal.find('#bronze-form').css('display', 'none');
-        modal.find('#silver_gold').attr('value', 'silver');
-
-    }
+    
     else {
         modal.find('#payment-form').css('display', 'block');
         modal.find('#bronze-form').css('display', 'none');
-        modal.find('#submit-mem-silver').css('display', 'none');
-        modal.find('#silver_gold').attr('value', 'gold');
-
+        membershipLevel === 'silver' ? $('#silver_gold').attr('value', 'silver') : $('#silver_gold').attr('value', 'gold');
     }
 }
 
