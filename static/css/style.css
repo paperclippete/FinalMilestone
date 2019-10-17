@@ -46,7 +46,7 @@ body {
 }
 
 #site-background {
-    min-height: 100vh;
+    min-height: 93vh;
     padding-bottom: 30px;
     margin: 0;
     background-image: var(--main-background);
@@ -73,6 +73,11 @@ body {
 
 .light-text {
     color: var(--langreylight);
+}
+
+.title-font {
+    font-family: var(--title-font);
+    font-size: 4rem;
 }
 
 /*Footer Styles*/
@@ -459,9 +464,11 @@ a:not([href]):hover {
     width: 100%;
 }
 
+#membership-text,
 #about-us-text {
     color: var(--langrey);
     text-align: center;
+    margin-bottom: 40px;
 }
 
 .about-us-p {
@@ -470,6 +477,14 @@ a:not([href]):hover {
 
 .about-us-p a {
     color: var(--langrey);
+}
+
+.about-us-title {
+    margin-top: 25px;
+}
+
+.details {
+    min-height: 8rem;
 }
 
 .tagline {
