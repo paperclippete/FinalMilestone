@@ -49,7 +49,7 @@
                 <div class="row card-row">
                     <div class="col">
                         {% if event.price == null %}
-                        <p><i class="fas fa-pound-sign"></i> - free!</p>
+                        <p><i class="fas fa-pound-sign"></i> - <strong>FREE</strong></p>
                         {% else %}
                         <p><i class="fas fa-pound-sign"></i> - £{{ event.price }}</p>
                         {% endif %}
@@ -89,6 +89,8 @@
     </div>
     <div class="divider"></div>
     <p class="event-text">{{ event.description|capfirst }}</p>
+    
+    <p class="disclaimer-text"><strong>At present, our events require payment in person at the event. We are working on how we can accept your payments through our site.</strong></p>
     
     {% if user.is_authenticated and user == event_host %}
         <a href="{% url 'edit_event' event.id %}" class="btn btn-success"><i class="fas fa-edit"></i> Edit Event</a>
