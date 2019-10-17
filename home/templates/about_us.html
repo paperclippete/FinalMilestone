@@ -3,30 +3,33 @@
 {% block title %}About Us{% endblock %}
 
 {% block content %}
-<div class="layout title-layout">
-    <h1 class="site-title"><sup class="change-word-small">Love</sup>Lanarkshire</h1>
-</div>
 <div class="row lan-photos">
     <div class="col photo-col">
         <img src="{{ MEDIA_URL }}images/airdrie.jpg" class="img-thumbnail" title="Airdrie Town Hall" alt="Airdrie Town Hall">
-        <img src="{{ MEDIA_URL }}images/cuningarloop2.jpg" class="img-thumbnail" title="Cuningar Loop, Rutherglen" alt="Cuningar Loop, Rutherglen">
-        <img src="{{ MEDIA_URL }}images/chatelherault.jpg" class="img-thumbnail" title="Chatelherault Park, Hamilton" alt="Chatelherault Park, Hamilton">
-        <img src="{{ MEDIA_URL }}images/newlanark.jpg" class="img-thumbnail" title="New Lanark" alt="New Lanark">
     </div>
     <div class="col photo-col photo-col-up">
-        <img src="{{ MEDIA_URL }}images/fountain.jpg" class="img-thumbnail" title="The Fountain, Lesmahagow" alt="The Fountain, Lesmahagow">
-        <img src="{{ MEDIA_URL }}images/cuningarloop.jpg" class="img-thumbnail" title="Cuningar Loop, Rutherglen" alt="Cuningar Loop, Rutherglen">
-        <img src="{{ MEDIA_URL }}images/leadhills.jpg" class="img-thumbnail" title="Leadhills and Wanlockhead Railway" alt="Leadhills and Wanlockhead Railway">
+        <img src="{{ MEDIA_URL }}images/cuningarloop2.jpg" class="img-thumbnail" title="Cuningar Loop, Rutherglen" alt="Cuningar Loop, Rutherglen">
     </div>
-    <div class="col photo-col">                
-        <img src="{{ MEDIA_URL }}images/bothwellcastle.jpg" class="img-thumbnail" title="Bothwell Castle" alt="Bothwell Castle">
-        <img src="{{ MEDIA_URL }}images/newmains.jpg" class="img-thumbnail" title="Newmains Community Trust" alt="Newmains Community Trust">
-        <img src="{{ MEDIA_URL }}images/rutherglen.jpg" class="img-thumbnail" title="Rutherglen Town Hall" alt="Rutherglen Town Hall">
-        <img src="{{ MEDIA_URL }}images/summerlee.jpg" class="img-thumbnail" title="Summerlee Museum, Coatbridge" alt="Summerlee Museum of Industrial Life, Coatbridge">
+    <div class="col photo-col">
+        <img src="{{ MEDIA_URL }}images/chatelherault.jpg" class="img-thumbnail" title="Chatelherault Park, Hamilton" alt="Chatelherault Park, Hamilton">
+    </div>
+</div>
+<div class="layout title-layout about-us-title">
+    <h1 class="site-title"><sup class="change-word-small">Love</sup>Lanarkshire</h1>
+</div>
+<div class="row lan-photos">
+    <div class="col photo-col photo-col-up">
+        <img src="{{ MEDIA_URL }}images/newlanark.jpg" class="img-thumbnail" title="New Lanark" alt="New Lanark">
+    </div>
+    <div class="col photo-col">
+        <img src="{{ MEDIA_URL }}images/fountain.jpg" class="img-thumbnail" title="The Fountain, Lesmahagow" alt="The Fountain, Lesmahagow">
+    </div>
+    <div class="col photo-col photo-col-up">
+        <img src="{{ MEDIA_URL }}images/leadhills.jpg" class="img-thumbnail" title="Leadhills and Wanlockhead Railway" alt="Leadhills and Wanlockhead Railway">
     </div>
 </div>
 <div id="about-us-text" class="event-container layout">
-    <h2>Welcome to <sup class="change-word-small">LOVE</sup>LANARKSHIRE</h2>
+    <h2 class="title-font">Welcome to <sup class="change-word-small">LOVE</sup>LANARKSHIRE</h2>
     <div class="divider"></div>
     <div class="about-us-p">
         <p><sup class="change-word-small">LOVE</sup>LANARKSHIRE is a brand new way to access the best your community has to offer. You can find and join events across Lanarkshire suitable to your age and interests!</p>
@@ -38,7 +41,65 @@
             <p>Laugh, Learn, Live and Love Lanarkshire!</p>
         </div>
     </div>
+</div>    
+<div class="row lan-photos">
+    <div class="col photo-col photo-col-up">                
+        <img src="{{ MEDIA_URL }}images/bothwellcastle.jpg" class="img-thumbnail" title="Bothwell Castle" alt="Bothwell Castle">
+    </div>
+    <div class="col photo-col">                
+        <img src="{{ MEDIA_URL }}images/newmains.jpg" class="img-thumbnail" title="Newmains Community Trust" alt="Newmains Community Trust">
+    </div>
+    <div class="col photo-col photo-col-up">                
+        <img src="{{ MEDIA_URL }}images/rutherglen.jpg" class="img-thumbnail" title="Rutherglen Town Hall" alt="Rutherglen Town Hall">
+    </div>
 </div>
+<div id="membership-text" class="event-container layout">
+    <h2 class="title-font">Our Membership Package</h2>
+    <div class="divider"></div>
+    <div class="about-us-p row">
+        <p>There's no expiry for our memberships, they will only renew when you choose to change. Your posts will last you as long as you don't use them, they will not run out or expire.</p>
+        <div class="divider"></div>
+        <div class="col-sm-4 mem-card">
+            <div class="card">
+                <ul class="price">
+                    <li class="header bronze-header"><strong>BRONZE</strong></li>
+                    <li class="bronze-text"><strong>Free</strong></li>
+                    <li>Join Events</li>
+                    <li>N/A</li>
+                    <li class="details">You can't post events, however you can upgrade to Silver or Gold membership at any time.</li>
+                    <li class="details">Contact us for membership support 24/7 through our Social Media Links or <a href="mailto:support@love-lanarkshire.com">email</a></li> 
+                    <li class="details">Coming Soon: Pay for your event place online!</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-4 mem-card">
+            <div class="card">
+                <ul class="price">
+                    <li class="header silver-header"><strong>SILVER</strong></li>
+                    <li class="silver-text"><strong>£20</strong></li>
+                    <li>Join and Post Events</li>
+                    <li>2 Posts</li>
+                    <li class="details">You can post 2 unique events but you can renew your Silver membership or upgrade to Gold.</li>
+                    <li class="details">Contact us for membership support 24/7 through our Social Media Links or <a href="mailto:support@love-lanarkshire.com">email</a></li>
+                    <li class="details">Coming Soon: Create an event that spans a date range or weekend!</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-4 mem-card">
+            <div class="card">
+                <ul class="price">
+                    <li class="header gold-header"><strong>GOLD</strong></li>
+                    <li class="gold-text"><strong>£120</strong></li>
+                    <li>Join and Post Events</li>
+                    <li>15 Posts</li>
+                    <li class="details">You can post 15 unique events - there is no time limit on our memberships, so take as long as you wish...</li>
+                    <li class="details">Dedicated GOLD support 24/7 through our Social Media or <a href="mailto:gold_support@love-lanarkshire.com">email</a></li>
+                    <li class="details">Coming Soon: Gold events will be featured in our new email newsletter!</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
 {% endblock %}
 
 {% block js %}
