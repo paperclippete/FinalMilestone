@@ -12,15 +12,17 @@
             <a href="{% url 'delete_like' event.id %}" class="btn btn-outline-danger"><i class="fas fa-heart like-heart"></i></a>
         {% else %}
             <form method="POST">
+                
                 {% csrf_token %}
                 {{ like_form }}
-                <button action="submit" name="like_form" class="btn btn-outline-danger"><i class="far fa-heart like-heart"></i></button>
+                
+                <button type="submit" name="like_form" class="btn btn-outline-danger"><i class="far fa-heart like-heart"></i></button>
             </form>
         {% endif %}
     {% endif %}
     </div>
     <h3>{{ event.title|title }}</h3>
-    <span class="event-host">Hosted by: <a href="mailto: {{ event_host.email }}"><strong>{{ event.event_host|title }}</strong></a> <i class="far fa-envelope"></i> </span>
+    <span class="event-host">Hosted by: <a href="mailto: {{ event_host.email }}"><strong>{{ event.event_host|title }}</strong></a> <i class="far fa-envelope"></i></span>
     
     <div class="divider"></div>
     <div class="background-image" {% if event.image %} style="background-image:url({{ event.image.url }})" 
@@ -104,7 +106,7 @@
                 <form class="join-form" method="POST">
                     {% csrf_token %}
                     {{ join_form }}
-                    <button action="submit" name="join_form" class="btn btn-success"><i class="fas fa-user-plus"></i> Book a Place</button>
+                    <button type="submit" name="join_form" class="btn btn-success"><i class="fas fa-user-plus"></i> Book a Place</button>
                 </form>
             {% endif %}
         {% else %}

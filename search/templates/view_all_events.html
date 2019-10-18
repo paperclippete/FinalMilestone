@@ -2,6 +2,7 @@
 {% load static %}
 {% block title %}Events{% endblock %}
 {% load crispy_forms_tags %}
+
 {% block content %}
 <div class="container">
     <button class="btn btn-primary btn-lg btn-block" id="filter-button" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Filter {{ results }} Awesome {% if results == 1 %}Event{% else %}Events{% endif %} <i class="fas fa-sort-amount-down"></i></button>
@@ -9,10 +10,13 @@
         <div class="card card-body">
             <form method="POST">
                 <div class="row filter-row">
+                
                 {% csrf_token %}
+                
                 {{ filter_form|crispy }}
+                
                 </div>
-                <button action="submit" id="filter-btn" class="btn btn-success float-right">Filter</button>
+                <button type="submit" id="filter-btn" class="btn btn-success float-right">Filter</button>
                 <a href="{% url 'search' %}" class="btn btn-secondary float-right">Reset</a>
             </form>
         </div>
@@ -27,7 +31,6 @@
                     {% endif %}
                     {% if event in user_joined %}
                         <span class="booked-sticker" title="You booked this event!">BOOKED!</span>
-
                     {% endif %}
                 {% endif %}
                 <div class="card-image">
@@ -61,18 +64,18 @@
                             </div>
                             <div class="col col-xs-6">
                                 {% if event.price == null %}
-                                <p><i class="fas fa-pound-sign"></i> - free!</p>
+                                    <p><i class="fas fa-pound-sign"></i> - free!</p>
                                 {% else %}
-                                <p><i class="fas fa-pound-sign"></i> - £{{ event.price }}</p>
+                                    <p><i class="fas fa-pound-sign"></i> - £{{ event.price }}</p>
                                 {% endif %}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
                                 {% if event.event_date_begins == event.event_date_ends %}
-                                <p><i class="far fa-calendar-alt"></i> - {{ event.event_day }} {{ event.event_date_begins|date:"jS F Y" }}</p>
+                                    <p><i class="far fa-calendar-alt"></i> - {{ event.event_day }} {{ event.event_date_begins|date:"jS F Y" }}</p>
                                 {% else %}
-                                <p><i class="far fa-calendar-alt"></i> - {{ event.event_day }}s from {{ event.event_date_begins|date:"jS F Y" }} to {{ event.event_date_ends|date:"jS F Y" }}</p>
+                                    <p><i class="far fa-calendar-alt"></i> - {{ event.event_day }}s from {{ event.event_date_begins|date:"jS F Y" }} to {{ event.event_date_ends|date:"jS F Y" }}</p>
                                 {% endif %}
                             </div>
                         </div>
@@ -84,16 +87,13 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="{% url 'view_one_event' event.id %}"class="btn btn-success btn-block">View Event</a>
+                    <a href="{% url 'view_one_event' event.id %}" class="btn btn-success btn-block">View Event</a>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
 </div>
-
-
-
 
 
 {% endblock %}
