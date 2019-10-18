@@ -1,4 +1,4 @@
-# <div style="text-align:center">[Love Lanarkshire](https://love-lanarkshire-ms4.herokuapp.com)</div>
+# <div style="text-align: center">[Love Lanarkshire](https://love-lanarkshire-ms4.herokuapp.com)</div>
 
 
 <img src="development/ResponsiveMockup.png" height="420px" width="100%">
@@ -75,7 +75,7 @@ In order to create a good UX Love Lanarkshire should...
 * enable users to instantly increase the functionality they receive with a one-time payment
 * be functional to any user, whether logged in or not, but provide extra functionality and personalisation to registered users and differing membership levels
 
-Please find my initial wireframe and database schema, created using Balsamiq, [here](development/LL-wireframes.pdf)
+Please find my initial wireframe, created using Balsamiq, [here](development/LL-wireframes.pdf).
 
 
 ### Features
@@ -166,6 +166,14 @@ Resetting the user queue and allowing an event to span over a period of time wou
 
 Choosing multiple days would increase functionality for events that would span a time period.
 
+> Booking multiple places
+
+Allow users to book multiple places for an event, i.e. adult and child places.
+
+> Handle payments for events 
+
+Allow users to pay for an event upfront using a saved card or Apple Pay would enhance the user experience and ultimately make the site more appealing and easy to use. 
+
 
 ### Technologies Used
 
@@ -217,6 +225,7 @@ Choosing multiple days would increase functionality for events that would span a
 * [Font Awesome](https://fontawesome.com/) - used for links and icons to make the site more appealing
 * [Animate.css](https://daneden.github.io/animate.css/) - used for nav link hover effect
 * [Textillate](https://textillate.js.org/) and [Lettering.JS](http://letteringjs.com/) - used to create site title effects
+* [Bootstrap Horizon CSS](https://cdnjs.com/libraries/bootstrap-horizon) - library to support horizontal scrolling 
 
 
 ### Testing
@@ -244,7 +253,6 @@ There is a test account available on Love Lanarkshire to show the full functiona
 ```
 Username = TestUser
 Password = PassTest!
-
 ```
 
 There are also test cards for testing the Stripe payments in membership upgrade on the user's profile page...
@@ -278,26 +286,22 @@ Using Django's TestCase I created tests for individual component parts of the si
 An example of a test for form validation would be...
 
 ```
-
 class TestUserLoginForm(TestCase):
     """ Test User Login Form is valid and provides correct errors """
     def test_log_in_valid(self):
         form = UserLoginForm({"username_or_email": "TestUser", "password": "TestPassword"})
         self.assertTrue(form.is_valid())
-        
 ```
 
 An example of a test for a Django view would be...
 
 ```
-
 class TestAccountsViews(TestCase):
     """ Test each page loads with correct template """
     def test_get_login_page(self):
         page = self.client.get("/accounts/login/")
         self.assertEqual(page.status_code, 200)
         self.assertTemplateUsed(page, "login.html")
-        
 ```
 
 Having created tests in a file named ```test.py``` you can run your tests with...
@@ -311,9 +315,7 @@ You can also use Coverage to run your tests and provide statistics on where test
 
 ```
 python 3 coverage
-
 ```
-
 
 #### Responsiveness
 
@@ -345,7 +347,6 @@ ___
 
 ```
 git clone https://github.com/paperclippete/FinalMilestone.git
-
 ``` 
 
 2. Set up your Virtual Environment Variables 
@@ -358,7 +359,6 @@ git clone https://github.com/paperclippete/FinalMilestone.git
 
 ```
 sudo pip3 -r install requirements.txt
-
 ```
 
 4. You will also have to create your own database to get full functionality from the project. [PostgresSQL](https://www.postgresql.org/) is free and easy to integrate with this project. 
@@ -369,7 +369,6 @@ sudo pip3 -r install requirements.txt
 python3 manage.py makemigrations
 
 python3 manage.py migrate 
-
 ```
 
 <img src="development/LoveLanDb.jpg" height="550px" width="100%">
@@ -387,7 +386,6 @@ sudo pip3 install gunicorn
 echo web: gunicorn lanarkshire.wsgi:application > Procfile
 
 sudo pip3 freeze --local > requirements.txt 
-
 ```
    
 
@@ -397,7 +395,6 @@ sudo pip3 freeze --local > requirements.txt
 heroku login  
     
 git remote add heroku(url)
-    
 ``` 
 
 3. You then need to setup your Heroku Enivronment Variables and you can do this in two ways, either through the terminal or by navigating to [Heroku](http://heroku.com).
