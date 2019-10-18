@@ -180,46 +180,7 @@
 
 <!--Modal for membership upgrade-->
 
-<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!--Form will display for changing to bronze membership-->
-                <form method="POST" id="bronze-form" action="{% url 'membership' %}">
-                    {% csrf_token %} 
-                    {{ order_form|crispy }}
-                    <input type="hidden" name="membership_level" value="bronze"/>
-                    <button type="submit" class="btn btn-primary btn-block btn-lg">Submit Request</button>
-                </form>
-                <!--Form with payment element will display for changing to silver or gold membership-->
-                <form method="POST" id="payment-form" action="{% url 'membership' %}" data-token="{{ publishable }}">
-                    {% csrf_token %} 
-                    {{ order_form|crispy }}
-                    <fieldset class="form-group">
-                        <label for="card-element" class="col-form-label">Credit or Debit Card</label>
-                        <!-- Stripe widget inserted below -->
-                        <div id="card-element" class="textinput textInput form-control"></div>
-                        <div id="card-errors" class="white-text red" role="alert"></div>
-                        <input type="hidden" id="silver_gold" name="membership_level" value="silver"/>
-                        <div class="card-action">
-                            <button type="submit" class="btn btn-primary btn-block btn-lg">Submit Payment</button>
-                        </div>
-                    </fieldset>
-                </form>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+{% include 'membership_modal_partial.html' %}
 
 {% endblock %}
 
