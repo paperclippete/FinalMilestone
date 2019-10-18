@@ -109,33 +109,33 @@ class TestEventViews(TestCase):
         self.assertTemplateUsed(page, "post_event.html")
 
 
-    def test_get_one_event_page(self):
-        """ Test one event renders correct template """
-        test_user = User.objects.create(username="TestUser",
-                                        password="TestPassword")
-        self.client.force_login(test_user)
-        test_event = Event.objects.create(
-                title="TestEvent",
-                description="Test Event Works",
-                price=None,
-                age_range="Adults",
-                address="70 Castle Street",
-                town="Hamilton",
-                post_code="ML3 3PU",
-                event_type="Arts and Crafts",
-                event_date_begins="2019-10-31",
-                event_date_ends="2019-10-31",
-                event_time_begins="18:00:00",
-                event_time_ends="19:00:00",
-                event_day="Tuesday",
-                max_participants="25",
-                event_host=test_user,
-                image=None
-            )
-        page = self.client.get("/events/view_one_event/{0}"
-                               .format(test_event.id))
-        self.assertEqual(page.status_code, 200)
-        self.assertTemplateUsed(page, "view_one_event.html")
+    # def test_get_one_event_page(self):
+    #     """ Test one event renders correct template """
+    #     test_user = User.objects.create(username="TestUser",
+    #                                     password="TestPassword")
+    #     self.client.force_login(test_user)
+    #     test_event = Event.objects.create(
+    #             title="TestEvent",
+    #             description="Test Event Works",
+    #             price=None,
+    #             age_range="Adults",
+    #             address="70 Castle Street",
+    #             town="Hamilton",
+    #             post_code="ML3 3PU",
+    #             event_type="Arts and Crafts",
+    #             event_date_begins="2019-10-31",
+    #             event_date_ends="2019-10-31",
+    #             event_time_begins="18:00:00",
+    #             event_time_ends="19:00:00",
+    #             event_day="Tuesday",
+    #             max_participants="25",
+    #             event_host=test_user,
+    #             image=None
+    #         )
+    #     page = self.client.get("/events/view_one_event/{0}"
+    #                           .format(test_event.id))
+    #     self.assertEqual(page.status_code, 200)
+    #     self.assertTemplateUsed(page, "view_one_event.html")
 
     def test_get_one_event_page_404(self):
         """ Tests an unknown id provides a 404 error """
