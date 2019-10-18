@@ -46,15 +46,15 @@ body {
 }
 
 #site-background {
-    min-height: 93vh;
-    padding-bottom: 30px;
+    min-height: 100vh;
+    padding-bottom: 2rem;
     margin: 0;
     background-image: var(--main-background);
 
 }
 
 #site-content {
-    padding-top: 60px;
+    padding-top: 3.75rem;
 }
 
 .divider {
@@ -64,7 +64,7 @@ body {
 }
 
 .layout {
-    padding: 0px 30px;
+    padding: 0 1.875rem;
 }
 
 .hidden {
@@ -98,20 +98,20 @@ footer {
 }
 
 #services li {
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
     display: inline-block;
-    margin: 0 20px;
+    margin: 0 1.75rem;
     list-style: none;
 }
 
 #services li div {
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
     color: var(--dark-color);
     font-size: 1.8em;
     text-align: center;
-    line-height: 40px;
+    line-height: 2.5rem;
     background-color: var(--lanwhite);
     border-radius: 100px;
     transition: all 0.5s ease;
@@ -127,7 +127,7 @@ footer {
 
 .copyright-info {
     text-align: center;
-    margin-top: 4px;
+    margin-top: 0.5rem;
     margin-bottom: 0;
     font-size: 0.6rem;
 }
@@ -137,16 +137,16 @@ footer {
 .zoom {
     position: fixed;
     bottom: 0px;
-    right: 15px;
-    height: 70px;
+    right: 1rem;
+    height: 4.5rem;
 }
 
 .zoom-fab {
     display: inline-block;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    border-radius: 5rem;
     vertical-align: middle;
     text-decoration: none;
     text-align: center;
@@ -164,27 +164,27 @@ footer {
 }
 
 .zoom-btn-large {
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
+    width: 4rem;
+    height: 4rem;
+    line-height: 4rem;
     color: var(--dark-color) !important;
 }
 
 .zoom-menu {
     position: absolute;
-    right: 70px;
+    right: 4.5rem;
     left: auto;
-    top: 50%;
-    transform: translateY(-34%);
+    top: 2.5rem;
+    transform: translateY(-68%);
     height: 100%;
-    width: 500px;
+    width: 18rem;
     list-style: none;
     text-align: right;
 }
 
 .zoom-menu li {
     display: inline-block;
-    margin-right: 10px;
+    margin-right: 0.5rem;
 }
 
 .scale-transition {
@@ -360,22 +360,22 @@ a:not([href]):hover {
 }
 
 .change-word-small {
-    top: -1.4em;
-    font-size: 50%;
+    top: -0.9rem;
+    font-size: 0.7rem;
 }
 
 .placeholder {
     width: 100%;
-    padding-top: 15px;
+    padding-top: 1rem;
 }
 
 #user-message {
     background-color: #f1fae5b5;
     color: var(--langrey);
-    margin: 0 30px 20px 30px;
-    padding: 10px;
+    margin: 0 2rem 1.25rem 2rem;
+    padding: 0.65rem;
     text-align: center;
-    border-radius: 0.6rem;
+    border-radius: 0.65rem;
 
 }
 
@@ -383,7 +383,7 @@ a:not([href]):hover {
 
 .lanarkshire-form {
     margin: 0px 3rem;
-    padding-bottom: 20px;
+    padding-bottom: 1.25rem;
 }
 
 .lanarkshire-form a {
@@ -391,7 +391,7 @@ a:not([href]):hover {
 }
 
 .form-button {
-    margin-top: 30px;
+    margin-top: 2rem;
 }
 
 .modal-body a {
@@ -434,12 +434,12 @@ a:not([href]):hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0px 10px;
+    padding: 0 0.625rem;
 
 }
 
 .search-box {
-    margin: 30px 0;
+    margin: 2rem 0;
 
 }
 
@@ -452,9 +452,9 @@ a:not([href]):hover {
 .lan-photos {
     display: flex;
     flex-wrap: wrap;
-    padding: 0 4px;
+    padding: 0 0.25rem;
     justify-content: center;
-    padding-bottom: 20px;
+    padding-bottom: 1.25rem;
     margin: 0;
 }
 
@@ -469,7 +469,7 @@ a:not([href]):hover {
 }
 
 .photo-col img {
-    margin-top: 8px;
+    margin-top: 0.5rem;
     vertical-align: middle;
     width: 100%;
 }
@@ -478,11 +478,11 @@ a:not([href]):hover {
 #about-us-text {
     color: var(--langrey);
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 2.5rem;
 }
 
 .about-us-p {
-    margin-top: 15px;
+    margin-top: 1rem;
 }
 
 .about-us-p a {
@@ -490,7 +490,7 @@ a:not([href]):hover {
 }
 
 .about-us-title {
-    margin-top: 25px;
+    margin-top: 1.5rem;
 }
 
 .details {
@@ -498,8 +498,8 @@ a:not([href]):hover {
 }
 
 .tagline {
-    margin-top: 15px;
-    size: 1.2rem;
+    margin-top: 1rem;
+    font-size: 1.2rem;
     font-weight: bolder;
 }
 
@@ -533,7 +533,7 @@ a:not([href]):hover {
 }
 
 #filter-btn {
-    margin-left: 8px;
+    margin-left: 0.5rem;
 }
 
 .card-row {
@@ -541,11 +541,11 @@ a:not([href]):hover {
 }
 
 .top-row {
-    margin-top: 10px;
+    margin-top: 0.625rem;
 }
 
 .card-col {
-    padding-bottom: 20px;
+    padding-bottom: 1.25rem;
 }
 
 .card {
@@ -612,8 +612,8 @@ a:not([href]):hover {
 /*View one event styling*/
 
 .event-container {
-    margin: 0 20px 60px 20px;
-    padding: 20px;
+    margin: 0 1.25rem 3.75rem 1.25rem;
+    padding: 1.25rem;
     background-color: var(--lanwhite);
     color: var(--langrey);
     position: relative;
@@ -647,22 +647,22 @@ a:not([href]):hover {
 .event-view-image {
     position: relative;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
 }
 
 .event-info {
-    margin: 20px 0px;
+    margin: 1.25rem 0px;
 
 }
 
 .event-text {
-    padding-top: 20px;
-    margin-bottom: 20px;
+    padding-top: 1.25rem;
+    margin-bottom: 1.25rem;
 }
 
 .easy-map-googlemap {
     width: 100% !important;
-    height: 300px !important;
+    height: 19rem !important;
 }
 
 .gm-style-mtc {
@@ -694,17 +694,17 @@ a:not([href]):hover {
 }
 
 .back-btn {
-    margin-top: 10px;
+    margin-top: 0.625rem;
 }
 
 /*User Profile Page*/
 
 .profile-button {
-    margin: 20px 0;
+    margin: 1.25rem 0;
 }
 
 .mem-card {
-    margin-top: 10px;
+    margin-top: 0.625rem;
 }
 
 .bronze-text {
@@ -751,7 +751,7 @@ a:not([href]):hover {
 
 .price li {
     border-bottom: 1px solid var(--lanwhite);
-    padding: 15px;
+    padding: 1rem;
     text-align: center;
     border: 1px solid #eee;
 }
@@ -762,7 +762,7 @@ a:not([href]):hover {
 
 .h-card {
     margin-left: 0px;
-    padding: 15px 0px 5px 0px;
+    padding: 1rem 0px 5px 0px;
 }
 
 .flex-nowrap {
@@ -810,7 +810,7 @@ a:not([href]):hover {
 /*Profile Upgrade Modal*/
 
 .card-action {
-    margin-top: 30px;
+    margin-top: 2rem;
 }
 
 /*Media Queries*/
@@ -831,6 +831,7 @@ a:not([href]):hover {
 /*Tablet*/
 
 @media screen and (min-width: 768px) {
+    
     .site-title {
         font-size: 8rem;
     }
@@ -855,6 +856,10 @@ a:not([href]):hover {
 /*Small Laptop*/
 
 @media screen and (min-width: 992px) {
+    #site-background {
+        min-height: 93vh;
+    }
+    
     .site-title {
         font-size: 12rem;
     }
@@ -921,7 +926,16 @@ a:not([href]):hover {
         float: right !important;
         margin-top: 0;
     }
+    
 }
+
+@media screen and (min-width: 360px) {
+    .zoom-menu {
+        transform: translateY(-34%);
+        width: 30rem;
+    }
+}
+
 
 @media screen and (min-width: 768px) {
     
@@ -934,19 +948,19 @@ a:not([href]):hover {
 @media screen and (min-width: 992px) {
     
     .event-container {
-        margin: 0 60px 60px 60px;
+        margin: 0 3.75rem 3.75rem 3.75rem;
     }
     .card-img-top {
         height: 15vw;
     }
     .placeholder {
-        height: 74px;
+        height: 4.75rem;
     }
     #user-message {
-        margin: 0 60px;
+        margin: 0 3.75rem;
     }
     .modal-dialog {
-        max-width: 700px;
+        max-width: 43.4rem;
     }
 }
 
