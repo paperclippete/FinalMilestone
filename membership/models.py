@@ -4,6 +4,7 @@ import datetime
 
 # Create your models here.
 
+
 class Membership(models.Model):
     """User membership of site"""
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -11,7 +12,8 @@ class Membership(models.Model):
     silver = models.BooleanField(null=True)
     gold = models.BooleanField(null=True)
     posts_remaining = models.IntegerField(default=0)
-    
+
+
 class Order(models.Model):
     """When a user purchases a membership"""
     membership = models.ForeignKey(Membership, on_delete=models.CASCADE)
@@ -27,5 +29,3 @@ class Order(models.Model):
 
     def __str__(self):
         return "{0}-{1}-{2}".format(self.id, self.date, self.user.id)
-
-

@@ -25,14 +25,16 @@ def post_event(request):
             membership.posts_remaining -= 1
             membership.save()
             current_places = event.max_participants
-            full_address = event.address + ' ' + event.town + ' ' + event.post_code
+            full_address = (event.address + ' ' + event.town +
+                            ' ' + event.post_code)
             context = {
                 'event': event,
                 'current_places': current_places,
                 'full_address': full_address,
                 'event_host': event.event_host,
             }
-            messages.success(request, f"You have posted {request.POST['title']}!")
+            messages.success(request, (f"You have posted "
+                                       "{request.POST['title']}!"))
             return render(request, 'view_one_event.html', context)
 
     context = {
@@ -40,10 +42,12 @@ def post_event(request):
     }
 
     return render(request, 'post_event.html', context)
-    
+
+
 @login_required
 def edit_event(request, pk):
-    """Allows Event Host to make changes to an upcoming event and re-publish a finished event"""
+    """Allows Event Host to make changes to an upcoming event
+       and re-publish a finished event"""
     event = get_object_or_404(Event, pk=pk)
     event_form = CreateEventForm(instance=event)
     context = {
@@ -51,7 +55,8 @@ def edit_event(request, pk):
     }
     user = request.user
     if request.method == "POST":
-        event_form = CreateEventForm(request.POST, request.FILES, instance=event)
+        event_form = CreateEventForm(request.POST, request.FILES,
+                                     instance=event)
         if event_form.is_valid():
             edit = event_form.save(commit=False)
             edit.event_host = user
@@ -59,7 +64,8 @@ def edit_event(request, pk):
             if event.event_date_begins < datetime.date.today():
                 membership = Membership.objects.get(user=user)
                 if membership.posts_remaining == 0:
-                    messages.error(request, "Sorry, you have no posts remaining!")
+                    messages.error(request, "Sorry, "
+                                   "you have no posts remaining!")
                     return redirect('user_profile')
                 else:
                     membership.posts_remaining -= 1
@@ -68,7 +74,8 @@ def edit_event(request, pk):
             return redirect('user_profile')
     return render(request, 'post_event.html', context)
 
-@login_required    
+
+@login_required
 def delete_event(request, pk):
     """Allows Event Host to delete event"""
     event = get_object_or_404(Event, pk=pk)
@@ -86,7 +93,7 @@ def view_one_event(request, pk):
     if user.is_authenticated:
         user_liked = Like.objects.filter(event=event).filter(user=user)
         user_joined = Participant.objects.filter(event=event).filter(user=user)
-    else: 
+    else:
         user_liked = None
         user_joined = None
     user_queue = Participant.objects.filter(event=event).count()
@@ -109,33 +116,34 @@ def view_one_event(request, pk):
         'user_list': user_list,
         'date': date
     }
-    
-    # Allow user to join an event    
-   
+
+    # Allow user to join an event
+
     if request.method == "POST" and 'join_form' in request.POST:
         if join_form.is_valid():
             join_form.instance.user = user
             join_form.instance.event = event
             join_form.save()
-            messages.success(request, f"You have signed up for { event.title }")
+            messages.success(request, f"You have signed up for "
+                             "{ event.title }")
             return redirect(view_one_event, pk)
         else:
             messages.error(request, f"Error: Try again later!")
-    
+
     # Allow user to like and save an event
-    
-    elif request.method == "POST" and 'like_form' in request.POST:    
+
+    elif request.method == "POST" and 'like_form' in request.POST:
         if like_form.is_valid():
             like_form.instance.user = user
             like_form.instance.event = event
             like_form.save()
-            messages.success(request, f"You have saved { event.title } to your like list")
+            messages.success(request, f"You have saved "
+                             "{ event.title } to your like list")
             return redirect(view_one_event, pk)
         else:
             messages.error(request, f"Error: Try again later!")
-      
     return render(request, 'view_one_event.html', context)
-    
+
 
 def delete_participant(request, pk):
     """Removes user from event"""
@@ -145,7 +153,8 @@ def delete_participant(request, pk):
     participant.delete()
     messages.success(request, f"You are no longer booked for { event.title }")
     return redirect('search')
-    
+
+
 def delete_like(request, pk):
     """Removes event from user like list"""
     event = get_object_or_404(Event, pk=pk)
@@ -153,6 +162,3 @@ def delete_like(request, pk):
     like = Like.objects.get(event=event, user=user)
     like.delete()
     return redirect(view_one_event, pk)
-    
-    
-     

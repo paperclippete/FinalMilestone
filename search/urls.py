@@ -6,5 +6,4 @@ from .views import search
 
 urlpatterns = [
     path('', search, name='search'),
-    
 ]

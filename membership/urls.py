@@ -6,5 +6,4 @@ from .views import membership
 
 urlpatterns = [
     path('upgrade/', membership, name='membership'),
-    
 ]

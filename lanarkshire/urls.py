@@ -31,5 +31,6 @@ urlpatterns = [
     path('events/', include(urls_events)),
     path('search/', include(urls_search)),
     path('membership/', include(urls_membership)),
-    re_path(r'^media/(?P<path>.*)$', static.serve,{'document_root': MEDIA_ROOT}),
+    re_path(r'^media/(?P<path>.*)$',
+            static.serve,{'document_root': MEDIA_ROOT}),
 ]

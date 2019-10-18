@@ -7,6 +7,5 @@ from events import urls_one_event
 urlpatterns = [
     path('post_event/', post_event, name='post_event'),
     path('view_one_event/', include(urls_one_event)),
-    
-    
+
 ]

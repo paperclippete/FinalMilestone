@@ -8,10 +8,8 @@ from django.utils import timezone
 from django.conf import settings
 import stripe
 
-
-# Create your views here.
-
 stripe.api_key = settings.STRIPE_SECRET
+
 
 @login_required
 def membership(request):
@@ -29,7 +27,9 @@ def membership(request):
         membership.bronze = True if membership_level == 'bronze' else False
         membership.silver = True if membership_level == 'silver' else False
         membership.gold = True if membership_level == 'gold' else False
-        membership.posts_remaining = 0 if membership_level == 'bronze' else 2 if membership_level == 'silver' else 15
+        membership.posts_remaining = (0 if membership_level == 'bronze' else
+                                      2 if membership_level == 'silver' else
+                                      15)
         membership.save()
         order = order_form.save(commit=False)
         order.membership = membership
@@ -45,21 +45,22 @@ def membership(request):
             try:
                 token = request.POST['stripeToken']
                 customer = stripe.Charge.create(
-                    amount = int(price * 100),
-                    currency = "GBP",
-                    description = request.user.email,
+                    amount=int(price * 100),
+                    currency="GBP",
+                    description=request.user.email,
                     source=token,
                 )
             except stripe.error.CardError:
-                messages.error(request, "Sorry, your card was declined, please try again!")
+                messages.error(request, "Sorry, your card was declined, "
+                               "please try again!")
                 return render(request, 'membership.html', context)
-                
             if customer.paid:
-                messages.success(request, "You have successfully paid! Membership updated!")
+                messages.success(request, "You have successfully paid! "
+                                 "Membership updated!")
                 return redirect(reverse('user_profile'))
             else:
-                messages.error(request, "Unable to take payment at this time, please try again!")
+                messages.error(request, "Unable to take payment at this time, "
+                               "please try again!")
                 return render(request, 'membership.html', context)
     else:
-        return render(request, 'membership.html', context)    
-    
+        return render(request, 'membership.html', context)
