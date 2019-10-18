@@ -136,3 +136,11 @@ function modalMemForm(event)  {
     }
 }
 
+function membershipSale() {
+    if($(window).width() > 768) {
+        $('#change_membership').addClass('show');
+    } else {
+        $('#change_membership').removeClass('show');
+    }
+};
+
