@@ -24,7 +24,8 @@
         {% endif %} 
         </p>
     <div class="divider"></div>
-    <!-- Edit User Details Accordion -->
+        <!-- Edit User Details Accordion -->
+    <div class="divider"></div>
     <div class="profile-button">
         <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#edit_user" aria-expanded="false" aria-controls="collapseExample">Edit your details <i class="fas fa-user-edit"></i></button>
         <div class="collapse" id="edit_user">
@@ -84,25 +85,7 @@
             </div>
         </div>
     </div>
-    <!-- User Liked/ Saved Events Accordion with Horizontal Scroll -->
-    <div class="profile-button">
-        <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#liked_events" aria-expanded="false" aria-controls="collapseExample">Your Saved Events <i class="fas fa-heart"></i></button>
-        <div class="collapse" id="liked_events">
-            <div class="card card-body h-card">
-                <div class="container-fluid">
-                    {% if user_liked_events|length == 0 %}
-                       <p class="text-center">You have no saved events!</p> 
-                    {% else %}
-                    <div class="row flex-row flex-nowrap h-scroll">
-                    {% for event in user_liked_events %}
-                        {% include "view_events_partial.html" %}
-                    {% endfor %}
-                    </div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="divider"></div>
     <!-- User Booked Events Accordion with Horizontal Scroll -->
     <div class="profile-button">
         <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#booked_events" aria-expanded="false" aria-controls="collapseExample">Your Booked Events <i class="far fa-calendar-alt"></i></button>
@@ -114,6 +97,26 @@
                     {% else %}
                     <div class="row flex-row flex-nowrap h-scroll">
                     {% for event in user_participant_events %}
+                        {% include "view_events_partial.html" %}
+                    {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Liked/ Saved Events Accordion with Horizontal Scroll -->
+    <div class="profile-button">
+        <button class="btn btn-primary btn-lg btn-block" type="button" data-toggle="collapse" data-target="#liked_events" aria-expanded="false" aria-controls="collapseExample">Your Saved Events <i class="fas fa-heart"></i></button>
+        <div class="collapse" id="liked_events">
+            <div class="card card-body h-card">
+                <div class="container-fluid">
+                    {% if user_liked_events|length == 0 %}
+                       <p class="text-center">You have no saved events!</p> 
+                    {% else %}
+                    <div class="row flex-row flex-nowrap h-scroll">
+                    {% for event in user_liked_events %}
                         {% include "view_events_partial.html" %}
                     {% endfor %}
                     </div>
@@ -217,6 +220,7 @@
     </div>
 </div>
 
+
 {% endblock %}
 
 {% block js %}
@@ -224,14 +228,12 @@
 <script type="text/javascript">
 $(function() {
     $('#paymentModal').on('show.bs.modal', modalMemForm);
-});
-$(function() {
+    membershipSale();
     $('.collapse').on('shown.bs.collapse', (() => {
         $('.collapse .h-card .container-fluid .h-scroll:visible').each(scrollSection) 
     }));
-    
 });
-   
+
 </script>
 
 <!--Stripe JS below will handle display of card element in modal form-->
