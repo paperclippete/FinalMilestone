@@ -23,29 +23,29 @@
             <div class="card">
                 {% if user.is_authenticated %}
                     {% if event in user_liked %}
-                        <i class="fas fa-heart like-heart btn like-button no-hover"></i>
+                        <span title="You like this event!"><i class="fas fa-heart like-heart btn like-button no-hover"></i></span>
                     {% endif %}
                     {% if event in user_joined %}
-                        <span class="booked-sticker">BOOKED!</span>
+                        <span class="booked-sticker" title="You booked this event!">BOOKED!</span>
 
                     {% endif %}
                 {% endif %}
                 <div class="card-image">
                     {% if event.image %}
-                        <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.event_type }} Image">
+                        <img src="{{ event.image.url }}" class="card-img-top" alt="{{ event.event_type }} Image" title="{{ event.event_type }} Event: {{event.title}}">
                     {% else %} 
                         {% if event.event_type == "Arts and Crafts" %}
-                            <img src="{{ MEDIA_URL }}images/craft_event.jpg" class="card-img-top" alt="Arts and Crafts Image">
+                            <img src="{{ MEDIA_URL }}images/craft_event.jpg" class="card-img-top" alt="Arts and Crafts Image" title="Arts and Crafts Event: {{event.title}}">
                         {% elif event.event_type == "Educational" %}
-                            <img src="{{ MEDIA_URL }}images/education_event.jpg" class="card-img-top" alt="Education Image"> 
+                            <img src="{{ MEDIA_URL }}images/education_event.jpg" class="card-img-top" alt="Education Image" title="Education Event: {{event.title}}"> 
                         {% elif event.event_type == "Nature" %}
-                            <img src="{{ MEDIA_URL }}images/nature_event.jpg" class="card-img-top" alt="Nature Image">
+                            <img src="{{ MEDIA_URL }}images/nature_event.jpg" class="card-img-top" alt="Nature Image" title="Nature Event: {{event.title}}">
                         {% elif event.event_type == "Physical and Exercise" %}
-                            <img src="{{ MEDIA_URL }}images/physical_event.jpg" class="card-img-top" alt="Physical and Exercise Image">
+                            <img src="{{ MEDIA_URL }}images/physical_event.jpg" class="card-img-top" alt="Physical and Exercise Image" title="Physical and Exercise Event: {{event.title}}">
                         {% elif event.event_type == "Health and Wellbeing" %}
-                            <img src="{{ MEDIA_URL }}images/wellbeing_event.jpg" class="card-img-top" alt="Health and Wellbeing Image"> 
+                            <img src="{{ MEDIA_URL }}images/wellbeing_event.jpg" class="card-img-top" alt="Health and Wellbeing Image" title="Health and Wellbeing Event: {{event.title}}"> 
                         {% elif event.event_type == "Entertainment" %}
-                            <img src="{{ MEDIA_URL }}images/entertainment_event.jpg" class="card-img-top" alt="Entertainment Image">
+                            <img src="{{ MEDIA_URL }}images/entertainment_event.jpg" class="card-img-top" alt="Entertainment Image" title="Entertainment Event: {{event.title}">
                         {% endif %} 
                     {% endif %}
                 </div>
