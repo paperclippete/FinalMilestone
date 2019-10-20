@@ -33,8 +33,8 @@ def post_event(request):
                 'full_address': full_address,
                 'event_host': event.event_host,
             }
-            messages.success(request, (f"You have posted "
-                                       "{request.POST['title']}!"))
+            messages.success(
+                request, f"You have posted {request.POST['title']}!")
             return render(request, 'view_one_event.html', context)
 
     context = {
@@ -55,7 +55,8 @@ def edit_event(request, pk):
     }
     user = request.user
     if request.method == "POST":
-        event_form = CreateEventForm(request.POST, request.FILES,
+        event_form = CreateEventForm(request.POST,
+                                     request.FILES,
                                      instance=event)
         if event_form.is_valid():
             edit = event_form.save(commit=False)
@@ -64,8 +65,8 @@ def edit_event(request, pk):
             if event.event_date_begins < datetime.date.today():
                 membership = Membership.objects.get(user=user)
                 if membership.posts_remaining == 0:
-                    messages.error(request, "Sorry, "
-                                   "you have no posts remaining!")
+                    messages.error(
+                        request, "Sorry, you have no posts remaining!")
                     return redirect('user_profile')
                 else:
                     membership.posts_remaining -= 1
@@ -124,8 +125,8 @@ def view_one_event(request, pk):
             join_form.instance.user = user
             join_form.instance.event = event
             join_form.save()
-            messages.success(request, f"You have signed up for "
-                             "{ event.title }")
+            messages.success(
+                request, f"You have signed up for { event.title }")
             return redirect(view_one_event, pk)
         else:
             messages.error(request, f"Error: Try again later!")
@@ -137,8 +138,8 @@ def view_one_event(request, pk):
             like_form.instance.user = user
             like_form.instance.event = event
             like_form.save()
-            messages.success(request, f"You have saved "
-                             "{ event.title } to your like list")
+            messages.success(
+                request, f"You have saved { event.title } to your like list")
             return redirect(view_one_event, pk)
         else:
             messages.error(request, f"Error: Try again later!")
