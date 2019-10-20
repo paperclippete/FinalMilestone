@@ -11,8 +11,11 @@
             <div class="modal-body">
                 <h4>Current Attendees for {{ event.title }}</h4>
                 <p class="light-text">{{ date|date:"jS F Y" }} - {{ date|time:"G:i" }}</p>
+                {% if user_list|length == 0 %}
+                    <p>Sorry, no one has signed up... yet!</p>
+                {% endif %}
                 {% for user in user_list %}
-                <p>{{ user.first_name }} {{ user.last_name }} - <a href="mailto:{{ user.email }}"> {{ user.email }}</a></p>
+                    <p>{{ user.first_name }} {{ user.last_name }} - <a href="mailto:{{ user.email }}"> {{ user.email }}</a></p>
                 {% endfor %}
             </div>
             <div class="modal-footer">
