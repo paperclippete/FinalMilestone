@@ -337,6 +337,8 @@ During testing certain hover links did not behave as expected this was due to cs
 
 There was an issue with the membership modal. There is only one modal that is changed on the client-side dependent on the button that launches it. JS could not inject the Django templating syntax into the HTML, therefore the links would not work. I resolved this by adding a hidden input and using Python to check the request.POST for a membership hidden input.
 
+There is a bug with Travis CI failing for ```test_get_one_event_page```, this test passes within the development environment with the SQLite database. However, it is failing on build with an error for EASY_MAPS_GOOGLE_KEY, I have encrypted this key and passed it into `.travis.yml` but it is still failing. I have fixed this for deployment by commenting out the test - this will enable anyone wishing to clone Love Lanarkshire to uncomment the code and test the view for this page. I will continue to investigate the cause for this bug.
+
 
 ### Deployment
 ___
