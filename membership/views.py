@@ -51,12 +51,12 @@ def membership(request):
                     source=token,
                 )
             except stripe.error.CardError:
-                messages.error(request, "Sorry, your card was declined, "
-                               "please try again!")
+                messages.error(
+                    request, "Sorry, your card was declined, please try again!")
                 return render(request, 'membership.html', context)
             if customer.paid:
-                messages.success(request, "You have successfully paid! "
-                                 "Membership updated!")
+                messages.success(
+                    request, "You have successfully paid! Membership updated!")
                 return redirect(reverse('user_profile'))
             else:
                 messages.error(request, "Unable to take payment at this time, "
