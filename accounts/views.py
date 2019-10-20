@@ -22,6 +22,8 @@ def logout(request):
 def login(request):
     """Return a Login page for @login or unsuccessful modal login"""
     login_form = UserLoginForm(request.POST or None)
+    if request.user.is_authenticated:
+        return redirect(reverse('index'))
     return render(request, 'login.html', {'login_form': login_form})
 
 
