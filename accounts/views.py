@@ -34,8 +34,8 @@ def login_modal(request):
                              password=request.POST['password'])
     if user:
         auth.login(user=user, request=request)
-        messages.success(request, (
-            f"Welcome {user.first_name}, you are logged in!"))
+        messages.success(
+            request, f"Welcome {user.first_name}, you are logged in!")
         return redirect(reverse('index'))
     else:
         messages.error(request, "Wrong username or password, try again!")
