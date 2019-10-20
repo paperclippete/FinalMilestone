@@ -1,5 +1,9 @@
 <div class="col-12 h-card-col">
-    <div class="card" {% if event in user_past_hosted_events %} class="card grey-card" {% endif %}>
+    {% if event in user_past_hosted_events %} 
+    <div class="card grey-card">
+    {% else %}
+    <div class="card"> 
+    {% endif %} 
         <div class="card-body">
             <h5 class="card-title">{{ event.title|title }}</h5>
             <span class="event-host">Hosted by: <strong>{{ event.event_host|title }}</strong></span>
