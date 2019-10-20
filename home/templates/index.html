@@ -20,7 +20,7 @@
 <div class="index-buttons">
 
     <form action="{% url 'search' %}" method="GET">
-        <div class="input-group input-group-lg search-box">
+        <div class="input-group input-group-lg search-box" id="search-group">
             <input id="search-query" type="text" name="query" class="form-control" aria-label="Search query">
             <div class="input-group-append">
                 <button id="search-btn" class="btn btn-primary" type="submit" disabled><i class="fas fa-search"></i> Search</button>
@@ -51,7 +51,6 @@
         });
     
     $("#search-query").focus(disableBtn);
-    $("#search-query").blur(enableBtn);
-    
+
 </script>
 {% endblock %}

@@ -76,10 +76,6 @@ const disableBtn = () => {
     $("#search-btn").prop('disabled', false);
 };
     
-const enableBtn = () => {
-    $("#search-btn").prop('disabled', true);
-};
-
 
 // Horizontal Slider by https://codepen.io/toddwebdev
 function scrollSection() {
