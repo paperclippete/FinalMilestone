@@ -10,7 +10,8 @@ import datetime
 def search(request):
     """Returns events searched by the user"""
     if 'query' in request.GET:
-        events = Event.objects.filter(title__icontains=request.GET['query'])
+        events = (Event.objects.filter(title__icontains=request.GET['query']) |
+                 Event.objects.filter(town__icontains=request.GET['query']))
     else:
         events = Event.objects.all()
     filter_form = FilterEventsForm(request.POST or None)
@@ -48,10 +49,11 @@ def search(request):
 
     results = len(events.exclude(event_date_ends__lt=datetime.date.today()))
     user = request.user
+
     if user.is_authenticated:
-        user_liked_list = Like.objects.filter(user=user)
+        user_liked_list = Like.objects.filter(user=user).values('event')
         user_liked = events.filter(id__in=user_liked_list)
-        user_joined_list = Participant.objects.filter(user=user)
+        user_joined_list = Participant.objects.filter(user=user).values('event')
         user_joined = events.filter(id__in=user_joined_list)
 
     else:
@@ -69,8 +71,8 @@ def search(request):
     }
 
     if len(events.exclude(event_date_ends__lt=datetime.date.today())) == 0:
-        messages.error(request, f"Sorry, we found 0 results! "
-                       "Please search again!")
+        messages.error(
+            request, f"Sorry, we found 0 results! Please search again!")
         return redirect('index')
 
     return render(request, 'view_all_events.html', context)
