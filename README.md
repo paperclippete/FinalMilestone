@@ -3,7 +3,9 @@
 
 <img src="development/ResponsiveMockup.png" height="420px" width="100%">
 
-Welcome to Love Lanarkshire - a web application that brings local communities together, allowing users to share their interests, hobbies and expertise with others in their local area. The site features a robust relational database hosted with PostgresSQL and a backend code devleoped with Python and the Django framework. This enables users to upload and view a variety of event details, interact with specific events and filter and search through the event database. The frontend was developed with HTML, CSS and JS and displays all events in a responsive, intuitive and coherent design. Registered users can perform CRUD operations on their own details or the events they have listed. Registered users have the ability to pay to upgrade their membership of the site and this is facilitated by Stripe payments.
+Welcome to Love Lanarkshire - a web application that brings local communities together, allowing users to share their interests, hobbies and expertise with others in their local area. The site enables users to join events throughout Lanarkshire, suitable to their age, location and interests. Users can also pay for a membership to the site, this enables them to host and post events where they can share their interests and passions with others.
+
+The site features a robust relational database hosted with PostgresSQL and a backend code devleoped with Python and the Django framework. This enables users to upload and view a variety of event details, interact with specific events and filter and search through the event database. The frontend was developed with HTML, CSS and JS and displays all events in a responsive, intuitive and coherent design. Registered users can perform CRUD operations on their own details or the events they have listed. Registered users have the ability to pay to upgrade their membership of the site and this is facilitated by Stripe payments.
 
 
 <img src="https://travis-ci.org/paperclippete/FinalMilestone.svg?branch=master">
