@@ -3,7 +3,7 @@
 
 <img src="development/ResponsiveMockup.png" height="420px" width="100%">
 
-Welcome to Love Lanarkshire - a web application that brings local communities together, allowing users to share their interests, hobbies and expertise with others in their local area. The site features a robust relational database hosted with PostgresSQL and a backend code devleoped with Python and the Django framework. This enables users to upload and view a variety of event details, interact with specific events and filter and search through the event database. The frontend was developed with HTML, CSS and JS and displays all events in a responsive, intuitive and coherent design. Registered users can perform CRUD operations on their own details or the events they have listed. Registered users have the ability to upgrade their membership of the site and this is facilitated by Stripe payments.
+Welcome to Love Lanarkshire - a web application that brings local communities together, allowing users to share their interests, hobbies and expertise with others in their local area. The site features a robust relational database hosted with PostgresSQL and a backend code devleoped with Python and the Django framework. This enables users to upload and view a variety of event details, interact with specific events and filter and search through the event database. The frontend was developed with HTML, CSS and JS and displays all events in a responsive, intuitive and coherent design. Registered users can perform CRUD operations on their own details or the events they have listed. Registered users have the ability to pay to upgrade their membership of the site and this is facilitated by Stripe payments.
 
 
 <img src="https://travis-ci.org/paperclippete/FinalMilestone.svg?branch=master">
@@ -330,6 +330,8 @@ There were numerous build errors whilst using Travis CI. Most recently due to un
 There were issues implementing S3 buckets for storage of media files and static files, I ensured I had the correct packages installed, tested the secret keys were working and custom_storages.py was recognised. It is now functioning as expected.
 
 There is a known issue with ```sys:1: ResourceWarning: unclosed <ssl.SSLSocket fd=11, family=AddressFamily.AF_INET, type=2049, proto=6, laddr=('172.31.88.137', 43552), raddr=('52.95.148.22', 443)>``` appearing in the development terminal when viewing the view_one_event.html. The site continues to function correctly but this issue will require further investigation. It is most likely caused by a dependency.
+
+There is also a known issue with ```sys:1: ResourceWarning: unclosed <ssl.SSLSocket fd=8, family=AddressFamily.AF_INET, type=2049, proto=6, laddr=('172.31.88.137', 53348), raddr=('34.202.153.183', 443)>``` appearing in the development terminal whilst viewing the user profile page. This is most likely caused by Stripe and is under investigation.
 
 During manual user testing there was a bug with the search button on the index page not being disabled - it is better UX to disable the button until a user enters a search term. 
 
