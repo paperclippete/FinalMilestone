@@ -1,4 +1,4 @@
-# <div style="text-align: center">[Love Lanarkshire](https://love-lanarkshire-ms4.herokuapp.com)</div>
+# <p align="center">[Love Lanarkshire](https://love-lanarkshire-ms4.herokuapp.com)</p>
 
 
 <img src="development/ResponsiveMockup.png" height="420px" width="100%">
@@ -25,25 +25,25 @@ ___
 
 The site should...
 
-* be visually appealing - using colours, styles and fonts which reflect the style and ethos of the brand
-* provide quick access to the database of events
-* enable the user to search for events by keywords
-* enable the user to filter their search results
-* enable users to change their details in the database
-* enable users to change their membership status (posting privileges) by completing a one-time payment
-* enable users to post/delete and edit events in the database
-* enable users to like and join events
+* Be visually appealing - using colours, styles and fonts which reflect the style and ethos of the brand
+* Provide quick access to the database of events
+* Enable the user to search for events by keywords
+* Enable the user to filter their search results
+* Enable users to change their details in the database
+* Enable users to change their membership status (posting privileges) by completing a one-time payment
+* Enable users to post/delete and edit events in the database
+* Enable users to like and join events
 
 For the user the site should...
 
-* be intuitive and easy to use
-* be personalised and welcoming
-* be responsive and accessible on a range of screens and devices
-* provide quick access to events with a very simple search and filter function
-* look appealing and in keeping with the brand
-* ensure their data is secure
-* allow them to manage their own events and user data
-* allow them to keep their favourite(liked) events
+* Be intuitive and easy to use
+* Be personalised and welcoming
+* Be responsive and accessible on a range of screens and devices
+* Provide quick access to events with a very simple search and filter function
+* Look appealing and in keeping with the brand
+* Ensure their data is secure
+* Allow them to manage their own events and user data
+* Allow them to keep their favourite(liked) events
 
 
 ##### User Stories
@@ -69,13 +69,13 @@ For the user the site should...
 
 In order to create a good UX Love Lanarkshire should...
 
-* be developed with a mobile-first approach in order to suit the widest possible audience
-* be responsive in order to display correctly across a range of devices. A quick overview of [current browser stats](https://www.w3counter.com/globalstats.php) reveals that whilst Chrome is by far the most popular browser by far, the top 3 screen resolutions were 640x360, 1920x1080 and 1366x768 therefore it is essential to support a range of screens.
-* be intuitive and provide feedback to the user on their actions
-* feature a cohesive and distinctive design which promotes the Love Lanarkshire brand
-* have a simple and easy to use search interface with filters
-* enable users to instantly increase the functionality they receive with a one-time payment
-* be functional to any user, whether logged in or not, but provide extra functionality and personalisation to registered users and differing membership levels
+* Be developed with a mobile-first approach in order to suit the widest possible audience
+* Be responsive in order to display correctly across a range of devices. A quick overview of [current browser stats](https://www.w3counter.com/globalstats.php) reveals that whilst Chrome is by far the most popular browser by far, the top 3 screen resolutions were 640x360, 1920x1080 and 1366x768 therefore it is essential to support a range of screens.
+* Be intuitive and provide feedback to the user on their actions
+* Feature a cohesive and distinctive design which promotes the Love Lanarkshire brand
+* Have a simple and easy to use search interface with filters
+* Enable users to instantly increase the functionality they receive with a one-time payment
+* Be functional to any user, whether logged in or not, but provide extra functionality and personalisation to registered users and differing membership levels
 
 Please find my initial wireframe, created using Balsamiq, [here](development/LL-wireframes.pdf).
 
@@ -87,7 +87,7 @@ ___
 
 > Navigation Bar/ Dropdown Menu
 
-Bootstrap 4 creates a minimalist navigation bar that toggles a dropdown menu on mobile/tablet devices. A user should not have to use the browser's back-button as the navigation bar is fixed, it will also fade to opaque when in use to increase the contrast of the text 
+Bootstrap creates a minimalist navigation bar that toggles a dropdown menu on mobile/tablet devices. A user should not have to use the browser's back-button as the navigation bar is fixed, it will also fade to opaque when in use to increase the contrast of the text 
 
 > Personalisation of Theme - FAB Button
 
@@ -350,6 +350,8 @@ There is a bug with Travis CI failing for ```test_get_one_event_page```, this te
 ___
 
 #### How to Install Love Lanarkshire
+
+These instructions are for using Linux, you may wish to change the commands used for your own operating system.
 
 1. From your terminal enter the following to clone the project and copy the files to your IDE.
 
