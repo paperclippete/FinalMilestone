@@ -413,11 +413,12 @@ git remote add heroku(url)
 
 5. Choose settings and click on 'Reveal Config Vars' and insert the environment variables that are essential for your project to run. For example, 
 
-    > SECRET_KEY - secret key
+    ```
+    SECRET_KEY - secret key
     AWS_ACCESS_KEY_ID - secret key from AWS S3 buckets 
     DATABASE_URL - your database name
     STRIPE_SECRET - secret key for Stripe API
-    
+    ```
     
 * You should never reveal any of these environment variables to ensure you maintain the security of your site *
 
