@@ -310,7 +310,6 @@ Having created tests in a file named ```test.py``` you can run your tests with..
 
 ```
 python3 manage.py test
-
 ```
 
 You can also use Coverage to run your tests and provide statistics on where testing has not been done...
