@@ -30,10 +30,10 @@ def search(request):
             age_range = request.POST['age_range']
             if age_range:
                 events = events.filter(age_range__iexact=age_range)
-        if 'day' in request.POST:
-            day = request.POST['day']
+        if 'event_day' in request.POST:
+            day = request.POST['event_day']
             if day:
-                events = events.filter(day__iexact=day)
+                events = events.filter(event_day__iexact=day)
         if 'day_time' in request.POST:
             day_time = request.POST['day_time']
             if day_time:

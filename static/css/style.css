@@ -535,7 +535,7 @@ a:not([href]):hover {
     }
     .filter-row > #div_id_town,
     .filter-row > #div_id_event_type,
-    .filter-row > #div_id_day,
+    .filter-row > #div_id_event_day,
     .filter-row > #div_id_age_range {
         width: 49%;
     }

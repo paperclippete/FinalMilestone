@@ -10,7 +10,7 @@ class FilterEventsForm(forms.Form):
     event_type = forms.ChoiceField(label='Type of Event',
                                    required=False,
                                    choices=EVENT_TYPE_CHOICES)
-    day = forms.ChoiceField(label='Day',
+    event_day = forms.ChoiceField(label='Day',
                             required=False,
                             choices=DAY_CHOICES)
     age_range = forms.ChoiceField(label='Age',
