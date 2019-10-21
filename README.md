@@ -324,7 +324,7 @@ I tested my project throughout development using Chrome Developer Tools to check
 
 #### Bugs
 
-There is a known bug with the search results filter. It cannot currently accept more than one filter parameter at a time. Having looked into this issue, I will look at using [Django Filter](https://django-filter.readthedocs.io/en/master/) to fix this issue in a future release.
+There is a known bug with the search results filter. It cannot currently accept more than one filter parameter at a time. A user must press the filter button after making each selection. Having looked into this issue, I will look at using either [Django Filter](https://django-filter.readthedocs.io/en/master/) or JS to automatically submit the form on every input change and fix this issue in a future release.
 
 There was a 404 error in the console during development despite a favicon being present. This continued to appear in the production version - I had to try different favicons in production, eventually I solved the issue by saving my favicon in the static folder.
 
