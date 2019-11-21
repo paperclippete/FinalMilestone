@@ -1,5 +1,13 @@
 # <p align="center">[Love Lanarkshire](https://love-lanarkshire-ms4.herokuapp.com)</p>
 
+### Grading
+___
+The breakdown of your marks for each assessment criterion (graded from 0 to 5) are as follows:
+
+Project Purpose: 5, UX design: 5, Suitability for purpose: 5, Navigation: 5, Ease of Use: 5, Information Architecture: 5, Defensive Design: 5, Responsive Design: 5, Image Presentation: 5, Colour scheme and typography: 5, Appropriate use of HTML: 5, Appropriate use of the template language: 5, Appropriate use of CSS: 5, Appropriate use of JavaScript: 5, Appropriate use of Python: 4, Appropriate use of Django: 5, App logic: 5, Cross-app logic: 5, E-commerce: 5, Authentication and Security: 5, Directory Structure and File Naming: 5, Version Control: 5, Testing implementation: 5, Testing write-up: 5, Readme file: 5, Comments: 3, Data store integration: 5, Deployment implementation: 5, Deployment write-up: 5
+
+Your percentage grade for this project is 98.0%.
+___
 
 <img src="development/ResponsiveMockup.png" height="420px" width="100%">
 
